@@ -2,9 +2,11 @@ public class App {
     public static void main(String[] args) {
 
         Fase fase1 = new Fase();
-        TelaFase telaFase = new TelaFase(fase1);
+        faseScreen faseScreen = new faseScreen(fase1);
 
-        telaFase.exibirTelaVitoria();
+        //faseScreen.showWinScreen();
+        //faseScreen.showDeathScreen();
+        faseScreen.showIntroductionScreen();
 
     }
 }
