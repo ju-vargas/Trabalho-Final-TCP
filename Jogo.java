@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Jogo {
     public static CardLayout cardLayout;
@@ -9,8 +7,8 @@ public class Jogo {
     public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 
-    public static final String TELA_UM = "1";
-    public static final String TELA_DOIS = "2";
+    public static final String FIRST_SCREEN = "1";
+    public static final String SECOND_SCREEN = "2";
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -22,12 +20,12 @@ public class Jogo {
             cardPanel = new JPanel(cardLayout);
 
             /**
-             * TELAS DISPONÍVEIS
+             * AVALIABLE SCREENS
              */
-            TelaUm telaum = new TelaUm();
-            cardPanel.add(telaum, TELA_UM);
-            TelaDois teladois = new TelaDois();
-            cardPanel.add(teladois, TELA_DOIS);
+            FirstScreen firstScreen = new FirstScreen();
+            cardPanel.add(firstScreen, FIRST_SCREEN);
+            SecondScreen secondScreen = new SecondScreen();
+            cardPanel.add(secondScreen, SECOND_SCREEN);
 
             frame.add(cardPanel);
             frame.setVisible(true);
