@@ -1,13 +1,17 @@
-import javax.swing.*;
-import java.awt.*;
+package src.com.game.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.*;
+import javax.swing.*;
+
+import src.com.game.controler.Jogo;
 
 public class FirstScreen extends JPanel {
+
 	JButton switchToPanel2 = new JButton("Ir para a Tela 2");
 
-	FirstScreen() {
+	public FirstScreen() {
         setBackground(Color.BLUE);
         setFocusable(true);
 		
