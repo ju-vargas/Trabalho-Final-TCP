@@ -8,7 +8,8 @@ public class Jogo {
     public static JPanel cardPanel;
     public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
-    public static int BAR_HEIGHT;
+    public static int WINDOW_HEIGHT_DIFFERENCE;
+    public static int WINDOW_WIDTH_DIFFERENCE;
     public static final String TRUE_GAME_SCREEN = "TG";
     public static final String SECOND_SCREEN = "2";
 
@@ -26,8 +27,8 @@ public class Jogo {
             /**
              * AVALIABLE SCREENS
              */           
-            BAR_HEIGHT = frame.getInsets().top;
-            System.out.println("Tamanho estimado da barra de título: " + BAR_HEIGHT + " pixels");
+            WINDOW_HEIGHT_DIFFERENCE = frame.getInsets().top + frame.getInsets().bottom;
+            WINDOW_WIDTH_DIFFERENCE = frame.getInsets().left + frame.getInsets().right;
             
             TelaJogo trueGameScreen = new TelaJogo();
             cardPanel.add(trueGameScreen, TRUE_GAME_SCREEN);

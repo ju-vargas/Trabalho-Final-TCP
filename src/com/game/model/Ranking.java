@@ -1,6 +1,5 @@
 public class Ranking {
 
-	private Timer timer;
 
 	private String nomeJogador;
 
