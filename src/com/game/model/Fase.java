@@ -1,7 +1,5 @@
 public class Fase {
 
-	private Timer timer;
-
 	private Mapa mapa;
 
 	private Jogador jogador;

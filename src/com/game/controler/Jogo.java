@@ -1,3 +1,5 @@
+//package src.com.game.controler;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -6,8 +8,8 @@ public class Jogo {
     public static JPanel cardPanel;
     public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
-
-    public static final String FIRST_SCREEN = "1";
+    public static int BAR_HEIGHT;
+    public static final String TRUE_GAME_SCREEN = "TG";
     public static final String SECOND_SCREEN = "2";
 
     public static void main(String[] args) {
@@ -15,20 +17,22 @@ public class Jogo {
             JFrame frame = new JFrame("Troca de Tela Exemplo");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(WIDTH, HEIGHT);
+            frame.setVisible(true);
 
+            //frame.setResizable(false);
             cardLayout = new CardLayout();
             cardPanel = new JPanel(cardLayout);
-
+            
             /**
              * AVALIABLE SCREENS
-             */
-            FirstScreen firstScreen = new FirstScreen();
-            cardPanel.add(firstScreen, FIRST_SCREEN);
-            SecondScreen secondScreen = new SecondScreen();
-            cardPanel.add(secondScreen, SECOND_SCREEN);
-
+             */           
+            BAR_HEIGHT = frame.getInsets().top;
+            System.out.println("Tamanho estimado da barra de título: " + BAR_HEIGHT + " pixels");
+            
+            TelaJogo trueGameScreen = new TelaJogo();
+            cardPanel.add(trueGameScreen, TRUE_GAME_SCREEN);
+            
             frame.add(cardPanel);
-            frame.setVisible(true);
         });
     }
 }
