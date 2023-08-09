@@ -1,4 +1,4 @@
-package src.com.game.view;
+// package src.com.game.view;
 
 import javax.swing.*; 
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-import src.com.game.controler.Jogo;
+// import src.com.game.controler.Jogo;
 import style.Fonts;
 import style.Images;
 
@@ -25,11 +25,13 @@ public class TelaJogo extends JPanel implements ActionListener {
 
     private static final int UNIDADES = LARGURA_TELA * ALTURA_TELA / (TAMANHO_BLOCO * TAMANHO_BLOCO); //qts unidades tem na cobrinha
     private static int INTERVALO = 50; //o clock do jogo
+    private static final String NOME_FONTE = "Ink Free";
+    private static final int HEADER_SIZE = 60;
     private final int[] bodyX = new int[UNIDADES]; //fazem parte do corpo da cobra
     private final int[] bodyY = new int[UNIDADES]; //fazem parte do corpo da cobra
     private final int XBlocks = 63; //tamanho máximo de blocos no grid no eixo x
     private final int YBlocks = 31; //tamanho máximo de blocos no grid no eixo x
-    private final int[][]mapa = new int[XBlocks][YBlocks];
+    private final int[][]mapa = MapConstraints.FASE_1;
     private int tamanhoJogador = 6; //tamanho inicial
     private int pontuacao;
     private int pontuacaoFase = 2;
@@ -95,24 +97,24 @@ public class TelaJogo extends JPanel implements ActionListener {
                             break;
                         }
                         
-                    g.fillRect(i*TAMANHO_BLOCO, 60+j*TAMANHO_BLOCO, TAMANHO_BLOCO, TAMANHO_BLOCO);
+                    g.fillRect(i*TAMANHO_BLOCO, HEADER_SIZE+j*TAMANHO_BLOCO, TAMANHO_BLOCO, TAMANHO_BLOCO);
                 }
             }
             g.setColor(Color.green);
             //g.fillOval(randomPosition[0], randomPosition[1], TAMANHO_BLOCO, TAMANHO_BLOCO);
 
-            String imageType = "";
-            imageType = "powerup"; 
-            if(!isFast){
-                if (seconds > 0 && seconds % 2 == 0){
-                    imageType = "energy";
-                    isFast = true; 
-                    INTERVALO = INTERVALO / 2;
-                    timer.setDelay(INTERVALO);
-                }
-            }
+            // String imageType = "";
+            // imageType = "powerup"; 
+            // if(!isFast){
+            //     if (seconds > 0 && seconds % 2 == 0){
+            //         imageType = "energy";
+            //         isFast = true; 
+            //         INTERVALO = INTERVALO / 2;
+            //         timer.setDelay(INTERVALO);
+            //     }
+            // }
 
-            g.drawImage(images.itemMapa(imageType), randomPosition[0],randomPosition[1],POWER_UP_SIZE, POWER_UP_SIZE, null);
+            // g.drawImage(images.itemMapa(imageType), randomPosition[0],randomPosition[1],POWER_UP_SIZE, POWER_UP_SIZE, null);
 
             for (int i = 0; i < tamanhoJogador; i++) {
                 if (i == 0) {
@@ -148,7 +150,7 @@ public class TelaJogo extends JPanel implements ActionListener {
         }while(!validPosition);
 
         randomPosition[0] = randomX*TAMANHO_BLOCO;
-        randomPosition[1] = 60+randomY*TAMANHO_BLOCO;
+        randomPosition[1] = HEADER_SIZE+randomY*TAMANHO_BLOCO;
     }
 
     public void fimDeJogo(Graphics g) {
@@ -175,7 +177,6 @@ public class TelaJogo extends JPanel implements ActionListener {
 
     private void updateTimer(){
         miliseconds++;
-        System.out.println(INTERVALO);
         seconds = (int)miliseconds/(1000/INTERVALO);
         if (seconds % 60 == 0 && miliseconds % (1000/INTERVALO) == 0){
             minutes++;
@@ -220,6 +221,13 @@ public class TelaJogo extends JPanel implements ActionListener {
         }
     }
 
+    private int[] getPosition(int i, int j){
+        int[] position = new int[2];
+        position[0] = i*TAMANHO_BLOCO;
+        position[1] = HEADER_SIZE+j*TAMANHO_BLOCO;
+        return position;
+    }
+
     private void validarLimites() {
         //A cabeça bateu no corpo?
         for (int i = tamanhoJogador; i > 0; i--) {
@@ -228,6 +236,19 @@ public class TelaJogo extends JPanel implements ActionListener {
                 break;
             }
         }
+
+        //bateu em um obstáculo?
+        for (int i = 0; i < mapa.length; i++) {
+                for (int j = 0; j < mapa[i].length; j++) {
+                    if(mapa[i][j] == 1){
+                        int[] position = getPosition(i,j);
+                        if (position[0] == bodyX[0] && position[1] == bodyY[0]){
+                            estaRodando = false;
+                        }
+                    }
+                                            
+                }
+            }
 
         //A cabeça tocou uma das bordas Direita ou esquerda?
         if (bodyX[0] < 0 || bodyX[0] > MAX_WIDTH) {
