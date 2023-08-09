@@ -1,7 +1,9 @@
-//package src.com.game.controler;
+package src.com.game.controler;
 
 import javax.swing.*;
 import java.awt.*;
+
+import src.com.game.view.TelaJogo;
 
 public class Jogo {
     public static CardLayout cardLayout;

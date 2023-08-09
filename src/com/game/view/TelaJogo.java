@@ -1,10 +1,18 @@
-import javax.swing.*;
+package src.com.game.view;
+
+import javax.swing.*; 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+
+import src.com.game.controler.Jogo;
+import style.Fonts;
+import style.Images;
+
+
 
 public class TelaJogo extends JPanel implements ActionListener {
 
@@ -13,9 +21,10 @@ public class TelaJogo extends JPanel implements ActionListener {
     private static final int MAX_HEIGHT = 720 - Jogo.WINDOW_HEIGHT_DIFFERENCE;
     private static final int MAX_WIDTH = 1280 - Jogo.WINDOW_WIDTH_DIFFERENCE;
     private static final int TAMANHO_BLOCO = 20;
+    private static final int POWER_UP_SIZE = 30;
+
     private static final int UNIDADES = LARGURA_TELA * ALTURA_TELA / (TAMANHO_BLOCO * TAMANHO_BLOCO); //qts unidades tem na cobrinha
-    private static final int INTERVALO = 50; //o clock do jogo
-    private static final String NOME_FONTE = "Ink Free";
+    private static int INTERVALO = 50; //o clock do jogo
     private final int[] bodyX = new int[UNIDADES]; //fazem parte do corpo da cobra
     private final int[] bodyY = new int[UNIDADES]; //fazem parte do corpo da cobra
     private final int XBlocks = 63; //tamanho máximo de blocos no grid no eixo x
@@ -34,9 +43,14 @@ public class TelaJogo extends JPanel implements ActionListener {
     Random random;
     private boolean win = false;
 
-    public Fonts style = new Fonts(); 
+    private boolean isFast = false; 
+    Fonts style = new Fonts(); 
+    Images images = new Images(); 
 
-    TelaJogo() {
+
+
+    //COMECA A TELA 
+    public TelaJogo() {
         random = new Random();
         setBackground(new Color(206, 206, 206));
         setPreferredSize(new Dimension(Jogo.WIDTH, Jogo.HEIGHT));
@@ -45,6 +59,7 @@ public class TelaJogo extends JPanel implements ActionListener {
         iniciarJogo();
     }
 
+    //COMECA O JOGO
     public void iniciarJogo() {
         getRandomCoordinates();
         estaRodando = true;
@@ -52,12 +67,19 @@ public class TelaJogo extends JPanel implements ActionListener {
         timer.start();
     }
 
+    //DESENHA A TELA ?
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         desenharTela(g);
     }
 
+    //DESENHA A TELA  
+        /*
+         * desenha blocos  
+         * desenha a cobra 
+         * 
+         */
     public void desenharTela(Graphics g) {
         if (estaRodando) {   
             for (int i = 0; i < mapa.length; i++) {
@@ -77,7 +99,20 @@ public class TelaJogo extends JPanel implements ActionListener {
                 }
             }
             g.setColor(Color.green);
-            g.fillOval(randomPosition[0], randomPosition[1], TAMANHO_BLOCO, TAMANHO_BLOCO);
+            //g.fillOval(randomPosition[0], randomPosition[1], TAMANHO_BLOCO, TAMANHO_BLOCO);
+
+            String imageType = "";
+            imageType = "powerup"; 
+            if(!isFast){
+                if (seconds > 0 && seconds % 2 == 0){
+                    imageType = "energy";
+                    isFast = true; 
+                    INTERVALO = INTERVALO / 2;
+                    timer.setDelay(INTERVALO);
+                }
+            }
+
+            g.drawImage(images.itemMapa(imageType), randomPosition[0],randomPosition[1],POWER_UP_SIZE, POWER_UP_SIZE, null);
 
             for (int i = 0; i < tamanhoJogador; i++) {
                 if (i == 0) {
@@ -90,7 +125,7 @@ public class TelaJogo extends JPanel implements ActionListener {
             }
 
             g.setColor(Color.red);
-            g.setFont(new Font(NOME_FONTE, Font.BOLD, 40));
+            g.setFont(style.fontScreenWin());
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("Pontos: " + pontuacao, (LARGURA_TELA - metrics.stringWidth("Pontos: " + pontuacao)) / 2, g.getFont().getSize());
             g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (LARGURA_TELA - 2*metrics.stringWidth("Pontos: " + pontuacao)), g.getFont().getSize());
@@ -117,6 +152,7 @@ public class TelaJogo extends JPanel implements ActionListener {
     }
 
     public void fimDeJogo(Graphics g) {
+
         g.setColor(Color.red);
         g.setFont(style.fontScreenWin());
         FontMetrics fontePontuacao = getFontMetrics(g.getFont());
@@ -139,6 +175,7 @@ public class TelaJogo extends JPanel implements ActionListener {
 
     private void updateTimer(){
         miliseconds++;
+        System.out.println(INTERVALO);
         seconds = (int)miliseconds/(1000/INTERVALO);
         if (seconds % 60 == 0 && miliseconds % (1000/INTERVALO) == 0){
             minutes++;
@@ -148,25 +185,25 @@ public class TelaJogo extends JPanel implements ActionListener {
     }
 
     private void andar() {
+        
         for (int i = tamanhoJogador; i > 0; i--) {
             bodyX[i] = bodyX[i - 1];
             bodyY[i] = bodyY[i - 1];
         }
-
         switch (direcao) {
             case 'C':
-                bodyY[0] = bodyY[0] - TAMANHO_BLOCO;
+                bodyY[0] = (bodyY[0] - TAMANHO_BLOCO);
                 break;
             case 'B':
-                bodyY[0] = bodyY[0] + TAMANHO_BLOCO;
+                bodyY[0] = (bodyY[0] + TAMANHO_BLOCO);
                 break;
             case 'E':
-                bodyX[0] = bodyX[0] - TAMANHO_BLOCO;
+                bodyX[0] = (bodyX[0] - TAMANHO_BLOCO);
                 break;
             case 'D':
-                bodyX[0] = bodyX[0] + TAMANHO_BLOCO;
+                bodyX[0] = (bodyX[0] + TAMANHO_BLOCO);
                 break;
-            default:
+            default: 
                 break;
         }
     }

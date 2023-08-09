@@ -1,4 +1,4 @@
-//package src.com.game.utils;
+package style;
 
 import java.awt.Font;
 import java.io.File;
@@ -7,13 +7,17 @@ import java.awt.FontFormatException;
 
 
 public class Fonts{
-    public static Font FONT;
+    public Font FONT;
 
     public Fonts(){
         try {
             FONT = Font.createFont(Font.TRUETYPE_FONT,
-            new File("resources/Margarine-Regular.ttf"));
+            new File("resources/font/Margarine-Regular.ttf"));
+            System.out.println("sucesso");
+
         }catch (FontFormatException | IOException e){
+            System.out.println(e);
+            System.out.println("nao achei");
             FONT = new Font("Arial", Font.BOLD, 16);
         }    
     }
