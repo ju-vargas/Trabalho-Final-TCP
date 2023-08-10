@@ -1,4 +1,5 @@
-// package src.com.game.view;
+package src.com.game.view;
+
 
 import javax.swing.*; 
 import java.awt.*;
@@ -8,10 +9,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-// import src.com.game.controler.Jogo;
-import style.Fonts;
-import style.Images;
 
+import src.com.game.controler.Jogo;
+import src.com.game.utils.style.Fonts;
+import src.com.game.utils.style.Images;
+import src.com.game.utils.MapConstraints;
 
 
 public class TelaJogo extends JPanel implements ActionListener {

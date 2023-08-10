@@ -1,4 +1,4 @@
-package style;
+package src.com.game.utils.style;
 
 import java.awt.Font;
 import java.io.File;

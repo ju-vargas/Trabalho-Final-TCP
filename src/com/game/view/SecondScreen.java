@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import src.com.game.controler.Jogo;
+
+
 public class SecondScreen extends JPanel {
 	JButton switchToPanel1 = new JButton("Ir para a Tela 1");
 

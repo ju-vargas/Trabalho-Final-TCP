@@ -1,3 +1,5 @@
+package src.com.game.utils;
+
 //provisório
 public class MapConstraints{
     public static final int[][]FASE_1 = {

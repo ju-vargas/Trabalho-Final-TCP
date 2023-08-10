@@ -1,4 +1,4 @@
-package style;
+package src.com.game.utils.style;
 
 import java.io.File;
 import javax.imageio.ImageIO;

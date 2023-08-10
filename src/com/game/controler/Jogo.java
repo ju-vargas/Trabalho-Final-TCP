@@ -1,9 +1,11 @@
-// package src.com.game.controler;
+package src.com.game.controler;
+import src.com.game.view.TelaJogo;
 
 import javax.swing.*;
 import java.awt.*;
 
-// import src.com.game.view.TelaJogo;
+import src.com.game.utils.MapConstraints;
+
 
 public class Jogo {
     public static CardLayout cardLayout;
