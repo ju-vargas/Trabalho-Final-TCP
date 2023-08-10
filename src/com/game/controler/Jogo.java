@@ -1,5 +1,6 @@
 package src.com.game.controler;
 
+import src.com.game.view.TelaJogo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import src.com.game.view.SecondScreen;
 import src.com.game.view.IntroductionScreen;
 import src.com.game.view.RulesScreen;
 import src.com.game.view.WinScreen;
+import src.com.game.utils.MapConstraints;
 
 
 public class Jogo {
@@ -49,6 +51,7 @@ public class Jogo {
 
             frame.add(cardPanel);
             frame.setVisible(true);
+
         });
     }
 }

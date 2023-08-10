@@ -3,6 +3,7 @@ import javax.swing.*;
 
 public class Tela extends JPanel{
 
+
 	private int altura;
 
 	private int largura;
