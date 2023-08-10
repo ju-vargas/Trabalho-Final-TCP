@@ -1,9 +1,12 @@
+package src.com.game.model;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+
 
 class Player {
     String name;
@@ -14,7 +17,6 @@ class Player {
         this.score = score;
     }
 }
-
 public class TelaRankings {
     public static void main(String[] args) {
 
