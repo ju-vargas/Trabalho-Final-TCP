@@ -1,22 +1,25 @@
 package src.com.game.view;
 
+
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import src.com.game.model.Tela;
 import src.com.game.config.Config;
 
-public class IntroductionScreen extends Tela {
+public class WinScreen extends Tela {
     Config configStyle = new Config();
 
     private String[] text = {
-        "O semestre foi difícil... pela terceira vez.",
-        "Mas espere! O professor esqueceu de considerar uma questão da prova",
-        "Encontre o professor para reaver sua nota e quebrar a maldição.",
+        "O aluno finalmente conseguiu chegar ao professor.",
+        "Agora você permanecerá como humano!",
+        "(Até a próxima cadeira da matemática)",
     };
 
 
-    public IntroductionScreen() {
+    public WinScreen() {
         setLayout(new GridBagLayout());
         setBackground(Color.PINK);     
     
@@ -35,29 +38,48 @@ public class IntroductionScreen extends Tela {
         JLabel textIntroduction = new JLabel(text[0]);
         textIntroduction.setFont(configStyle.fontScreenIntro());
         textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
-        constraintsGrid.gridy = 1;
-        constraintsGrid.gridx = 2;
+        constraintsGrid.gridy = 0;
         gridPanel.add(textIntroduction, constraintsGrid);
     
         JLabel textIntroduction1 = new JLabel(text[1]);
         textIntroduction1.setFont(configStyle.fontScreenIntro());
         textIntroduction1.setHorizontalAlignment(SwingConstants.CENTER);
-        constraintsGrid.gridy = 2;
+        constraintsGrid.gridy = 1;
         gridPanel.add(textIntroduction1, constraintsGrid);
     
         JLabel textIntroduction2 = new JLabel(text[2]);
         textIntroduction2.setFont(configStyle.fontScreenIntro());
         textIntroduction2.setHorizontalAlignment(SwingConstants.CENTER);
-        constraintsGrid.gridy = 3;
+        constraintsGrid.gridy = 2;
         gridPanel.add(textIntroduction2, constraintsGrid);
 
         constraintsMain.gridy = 0;
         mainPanel.add(gridPanel,constraintsMain);
         
-        JButton continueToNext = new JButton("Continuar");
-        continueToNext.setFont(configStyle.fontButton());
+
+		JPanel containerName = new JPanel(new FlowLayout());
+		containerName.setBackground(new Color(0, 0, 0,0));
+
+		JLabel nameLabel = new JLabel("Nome:");
+		nameLabel.setFont(configStyle.fontScreenIntro());
+		JTextField nameTextField = new JTextField(20); // 20 é o tamanho da coluna do campo
+		nameTextField.setFont(configStyle.fontScreenIntro());
+		
+		nameTextField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String enteredName = nameTextField.getText();
+				System.out.println(enteredName);
+				//setar o nome do jogador aqui, da classe
+			}
+		});
+
+		containerName.add(nameLabel);
+		containerName.add(nameTextField);
+
         constraintsMain.gridy = 1;
-        mainPanel.add(continueToNext,constraintsMain);
+		mainPanel.add(containerName,constraintsMain);
+
         add(mainPanel);
     };
 }

@@ -19,12 +19,12 @@ public class Config{
 
     //INTRODUCTION ----  
     public Font fontScreenIntro(){
-        return FONT.deriveFont(Font.PLAIN, 24);
+        return FONT.deriveFont(Font.PLAIN, 18);
     }
 
     //RULES -----
     public Font fontScreenRules(){
-        return FONT.deriveFont(Font.PLAIN, 16);
+        return FONT.deriveFont(Font.PLAIN, 15);
     }
 
     //WIN -----
@@ -35,6 +35,11 @@ public class Config{
     //BUTTON -----
     public Font fontButton(){
         return FONT.deriveFont(Font.PLAIN, 12);
+    }
+
+    //TITLES
+    public Font fontTitles(){
+        return FONT.deriveFont(Font.PLAIN, 25);
     }
     
 
