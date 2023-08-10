@@ -1,6 +1,6 @@
-public class Ranking {
 
-	private Timer timer;
+package src.com.game.model;
+public class Ranking {
 
 	private String nomeJogador;
 

@@ -1,4 +1,9 @@
+package src.com.game.controler;
+
 import javax.swing.*;
+import src.com.game.view.FirstScreen;
+import src.com.game.view.SecondScreen;
+
 import java.awt.*;
 
 public class Jogo {
