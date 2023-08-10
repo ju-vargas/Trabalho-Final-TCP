@@ -1,7 +1,5 @@
-
 package src.com.game.model;
 public class Fase {
-
 
 	private Mapa mapa;
 
