@@ -1,5 +1,6 @@
-public class Ranking {
 
+package src.com.game.model;
+public class Ranking {
 
 	private String nomeJogador;
 

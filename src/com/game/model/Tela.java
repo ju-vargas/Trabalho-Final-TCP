@@ -1,3 +1,5 @@
+
+package src.com.game.model;
 public class Tela {
 
 	private int altura;

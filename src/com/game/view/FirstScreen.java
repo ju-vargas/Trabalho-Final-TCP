@@ -1,3 +1,4 @@
+package src.com.game.view;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +10,7 @@ import src.com.game.controler.Jogo;
 public class FirstScreen extends JPanel {
 	JButton switchToPanel2 = new JButton("Ir para a Tela 2");
 
-	FirstScreen() {
+	public FirstScreen() {
         setBackground(Color.BLUE);
         setFocusable(true);
 		

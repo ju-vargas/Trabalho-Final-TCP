@@ -15,6 +15,7 @@ public class Jogo {
     public static int WINDOW_HEIGHT_DIFFERENCE;
     public static int WINDOW_WIDTH_DIFFERENCE;
     public static final String TRUE_GAME_SCREEN = "TG";
+
     public static final String SECOND_SCREEN = "2";
 
     public static void main(String[] args) {
@@ -38,6 +39,7 @@ public class Jogo {
             cardPanel.add(trueGameScreen, TRUE_GAME_SCREEN);
             
             frame.add(cardPanel);
+
         });
     }
 }
