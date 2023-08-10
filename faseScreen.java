@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+import src.com.game.model.Fase;
+import src.com.game.model.Tela; 
+
 public class faseScreen extends Tela {
     
     private Fase currentFase;

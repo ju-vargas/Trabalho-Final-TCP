@@ -1,3 +1,5 @@
+import src.com.game.model.Fase;
+
 public class App {
     public static void main(String[] args) {
 

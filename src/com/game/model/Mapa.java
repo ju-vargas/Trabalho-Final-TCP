@@ -1,3 +1,4 @@
+package src.com.game.model;
 public class Mapa {
 
 	private ObjetoMapa[][] posicoesDoMapa;

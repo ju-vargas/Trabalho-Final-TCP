@@ -1,4 +1,8 @@
-public class Tela {
+package src.com.game.model;
+import javax.swing.*;
+
+public class Tela extends JPanel{
+
 
 	private int altura;
 
