@@ -62,7 +62,7 @@ public class WinScreen extends Tela {
 
 		JLabel nameLabel = new JLabel("Nome:");
 		nameLabel.setFont(configStyle.fontScreenIntro());
-		JTextField nameTextField = new JTextField(20); // 20 é o tamanho da coluna do campo
+		JTextField nameTextField = new JTextField(20);
 		nameTextField.setFont(configStyle.fontScreenIntro());
 		
 		nameTextField.addActionListener(new ActionListener() {
