@@ -11,12 +11,13 @@ import java.util.Random;
 
 
 import src.com.game.controler.Jogo;
+//import src.com.game.model.Timer;
 import src.com.game.utils.style.Fonts;
 import src.com.game.utils.style.Images;
 import src.com.game.utils.MapConstraints;
 
 
-public class TelaJogo extends JPanel implements ActionListener {
+public class GameScreen extends JPanel implements ActionListener {
 
     private static final int LARGURA_TELA = 1280;
     private static final int ALTURA_TELA = 720;
@@ -54,7 +55,7 @@ public class TelaJogo extends JPanel implements ActionListener {
 
 
     //COMECA A TELA 
-    public TelaJogo() {
+    public GameScreen() {
         random = new Random();
         setBackground(new Color(206, 206, 206));
         setPreferredSize(new Dimension(Jogo.WIDTH, Jogo.HEIGHT));

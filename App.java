@@ -1,14 +1,15 @@
-import src.com.game.model.Fase;
+// import src.com.game.model.Fase;
+// import src.com.game.view.faseScreen;
 
-public class App {
-    public static void main(String[] args) {
+// public class App {
+//     public static void main(String[] args) {
 
-        Fase fase1 = new Fase();
-        faseScreen faseScreen = new faseScreen(fase1);
+//         Fase fase1 = new Fase();
+//         FaseScreen faseScreen = new FaseScreen(fase1);
 
-        //faseScreen.showWinScreen();
-        //faseScreen.showDeathScreen();
-        faseScreen.showIntroductionScreen();
+//         faseScreen.showWinScreen();
+//         //faseScreen.showDeathScreen();
+//         //faseScreen.showIntroductionScreen();
 
-    }
-}
+//     }
+// }

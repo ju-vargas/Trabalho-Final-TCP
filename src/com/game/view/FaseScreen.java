@@ -1,17 +1,18 @@
+package src.com.game.view;
 import javax.swing.*;
 import java.awt.*;
 
 import src.com.game.model.Fase;
 import src.com.game.model.Tela; 
 
-public class faseScreen extends Tela {
+public class FaseScreen extends Tela {
     
     private Fase currentFase;
 
 	private final int WIDTH = 800;
 	private final int HEIGHT = 600;
 
-    public faseScreen(Fase fase) {
+    public FaseScreen(Fase fase) {
         this.currentFase = fase;
     }
 

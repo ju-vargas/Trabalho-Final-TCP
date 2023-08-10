@@ -1,17 +1,17 @@
-package src.com.game.model;
+package src.com.game.view;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaOpcoes extends JFrame {
-    public TelaOpcoes() {
+public class OptionsScreen extends JPanel {
+    public OptionsScreen() {
         // Configurações da janela
-        setTitle("Tela Inicial do Jogo");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1280, 720);
-        setLocationRelativeTo(null);
+        //setTitle("Tela Inicial do Jogo");
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setSize(1280, 720);
+        //setLocationRelativeTo(null);
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints duvidei = new GridBagConstraints();
@@ -65,7 +65,7 @@ public class TelaOpcoes extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            TelaOpcoes tela = new TelaOpcoes();
+            OptionsScreen tela = new OptionsScreen();
             tela.setVisible(true);
         });
     }
