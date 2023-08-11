@@ -5,62 +5,92 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OptionsScreen extends JPanel {
-    public OptionsScreen() {
-        // Configurações da janela
-        //setTitle("Tela Inicial do Jogo");
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setSize(1280, 720);
-        //setLocationRelativeTo(null);
+import src.com.game.controler.Jogo;
+import src.com.game.model.Tela;
+import src.com.game.utils.style.Fonts;
+
+public class OptionsScreen extends Tela {
+
+    public OptionsScreen() {    
+
+        Fonts styles = new Fonts();
+
 		setLayout(new GridBagLayout());
+		GridBagConstraints mainConstraints = new GridBagConstraints();
 
-		GridBagConstraints duvidei = new GridBagConstraints();
 
-        // Título na parte de cima
-        JLabel tituloLabel = new JLabel("DOGBYTE");
-        tituloLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        tituloLabel.setFont(new Font("Arial", Font.BOLD, 50));
-        tituloLabel.setBounds(180, 100, 900, 200);
+
+        JLabel labelTitle = new JLabel("DOGBYTE");
+        labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        labelTitle.setFont(styles.boldTitle());
+        labelTitle.setBounds(180, 100, 900, 200);
 		
-		duvidei.gridx = 0;
-		duvidei.gridy = 0;
-        add(tituloLabel, duvidei);
+		mainConstraints.gridx = 0;
+		mainConstraints.gridy = 0;
+        add(labelTitle, mainConstraints);
 
 
         // Botões na parte inferior
-        JPanel painelBotoes = new JPanel(new FlowLayout());
-		painelBotoes.setFont(new Font("Arial", Font.BOLD, 20));
-        JButton botao1 = new JButton("Novo Jogo");
-        JButton botao2 = new JButton("Continuar");
-        JButton botao3 = new JButton("Ranking");
-        JButton botao4 = new JButton("Regras");
-		JButton botaoSair = new JButton("Sair");
+        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        JButton newGameButton = new JButton("Novo Jogo");
+		newGameButton.setFont(styles.boldButton());
+        JButton continueButton = new JButton("Continuar");
+		continueButton.setFont(styles.boldButton());
+        JButton rankingButton = new JButton("Ranking");
+		rankingButton.setFont(styles.boldButton());
+        JButton rulesButton = new JButton("Regras");
+		rulesButton.setFont(styles.boldButton());
+		JButton exitButton = new JButton("Sair");
+		exitButton.setFont(styles.boldButton());
 
-        painelBotoes.add(botao1);
-        painelBotoes.add(botao2);
-        painelBotoes.add(botao3);
-        painelBotoes.add(botao4);
-		painelBotoes.add(botaoSair);
+        buttonsPanel.add(newGameButton);
+        buttonsPanel.add(continueButton);
+        buttonsPanel.add(rankingButton);
+        buttonsPanel.add(rulesButton);
+		buttonsPanel.add(exitButton);
         
-        //painelBotoes.setLocation(100, 400);
-		duvidei.gridx = 0;
-		duvidei.gridy = 1;
+		mainConstraints.gridx = 0;
+		mainConstraints.gridy = 1;
 		
-        add(painelBotoes,duvidei);
+        add(buttonsPanel,mainConstraints);
 
-		
-
-		botaoSair.addActionListener(new ActionListener() {
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Jogo.cardLayout.show(Jogo.cardPanel, Jogo.GAME_SCREEN);
+            }
+        });
+        continueButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Jogo.cardLayout.show(Jogo.cardPanel, Jogo.GAME_SCREEN);
+            }
+        });
+        rankingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Jogo.cardLayout.show(Jogo.cardPanel, Jogo.RANKING_SCREEN);
+            }
+        });
+        rulesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                Jogo.cardLayout.show(Jogo.cardPanel, Jogo.RULES_SCREEN);
+            }
+        });
+		exitButton.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
-		}
+		};
+
+
 	});
 
 		
 
     }
-
 
 
     public static void main(String[] args) {

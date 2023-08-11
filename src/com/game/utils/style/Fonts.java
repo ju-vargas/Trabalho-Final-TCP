@@ -22,25 +22,40 @@ public class Fonts{
         }    
     }
 
-    //INTRODUCTION ----  
-    public Font fontScreenIntro(){
+
+
+    //LABELS -----
+    public Font smallLabel(){
+        return FONT.deriveFont(Font.PLAIN, 12);
+    }
+    public Font regularLabel(){
+        return FONT.deriveFont(Font.PLAIN, 16);
+    }
+    public Font boldLabel(){
         return FONT.deriveFont(Font.PLAIN, 24);
     }
 
-    //RULES -----
-    public Font fontScreenRules(){
+    //BUTTONS -----
+    public Font smallButton(){
+        return FONT.deriveFont(Font.PLAIN, 12);
+    }
+
+    public Font regularButton(){
         return FONT.deriveFont(Font.PLAIN, 16);
     }
 
-    //WIN -----
-    public Font fontScreenWin(){
+    public Font boldButton(){
+        return FONT.deriveFont(Font.PLAIN, 22);
+    }
+
+    //TITLES -----
+    public Font smallTitle(){
         return FONT.deriveFont(Font.PLAIN, 24);
     }
-
-    //BUTTON -----
-    public Font fontButton(){
-        return FONT.deriveFont(Font.PLAIN, 12);
-    }
-    
-
+    public Font regularTitle(){
+        return FONT.deriveFont(Font.PLAIN, 30);
+    }    
+    public Font boldTitle(){
+        return FONT.deriveFont(Font.PLAIN, 55);
+    }    
 }

@@ -18,7 +18,6 @@ import src.com.game.utils.MapConstraints;
 
 
 public class GameScreen extends JPanel implements ActionListener {
-
     private static final int LARGURA_TELA = 1280;
     private static final int ALTURA_TELA = 720;
     private static final int MAX_HEIGHT = 720 - Jogo.WINDOW_HEIGHT_DIFFERENCE;
@@ -130,7 +129,7 @@ public class GameScreen extends JPanel implements ActionListener {
             }
 
             g.setColor(Color.red);
-            g.setFont(style.fontScreenWin());
+            g.setFont(style.regularTitle());
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("Pontos: " + pontuacao, (LARGURA_TELA - metrics.stringWidth("Pontos: " + pontuacao)) / 2, g.getFont().getSize());
             g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (LARGURA_TELA - 2*metrics.stringWidth("Pontos: " + pontuacao)), g.getFont().getSize());
@@ -159,11 +158,11 @@ public class GameScreen extends JPanel implements ActionListener {
     public void fimDeJogo(Graphics g) {
 
         g.setColor(Color.red);
-        g.setFont(style.fontScreenWin());
+        g.setFont(style.regularTitle());
         FontMetrics fontePontuacao = getFontMetrics(g.getFont());
         g.drawString("Pontos: " + pontuacao, (LARGURA_TELA - fontePontuacao.stringWidth("Pontos: " + pontuacao)) / 2, g.getFont().getSize());
         g.setColor(Color.red);
-        g.setFont(style.fontScreenWin());
+        g.setFont(style.regularTitle());
         FontMetrics fonteFinal = getFontMetrics(g.getFont());
         g.drawString("\uD83D\uDE1D Fim do Jogo.", (LARGURA_TELA - fonteFinal.stringWidth("Fim do Jogo")) / 2, ALTURA_TELA / 2);
     }
@@ -295,6 +294,9 @@ public class GameScreen extends JPanel implements ActionListener {
                 default:
                     break;
             }
+
         }
+        
     }
+    
 }

@@ -7,10 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.model.Tela;
-import src.com.game.config.Config;
-
+import src.com.game.utils.style.Fonts;
 public class WinScreen extends Tela {
-    Config configStyle = new Config();
+    Fonts configStyle = new Fonts();
 
     private String[] text = {
         "O aluno finalmente conseguiu chegar ao professor.",
@@ -36,19 +35,19 @@ public class WinScreen extends Tela {
         gridPanel.setBackground(Color.YELLOW);
 
         JLabel textIntroduction = new JLabel(text[0]);
-        textIntroduction.setFont(configStyle.fontScreenIntro());
+        textIntroduction.setFont(configStyle.regularLabel());
         textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 0;
         gridPanel.add(textIntroduction, constraintsGrid);
     
         JLabel textIntroduction1 = new JLabel(text[1]);
-        textIntroduction1.setFont(configStyle.fontScreenIntro());
+        textIntroduction1.setFont(configStyle.regularLabel());
         textIntroduction1.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 1;
         gridPanel.add(textIntroduction1, constraintsGrid);
     
         JLabel textIntroduction2 = new JLabel(text[2]);
-        textIntroduction2.setFont(configStyle.fontScreenIntro());
+        textIntroduction2.setFont(configStyle.regularLabel());
         textIntroduction2.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 2;
         gridPanel.add(textIntroduction2, constraintsGrid);
@@ -61,9 +60,9 @@ public class WinScreen extends Tela {
 		containerName.setBackground(new Color(0, 0, 0,0));
 
 		JLabel nameLabel = new JLabel("Nome:");
-		nameLabel.setFont(configStyle.fontScreenIntro());
+		nameLabel.setFont(configStyle.regularLabel());
 		JTextField nameTextField = new JTextField(20);
-		nameTextField.setFont(configStyle.fontScreenIntro());
+		nameTextField.setFont(configStyle.regularLabel());
 		
 		nameTextField.addActionListener(new ActionListener() {
 			@Override

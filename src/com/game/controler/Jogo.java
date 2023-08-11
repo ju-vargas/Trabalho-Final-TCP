@@ -59,15 +59,14 @@ public class Jogo {
              * AVALIABLE SCREENS
              */
 
-             
-            GameScreen gameScreen = new GameScreen();
-            cardPanel.add(gameScreen, GAME_SCREEN);
             OptionsScreen optionsScreen = new OptionsScreen();
             cardPanel.add(optionsScreen, WIN_SCREEN);
             IntroductionScreen introductionScreen = new IntroductionScreen();
             cardPanel.add(introductionScreen, INTRODUCTION_SCREEN);
             MapaScreen mapaScreen = new MapaScreen();
             cardPanel.add(mapaScreen, MAP_SCREEN);
+            GameScreen gameScreen = new GameScreen();
+            cardPanel.add(gameScreen, GAME_SCREEN);
             WinScreen winScreen = new WinScreen();
             cardPanel.add(winScreen, WIN_SCREEN);
             RankingScreen rankingScreen = new RankingScreen();

@@ -4,10 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 
 import src.com.game.model.Tela;
-import src.com.game.config.Config;
+import src.com.game.utils.style.Fonts;
 
 public class IntroductionScreen extends Tela {
-    Config configStyle = new Config();
+    Fonts configStyle = new Fonts();
 
     private String[] text = {
         "O semestre foi difícil... pela terceira vez.",
@@ -33,20 +33,20 @@ public class IntroductionScreen extends Tela {
         gridPanel.setBackground(Color.YELLOW);
 
         JLabel textIntroduction = new JLabel(text[0]);
-        textIntroduction.setFont(configStyle.fontScreenIntro());
+        textIntroduction.setFont(configStyle.regularLabel());
         textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 1;
         constraintsGrid.gridx = 2;
         gridPanel.add(textIntroduction, constraintsGrid);
     
         JLabel textIntroduction1 = new JLabel(text[1]);
-        textIntroduction1.setFont(configStyle.fontScreenIntro());
+        textIntroduction1.setFont(configStyle.regularLabel());
         textIntroduction1.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 2;
         gridPanel.add(textIntroduction1, constraintsGrid);
     
         JLabel textIntroduction2 = new JLabel(text[2]);
-        textIntroduction2.setFont(configStyle.fontScreenIntro());
+        textIntroduction2.setFont(configStyle.regularLabel());
         textIntroduction2.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 3;
         gridPanel.add(textIntroduction2, constraintsGrid);
@@ -55,7 +55,7 @@ public class IntroductionScreen extends Tela {
         mainPanel.add(gridPanel,constraintsMain);
         
         JButton continueToNext = new JButton("Continuar");
-        continueToNext.setFont(configStyle.fontButton());
+        continueToNext.setFont(configStyle.regularButton());
         constraintsMain.gridy = 1;
         mainPanel.add(continueToNext,constraintsMain);
         add(mainPanel);
