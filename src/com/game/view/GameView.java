@@ -39,6 +39,7 @@ public class GameView extends JPanel implements ActionListener {
     private int pontuacaoFase = 2;
     private int[] randomPosition = new int[2];
     private char direcao = 'D'; // C - Cima, B - Baixo, E - Esquerda, D - Direita
+    private boolean morreu = false;
     private boolean estaRodando = false;
     Timer timer;
     private int miliseconds = 0;
@@ -60,7 +61,6 @@ public class GameView extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(Jogo.WIDTH, Jogo.HEIGHT));
         setFocusable(true);
         addKeyListener(new LeitorDeTeclasAdapter());
-        iniciarJogo();
     }
 
     //COMECA O JOGO
@@ -85,11 +85,15 @@ public class GameView extends JPanel implements ActionListener {
          * 
          */
     public void desenharTela(Graphics g) {
-        if (estaRodando) {   
+        if (win){
+            System.out.println("ganhooooooooooooooooou");
+        } else if (morreu) {
+            fimDeJogo(g);
+        } else{
             for (int i = 0; i < mapa.length; i++) {
                 for (int j = 0; j < mapa[i].length; j++) {
                     int blockID = mapa[i][j];
-
+    
                     switch (blockID){
                         case 0 :
                             g.setColor(new Color(((i*1) % 255), (i*2) % 255, (i*1) % 255));
@@ -103,20 +107,7 @@ public class GameView extends JPanel implements ActionListener {
                 }
             }
             g.setColor(Color.green);
-            //g.fillOval(randomPosition[0], randomPosition[1], TAMANHO_BLOCO, TAMANHO_BLOCO);
-
-            // String imageType = "";
-            // imageType = "powerup"; 
-            // if(!isFast){
-            //     if (seconds > 0 && seconds % 2 == 0){
-            //         imageType = "energy";
-            //         isFast = true; 
-            //         INTERVALO = INTERVALO / 2;
-            //         timer.setDelay(INTERVALO);
-            //     }
-            // }
-
-            // g.drawImage(images.itemMapa(imageType), randomPosition[0],randomPosition[1],POWER_UP_SIZE, POWER_UP_SIZE, null);
+            g.fillOval(randomPosition[0], randomPosition[1], TAMANHO_BLOCO, TAMANHO_BLOCO);
 
             for (int i = 0; i < tamanhoJogador; i++) {
                 if (i == 0) {
@@ -127,17 +118,12 @@ public class GameView extends JPanel implements ActionListener {
                     g.fillRect(bodyX[i], bodyY[i], TAMANHO_BLOCO, TAMANHO_BLOCO);
                 }
             }
-
+    
             g.setColor(Color.red);
             g.setFont(style.regularTitle());
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("Pontos: " + pontuacao, (LARGURA_TELA - metrics.stringWidth("Pontos: " + pontuacao)) / 2, g.getFont().getSize());
             g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (LARGURA_TELA - 2*metrics.stringWidth("Pontos: " + pontuacao)), g.getFont().getSize());
-        } else if (win){
-            //tela de win aqui
-            System.out.println("ganhooooooooooooooooou");
-        }else {
-            fimDeJogo(g);
         }
     }
 
@@ -156,7 +142,6 @@ public class GameView extends JPanel implements ActionListener {
     }
 
     public void fimDeJogo(Graphics g) {
-
         g.setColor(Color.red);
         g.setFont(style.regularTitle());
         FontMetrics fontePontuacao = getFontMetrics(g.getFont());
@@ -217,7 +202,6 @@ public class GameView extends JPanel implements ActionListener {
             pontuacao++;
             if (pontuacao == pontuacaoFase){
                 win = true;
-                estaRodando = false;
             }
             getRandomCoordinates();
         }
@@ -234,7 +218,7 @@ public class GameView extends JPanel implements ActionListener {
         //A cabeça bateu no corpo?
         for (int i = tamanhoJogador; i > 0; i--) {
             if (bodyX[0] == bodyX[i] && bodyY[0] == bodyY[i]) {
-                estaRodando = false;
+                morreu = true;
                 break;
             }
         }
@@ -245,7 +229,7 @@ public class GameView extends JPanel implements ActionListener {
                     if(mapa[i][j] == 1){
                         int[] position = getPosition(i,j);
                         if (position[0] == bodyX[0] && position[1] == bodyY[0]){
-                            estaRodando = false;
+                            morreu = true;
                         }
                     }
                                             
@@ -254,15 +238,15 @@ public class GameView extends JPanel implements ActionListener {
 
         //A cabeça tocou uma das bordas Direita ou esquerda?
         if (bodyX[0] < 0 || bodyX[0] > MAX_WIDTH) {
-            estaRodando = false;
+            morreu = true;
         }
 
         //A cabeça tocou o piso ou o teto?
         if (bodyY[0] < 0 || bodyY[0] > MAX_HEIGHT) {
-            estaRodando = false;
+            morreu = true;
         }
 
-        if (!estaRodando) {
+        if (morreu) {
             timer.stop();
         }
     }

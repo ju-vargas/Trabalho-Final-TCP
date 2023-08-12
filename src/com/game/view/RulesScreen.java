@@ -21,6 +21,8 @@ public class RulesScreen extends Tela {
 
 
     public RulesScreen() {
+        super();
+        
         setLayout(new GridBagLayout());
         setBackground(Color.PINK);     
     

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import src.com.game.model.Tela;
 import src.com.game.utils.style.Fonts;
+
 public class WinScreen extends Tela {
     Fonts configStyle = new Fonts();
 

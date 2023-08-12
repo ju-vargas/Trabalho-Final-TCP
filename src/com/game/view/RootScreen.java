@@ -7,12 +7,11 @@ import java.awt.event.ActionListener;
 
 import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
-import src.com.game.utils.TelaUtils;
 
 import src.com.game.utils.style.Fonts;
 
-public class OptionsScreen extends Tela {    
-    public OptionsScreen() {    
+public class RootScreen extends Tela {    
+    public RootScreen() {    
         super();
         setLocationRelativeTo(null);
         Fonts styles = new Fonts();
@@ -22,7 +21,7 @@ public class OptionsScreen extends Tela {
 
 
 
-        JLabel labelTitle = new JLabel("DOGBYTE");
+        JLabel labelTitle = new JLabel("ROOT");
         labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
         labelTitle.setFont(styles.boldTitle());
         labelTitle.setBounds(180, 100, 900, 200);
@@ -34,6 +33,10 @@ public class OptionsScreen extends Tela {
 
         // Botões na parte inferior
         JPanel buttonsPanel = new JPanel(new FlowLayout());
+        JButton introductionButton = new JButton("Introdução");
+		introductionButton.setFont(styles.boldButton());
+        JButton winButton = new JButton("Vencer jogo");
+		winButton.setFont(styles.boldButton());
         JButton newGameButton = new JButton("Novo Jogo");
 		newGameButton.setFont(styles.boldButton());
         JButton continueButton = new JButton("Continuar");
@@ -45,6 +48,8 @@ public class OptionsScreen extends Tela {
 		JButton exitButton = new JButton("Sair");
 		exitButton.setFont(styles.boldButton());
 
+		buttonsPanel.add(introductionButton);
+        buttonsPanel.add(winButton);
         buttonsPanel.add(newGameButton);
         buttonsPanel.add(continueButton);
         buttonsPanel.add(rankingButton);
@@ -80,6 +85,18 @@ public class OptionsScreen extends Tela {
             public void actionPerformed(ActionEvent e) {    
                 goTo(Jogo.rulesScreen);
             }
+        });
+        introductionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goTo(Jogo.introductionScreen);
+            };
+        });
+        winButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goTo(Jogo.winScreen);
+            };
         });
 		exitButton.addActionListener(new ActionListener() {
             @Override

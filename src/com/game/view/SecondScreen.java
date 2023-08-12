@@ -9,20 +9,20 @@ import java.awt.event.ActionListener;
 
 
 public class SecondScreen extends JPanel {
-	JButton switchToPanel1 = new JButton("Ir para a Tela 1");
+	// JButton switchToPanel1 = new JButton("Ir para a Tela 1");
 
-	public SecondScreen() {
-        setBackground(Color.RED);
-        setFocusable(true);
+	// public SecondScreen() {
+    //     setBackground(Color.RED);
+    //     setFocusable(true);
 		
-		switchToPanel1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Jogo.cardLayout.show(Jogo.cardPanel, Jogo.FIRST_SCREEN);
+	// 	switchToPanel1.addActionListener(new ActionListener() {
+	// 		@Override
+	// 		public void actionPerformed(ActionEvent e) {
+	// 			Jogo.cardLayout.show(Jogo.cardPanel, Jogo.FIRST_SCREEN);
 
-			}
-		});
+	// 		}
+	// 	});
 
-		add(switchToPanel1);
-    }
+	// 	add(switchToPanel1);
+    // }
 }
