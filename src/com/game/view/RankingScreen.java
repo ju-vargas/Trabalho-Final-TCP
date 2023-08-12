@@ -25,6 +25,8 @@ public class RankingScreen extends Tela {
         //frame.setSize(1280, 720);
         
         public RankingScreen() {
+            super();
+            
             setLayout(new GridBagLayout());
 
             GridBagConstraints duvidei = new GridBagConstraints();
