@@ -27,8 +27,6 @@ public class Jogo {
     public static int WINDOW_WIDTH_DIFFERENCE;
     public static final String TRUE_GAME_SCREEN = "TG";
 
-
-
     /*
     * CONSTANTS SCREENS 
     */
@@ -44,45 +42,45 @@ public class Jogo {
     public static final String FIRST_SCREEN = "8";
     public static final String SECOND_SCREEN = "9";
     
-
+    public static GameScreen gaminho = new GameScreen();
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Dog Byte");
+            OptionsScreen frame = new OptionsScreen();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(WIDTH, HEIGHT);
 
-            cardLayout = new CardLayout();
-            cardPanel = new JPanel(cardLayout);
+            // cardLayout = new CardLayout();
+            // cardPanel = new JPanel(cardLayout);
 
-            /**
-             * AVALIABLE SCREENS
-             */
+            // /**
+            //  * AVALIABLE SCREENS
+            //  */
 
-            OptionsScreen optionsScreen = new OptionsScreen();
-            cardPanel.add(optionsScreen, WIN_SCREEN);
-            IntroductionScreen introductionScreen = new IntroductionScreen();
-            cardPanel.add(introductionScreen, INTRODUCTION_SCREEN);
-            MapaScreen mapaScreen = new MapaScreen();
-            cardPanel.add(mapaScreen, MAP_SCREEN);
-            GameScreen gameScreen = new GameScreen();
-            cardPanel.add(gameScreen, GAME_SCREEN);
-            WinScreen winScreen = new WinScreen();
-            cardPanel.add(winScreen, WIN_SCREEN);
-            RankingScreen rankingScreen = new RankingScreen();
-            cardPanel.add(rankingScreen, RANKING_SCREEN);
-            RulesScreen rulesScreen = new RulesScreen();
-            cardPanel.add(rulesScreen, RULES_SCREEN);
-            FirstScreen firstScreen = new FirstScreen();
-            cardPanel.add(firstScreen, FIRST_SCREEN);
-            SecondScreen secondScreen = new SecondScreen();
-            cardPanel.add(secondScreen, SECOND_SCREEN);
+            // OptionsScreen optionsScreen = new OptionsScreen();
+            // cardPanel.add(optionsScreen, WIN_SCREEN);
+            // IntroductionScreen introductionScreen = new IntroductionScreen();
+            // cardPanel.add(introductionScreen, INTRODUCTION_SCREEN);
+            // MapaScreen mapaScreen = new MapaScreen();
+            // cardPanel.add(mapaScreen, MAP_SCREEN);
+            // GameScreen gameScreen = new GameScreen();
+            // cardPanel.add(gameScreen, GAME_SCREEN);
+            // WinScreen winScreen = new WinScreen();
+            // cardPanel.add(winScreen, WIN_SCREEN);
+            // RankingScreen rankingScreen = new RankingScreen();
+            // cardPanel.add(rankingScreen, RANKING_SCREEN);
+            // RulesScreen rulesScreen = new RulesScreen();
+            // cardPanel.add(rulesScreen, RULES_SCREEN);
+            // FirstScreen firstScreen = new FirstScreen();
+            // cardPanel.add(firstScreen, FIRST_SCREEN);
+            // SecondScreen secondScreen = new SecondScreen();
+            // cardPanel.add(secondScreen, SECOND_SCREEN);
 
 
-            WINDOW_HEIGHT_DIFFERENCE = frame.getInsets().top + frame.getInsets().bottom;
-            WINDOW_WIDTH_DIFFERENCE = frame.getInsets().left + frame.getInsets().right;  
+            // WINDOW_HEIGHT_DIFFERENCE = frame.getInsets().top + frame.getInsets().bottom;
+            // WINDOW_WIDTH_DIFFERENCE = frame.getInsets().left + frame.getInsets().right;  
           
-            frame.add(cardPanel);
+            // frame.add(cardPanel);
             frame.setVisible(true);
 
         });

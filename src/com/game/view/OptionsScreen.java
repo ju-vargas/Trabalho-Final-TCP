@@ -7,10 +7,16 @@ import java.awt.event.ActionListener;
 
 import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
+import src.com.game.utils.TelaUtils;
+
 import src.com.game.utils.style.Fonts;
 
-public class OptionsScreen extends Tela {
+public class OptionsScreen extends JFrame {
 
+    public void trocar(){
+        TelaUtils u = new TelaUtils();
+        u.irDePara(this, Jogo.gaminho);        
+    }
     public OptionsScreen() {    
 
         Fonts styles = new Fonts();
@@ -57,7 +63,7 @@ public class OptionsScreen extends Tela {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Jogo.cardLayout.show(Jogo.cardPanel, Jogo.GAME_SCREEN);
+                trocar();
             }
         });
         continueButton.addActionListener(new ActionListener() {
