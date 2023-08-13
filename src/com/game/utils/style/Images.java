@@ -19,7 +19,7 @@ public class Images {
 
     public BufferedImage itemMapa(String name){
         switch(name){
-            case "powerup":
+            case "point":
                 try {
                     backgroundImage = ImageIO.read(new File("resources/sprites/cafe.png"));        
                 } catch (IOException e) {
