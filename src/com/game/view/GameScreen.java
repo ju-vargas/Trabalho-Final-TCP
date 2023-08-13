@@ -11,6 +11,6 @@ public class GameScreen extends Tela {
     }
 
     public void initNewGame(){
-        gameView.iniciarJogo();
+        gameView.startGameLevel();
     }
 }

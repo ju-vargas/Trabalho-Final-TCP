@@ -1,9 +1,9 @@
 package src.com.game.model;
 public class Fase {
 
-	private Mapa mapa;
+	// private Mapa mapa;
 
-	private Jogador jogador;
+	// private Jogador jogador;
 
 	private int numeroFase;
 

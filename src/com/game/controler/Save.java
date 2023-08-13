@@ -1,9 +1,9 @@
 
-package src.com.game.controler;
-import src.com.game.model.Fase;
+// package src.com.game.controler;
+// import src.com.game.model.Fase;
 
-public class Save {
+// public class Save {
 
-	private Fase[] fases;
+// 	private Fase[] fases;
 
-}
+// }
