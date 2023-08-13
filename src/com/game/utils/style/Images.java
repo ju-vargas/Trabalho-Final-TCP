@@ -38,4 +38,17 @@ public class Images {
         }
         return backgroundImage; 
     }
+
+    public BufferedImage button(String name){
+        String path; 
+        path = "resources/sprites/" + name + ".png";
+        try {
+            backgroundImage = ImageIO.read(new File(path));        
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("deu ruim");
+        }
+        return backgroundImage; 
+
+    }
 }

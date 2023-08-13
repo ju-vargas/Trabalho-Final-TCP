@@ -8,7 +8,7 @@ import src.com.game.view.OptionsScreen;
 import src.com.game.view.IntroductionScreen;
 import src.com.game.view.RulesScreen;
 import src.com.game.view.WinScreen;
-import src.com.game.view.MapaScreen;
+import src.com.game.view.MapScreen;
 import src.com.game.view.GameScreen;
 import src.com.game.view.RankingScreen;
 import src.com.game.view.RootScreen;
@@ -38,7 +38,6 @@ public class Jogo {
      * criar uma classe depois so pra ter os paths certinhos!!
      * por enquanto eh gambiarra
      */
-
     public static String PATH_LEVEL1 = "resources/maps/source/1.txt";
 
     public static boolean isGameRunning = false;
@@ -46,13 +45,13 @@ public class Jogo {
     public static GameScreen gameScreen = new GameScreen();
     public static RankingScreen rankingScreen = new RankingScreen();
     public static RulesScreen rulesScreen = new RulesScreen();
-    public static MapaScreen mapaScreen = new MapaScreen();
+    public static MapScreen mapaScreen = new MapScreen();
     public static IntroductionScreen introductionScreen = new IntroductionScreen();
     public static WinScreen winScreen = new WinScreen();
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            RootScreen frame = new RootScreen();
+            OptionsScreen frame = new OptionsScreen();
             frame.setVisible(true);
         });
     }

@@ -2,7 +2,10 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
 import src.com.game.utils.style.Fonts;
 
@@ -59,7 +62,14 @@ public class IntroductionScreen extends Tela {
         constraintsMain.gridy = 1;
         mainPanel.add(continueToNext,constraintsMain);
         add(mainPanel);
-    };
+
+        continueToNext.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goTo(Jogo.mapaScreen);
+            }
+        });
+    }    
 }
 
 

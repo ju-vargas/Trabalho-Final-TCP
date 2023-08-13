@@ -56,11 +56,13 @@ public class OptionsScreen extends Tela {
 		
         add(buttonsPanel,mainConstraints);
 
+        //se escolheu new game, apaga os .dat de progresso e escreve outros
+        //se escolheu new game, tambem reescreve GameProgress 
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Jogo.gameScreen);
-                Jogo.initNewGame();
+                goTo(Jogo.introductionScreen);
+                //Jogo.initNewGame();
             }
         });
         continueButton.addActionListener(new ActionListener() {
