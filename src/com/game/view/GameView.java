@@ -12,10 +12,26 @@ import java.util.Random;
 import src.com.game.controler.Jogo;
 import src.com.game.utils.style.Fonts;
 import src.com.game.model.Level;
+import src.com.game.controler.SaveLevel;
+import src.com.game.controler.LevelProgress;
+import src.com.game.controler.GameProgress;
+/*
+ * se isRunning, eu procuro o arquivo
+ * se nao eu crio um novo em cima, ou novo jogo
+ * pq isCompleted cria novo jogo
+ * preciso lembrar de reescrever as informacoes quando acabar
+ */
+
 
 public class GameView extends JPanel implements ActionListener {
     private static int INTERVAL = 50; //o clock do jogo
-    private Level level1 = new Level(1,2,3,Jogo.PATH_LEVEL1);
+
+
+    //private Level level = new Level(1,2,3,Jogo.PATH_LEVEL1);
+    private Level level; 
+
+
+    
     private Fonts style = new Fonts(); 
 
     private boolean isRunning = false;
@@ -34,7 +50,13 @@ public class GameView extends JPanel implements ActionListener {
         addKeyListener(new GetKeyPressed());
     }
 
-    public void startGameLevel() {
+    public void startGameLevel(String id) {
+        // Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+        // SaveLevel.saveLevel(level1, "1");
+        // Level level2 = new Level("1",2,3,Jogo.PATH_LEVEL2);
+        // SaveLevel.saveLevel(level2, "2");
+
+        level = SaveLevel.loadLevel(id);
         isRunning = true;
         timer = new Timer(INTERVAL, this);
         timer.start();
@@ -47,21 +69,36 @@ public class GameView extends JPanel implements ActionListener {
     }
 
     public void drawScreen(Graphics g) {
-        if (level1.isComplete()){
-            System.out.println("ganhooooooooooooooooou");
+        if (level.isComplete()){
+            //System.out.println("ganhooooooooooooooooou");
+            LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
+            LevelProgress thisLevelProgress;
+            switch(level.getIdFase()){
+                case "1":
+                    thisLevelProgress = new LevelProgress(1, true, false, seconds); 
+                    GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
+                    break;
+                case "2":
+                    thisLevelProgress = new LevelProgress(2, true, false, seconds); 
+                    GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
+                    break;
+            }
+            SaveLevel.saveLevel(level, level.getIdFase());
+            
+            
         } 
-        else if (level1.isEnd()) {
+        else if (level.isEnd()) {
             fimDeJogo(g);
         } 
         else{
-            level1.render(g);
+            level.render(g);
             
             /*render HEADER */
             g.setColor(Color.red);
             g.setFont(style.regularTitle());
             FontMetrics metrics = getFontMetrics(g.getFont());
 
-            int points = level1.getPlayer().getPoints();
+            int points = level.getPlayer().getPoints();
 
             g.drawString("Pontos: " + points, (Jogo.WIDTH - metrics.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
             g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (Jogo.WIDTH - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
@@ -69,7 +106,7 @@ public class GameView extends JPanel implements ActionListener {
     }
 
     public void fimDeJogo(Graphics g) {
-        int points = level1.getPlayer().getPoints();
+        int points = level.getPlayer().getPoints();
 
         g.setColor(Color.red);
         g.setFont(style.regularTitle());
@@ -83,10 +120,10 @@ public class GameView extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
-            level1.getPlayer().walk(); 
-            if (!level1.isComplete())
-                level1.setComplete(level1.checkScore());
-            if (level1.isColliding()) 
+            level.getPlayer().walk(); 
+            if (!level.isComplete())
+                level.setComplete(level.checkScore());
+            if (level.isColliding()) 
                 timer.stop();
             updateTimer();
         }
@@ -98,16 +135,16 @@ public class GameView extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                level1.getPlayer().moveLeft();
+                level.getPlayer().moveLeft();
                 break;
                 case KeyEvent.VK_RIGHT:
-                level1.getPlayer().moveRight();
+                level.getPlayer().moveRight();
                 break;
                 case KeyEvent.VK_UP:
-                level1.getPlayer().moveUp();
+                level.getPlayer().moveUp();
                 break;
                 case KeyEvent.VK_DOWN:
-                level1.getPlayer().moveDown();
+                level.getPlayer().moveDown();
                 break;
                 default:
                 break;

@@ -3,10 +3,11 @@ package src.com.game.utils.style;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.awt.FontFormatException;
 
 
-public class Fonts{
+public class Fonts implements Serializable{
     public Font FONT;
 
     public Fonts(){

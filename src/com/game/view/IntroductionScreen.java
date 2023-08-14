@@ -66,6 +66,7 @@ public class IntroductionScreen extends Tela {
         continueToNext.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 goTo(Jogo.mapaScreen);
             }
         });

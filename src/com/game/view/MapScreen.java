@@ -1,4 +1,6 @@
 package src.com.game.view;
+import src.com.game.model.Level;
+import src.com.game.model.Save;
 import src.com.game.model.Tela;
 import javax.swing.*;
 import java.awt.*;
@@ -6,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import src.com.game.utils.style.*;
 import src.com.game.controler.LevelProgress;
+import src.com.game.controler.SaveLevel;
 import src.com.game.controler.GameProgress;
 import src.com.game.controler.Jogo;
 
@@ -19,15 +22,12 @@ public class MapScreen extends Tela {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(0, 150, 0, 150);	
 		
-        GameProgress gameProgress = new GameProgress();
-        LevelProgress[] loadedProgress = gameProgress.loadGameProgress();
-
+        LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
         String[] sprite = new String[3];
-
-
         for(int i = 0; i<2; i++){
             if (loadedProgress[i].isCompleted() == true){
                 sprite[i] = "completebutton";
+                System.out.println("EAIII");
             }
             else if(loadedProgress[i].isRunning() == true){
                 sprite[i] = "almostbutton"; 
@@ -40,7 +40,6 @@ public class MapScreen extends Tela {
         else   
             sprite[2] = "notbutton";
     
-
 		JButton button1 = createCircularButton("Fase 1", sprite[0]);
 		JButton button2 = createCircularButton("Fase 2", sprite[1]);
 		JButton button3 = createCircularButton("Fim",sprite[2]);
@@ -55,13 +54,21 @@ public class MapScreen extends Tela {
 		constraints.gridy = 0;
 		add(button3, constraints);
 
-
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println(loadedProgress[0].isCompleted());
+                
+                //SE esta completo e clica, refaz o nivel
+                if (loadedProgress[0].isCompleted()){
+                    GameProgress.clearGameProgress(1);
+                    Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+                    SaveLevel.saveLevel(level1,"1");
+                }
+
+                //SE esta em progresso ou eh a primeira vez fazendo, só vai pro jogo
                 goTo(Jogo.gameScreen);
-                Jogo.initNewGame();
+                Jogo.initNewGame("1");
             }
         });
 
@@ -70,8 +77,14 @@ public class MapScreen extends Tela {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(loadedProgress[0].isCompleted()){
+                    if (loadedProgress[1].isCompleted()){
+                        GameProgress.clearGameProgress(1);
+                        Level level2 = new Level("1",2,3,Jogo.PATH_LEVEL2);
+                        SaveLevel.saveLevel(level2,"2");
+                        //manda a classe limpa
+                    }
                     goTo(Jogo.gameScreen);
-                    Jogo.initNewGame();
+                    Jogo.initNewGame("2");
                 } 
             }
         });
@@ -90,9 +103,14 @@ public class MapScreen extends Tela {
         Images imageFont = new Images();
         Fonts font = new Fonts();
 
+        System.out.println("O TYPE AQ eh "+ type);
+
         JButton button = new JButton(label);
         button.setPreferredSize(new Dimension(100, 100));
-        button.setIcon(new ImageIcon(imageFont.button(type)));
+
+        System.out.println("esse eh o tipo do " + label); 
+        System.out.println(type);
+        button.setIcon(imageFont.button(type));
 
         button.setVerticalTextPosition(AbstractButton.CENTER);
         button.setHorizontalTextPosition(AbstractButton.CENTER);

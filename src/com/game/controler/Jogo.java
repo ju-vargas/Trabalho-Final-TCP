@@ -39,6 +39,8 @@ public class Jogo {
      * por enquanto eh gambiarra
      */
     public static String PATH_LEVEL1 = "resources/maps/source/1.txt";
+    public static String PATH_LEVEL2 = "resources/maps/source/2.txt";
+
 
     public static boolean isGameRunning = false;
 
@@ -56,7 +58,7 @@ public class Jogo {
         });
     }
 
-    public static void initNewGame(){
-        gameScreen.initNewGame();
+    public static void initNewGame(String id){
+        gameScreen.initNewGame(id);
     }
 }

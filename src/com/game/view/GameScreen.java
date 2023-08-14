@@ -10,7 +10,7 @@ public class GameScreen extends Tela {
         setTitle("Jogo da Cobrinha - Snake game");
     }
 
-    public void initNewGame(){
-        gameView.startGameLevel();
+    public void initNewGame(String id){
+        gameView.startGameLevel(id);
     }
 }

@@ -65,7 +65,7 @@ public class RootScreen extends Tela {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goTo(Jogo.gameScreen);
-                Jogo.initNewGame();
+                //Jogo.initNewGame();
             }
         });
         continueButton.addActionListener(new ActionListener() {

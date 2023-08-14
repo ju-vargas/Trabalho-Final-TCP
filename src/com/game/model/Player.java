@@ -1,10 +1,11 @@
 package src.com.game.model;
 
 import java.awt.*;
+import java.io.Serializable;
 
 import src.com.game.controler.Jogo;
 
-public class Player {
+public class Player implements Serializable{
     private String name;
     private char direction;
     private int size; 
