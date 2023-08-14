@@ -78,14 +78,16 @@ public class OptionsScreen extends Tela {
 
 
                 //E ai vai pro jogo
-                Jogo.mapaScreen = new MapScreen();
+                // Jogo.mapaScreen = new MapScreen();
+                Jogo.mapaScreen.update();
                 goTo(Jogo.introductionScreen);
             }
         });
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Jogo.mapaScreen = new MapScreen();
+                // Jogo.mapaScreen = new MapScreen();
+                Jogo.mapaScreen.update();
                 goTo(Jogo.mapaScreen);
             }
         });

@@ -17,9 +17,14 @@ public class MapScreen extends Tela {
 	public MapScreen(){
         super();
         setLocationRelativeTo(null);
-
-		setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
+        update();
+	}
+    
+    public void update(){
+        this.getContentPane().removeAll();
+        // this.removeAll();
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(0, 75, 0, 75);	
 		
         LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
@@ -46,18 +51,18 @@ public class MapScreen extends Tela {
 	
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-        add(buttonMenu,constraints); 
+        this.add(buttonMenu,constraints); 
 
         
 		constraints.gridx = 1;
 		constraints.gridy = 1;
-		add(button1, constraints);
+		this.add(button1, constraints);
 		constraints.gridx = 2;
 		constraints.gridy = 0;
-		add(button2, constraints);
+		this.add(button2, constraints);
         constraints.gridx = 3;
 		constraints.gridy = 1;
-		add(button3, constraints);
+		this.add(button3, constraints);
 
         button1.addActionListener(new ActionListener() {
             @Override
@@ -114,7 +119,7 @@ public class MapScreen extends Tela {
                 goTo(Jogo.optionsScreen);    
             }
         });
-	}
+    }
 
     private static JButton createCircularButton(String label, String type) {
         Images imageFont = new Images();

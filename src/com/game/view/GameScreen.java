@@ -49,7 +49,8 @@ public class GameScreen extends Tela {
     }
 
     public void changeScreenLevel(){
-        Jogo.mapaScreen = new MapScreen();
+        // Jogo.mapaScreen = new MapScreen();
+        Jogo.mapaScreen.update();
         goTo(Jogo.mapaScreen);
     }
 
