@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -71,6 +74,8 @@ public class GameView extends JPanel implements ActionListener {
             switch(level.getIdFase()){
                 case "1":
                     thisLevelProgress = new LevelProgress(1, true, false, (int) miliseconds); 
+                    int saveTime = (int)miliseconds/10;
+                    saveTXT(saveTime);
                     GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                     break;
                 case "2":
@@ -101,7 +106,6 @@ public class GameView extends JPanel implements ActionListener {
 
     public void fimDeJogo(Graphics g) {
         int points = level.getPlayer().getPoints();
-
         g.setColor(Color.red);
         g.setFont(style.regularTitle());
         FontMetrics fontePontuacao = getFontMetrics(g.getFont());
@@ -110,6 +114,21 @@ public class GameView extends JPanel implements ActionListener {
         g.setFont(style.regularTitle());
         FontMetrics fonteFinal = getFontMetrics(g.getFont());
         g.drawString("\uD83D\uDE1D Fim do Jogo.", (Jogo.WIDTH - fonteFinal.stringWidth("Fim do Jogo")) / 2, Jogo.HEIGHT / 2);
+    }
+
+    public void saveTXT(int points) {
+        try {
+            FileWriter fileWriter = new FileWriter("src/com/game/view/ranking.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            String pointsString = Integer.toString(points);
+            bufferedWriter.write(pointsString + "segundos");
+            bufferedWriter.newLine();;
+            bufferedWriter.close();
+
+            System.out.println("Variável salva com sucesso no arquivo do ranking");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar a variável no arquivo: " + e.getMessage());
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
