@@ -1,6 +1,7 @@
 package src.com.game.model;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 
 import src.com.game.controler.Jogo;
 
@@ -8,8 +9,11 @@ public class Player {
     private String name;
     private char direction;
     private int size; 
-    private int time; 
+    private LocalDateTime endSpeedUpTime; 
+
     private int speed; 
+    private boolean isSpeededUp;
+
     private int points;
     private boolean isDead; 
 
@@ -20,17 +24,17 @@ public class Player {
         this.name = "";
         this.direction = direction;
         this.size = Jogo.INICIAL_PLAYER_SIZE; 
-        this.time = 0; 
-        this.speed = 0;
+        this.endSpeedUpTime = null; 
+        this.speed = 1;
         this.points = 0;
         this.isDead = false; 
     }
     /*GETTERS and SETTERS */
-    public int getTime() {
-        return time;
+    public LocalDateTime getEndSpeedUpTime() {
+        return endSpeedUpTime;
     }
-    public void setTime(int time) {
-        this.time = time;
+    public void setEndSpeedUpTime(LocalDateTime endSpeedUpTime) {
+        this.endSpeedUpTime = endSpeedUpTime;
     }
     public String getName() {
         return name;
@@ -41,19 +45,27 @@ public class Player {
     public int getSpeed() {
         return speed;
     }
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public boolean isSpeededUp() {
+        return isSpeededUp;
+    }
+    public void speedUp(int value){
+        this.isSpeededUp = true;
+        this.speed = value;
+    }
+    public void speedDown(){
+        this.isSpeededUp = false;
+        this.speed = 1;
     }
     public int getPoints(){
         return this.points;
     }
-
     public void increaseSize() {
         this.size = size+1;
     }
     public void increasePoints(int point){
         this.points += point;
     }
+
 
     public void moveUp(){
         if (this.direction != 'B') {
@@ -124,17 +136,17 @@ public class Player {
         }
         return this.isDead;
     }
+
     private int[] getPosition(int i, int j){
         int[] position = new int[2];
         position[0] = i*Jogo.BLOCK_SIZE;
-        position[1] = Jogo.HEADER_SIZE+j*Jogo.BLOCK_SIZE;
+        position[1] = j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE;
         return position;
     }
 
-    public boolean madePoint(int[] pos){
-        if (this.bodyX[0] == pos[0] && this.bodyY[0] == pos[1]) {
-            this.increaseSize();
-            this.points++;
+    public boolean hasCollide(int[] coord){
+        int position[] = LevelMap.getPositionByCoordinates(coord);
+        if (this.bodyX[0] == position[0] && this.bodyY[0] == position[1]) {
             return true; 
         }
         return false;
