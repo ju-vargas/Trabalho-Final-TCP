@@ -2,7 +2,7 @@ package src.com.game.controler;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.Spliterator.OfPrimitive;
 
 import src.com.game.view.OptionsScreen;
 import src.com.game.view.IntroductionScreen;
@@ -55,7 +55,7 @@ public class Jogo {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            RootScreen frame = new RootScreen();
+            OptionsScreen frame = new OptionsScreen();
             frame.setVisible(true);
         });
     }

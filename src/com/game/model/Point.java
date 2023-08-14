@@ -1,7 +1,7 @@
 package src.com.game.model;
-import java.io.Serializable;
 
-public class Point extends LevelMapObject implements Serializable {  
+
+public class Point extends LevelMapObject {  
     private static int value = 0;
     //private int[] position = new int[2]; 
     

@@ -1,12 +1,13 @@
 package src.com.game.model;
 import java.awt.*;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
 import src.com.game.controler.Jogo;
 import src.com.game.utils.style.Images;
 
-public abstract class LevelMapObject {
+public abstract class LevelMapObject implements Serializable {
     private int[] coordinates = new int[2]; 
     private String imageName = "";
 

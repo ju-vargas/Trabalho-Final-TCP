@@ -1,6 +1,5 @@
 package src.com.game.utils.style;
 import javax.swing.ImageIcon;
-
 import java.io.Serializable;
 
 public class Images implements Serializable{

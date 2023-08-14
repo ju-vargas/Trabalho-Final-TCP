@@ -46,11 +46,12 @@ public class GameView extends JPanel implements ActionListener {
     }
 
     public void startGameLevel(String id) {
-        // Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
-        // SaveLevel.saveLevel(level1, "1");
-        // Level level2 = new Level("1",2,3,Jogo.PATH_LEVEL2);
-        // SaveLevel.saveLevel(level2, "2");
-
+        System.out.println("oiii aqui roda");
+        //Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+        //SaveLevel.saveLevel(level1, "1");
+        //Level level2 = new Level("1",2,3,Jogo.PATH_LEVEL2);
+        //SaveLevel.saveLevel(level2, "2");
+        
         level = SaveLevel.loadLevel(id);
         isRunning = true;
         timer = new Timer(INTERVAL, this);
@@ -65,7 +66,6 @@ public class GameView extends JPanel implements ActionListener {
 
     public void drawScreen(Graphics g) {
         if (level.isComplete()){
-            //System.out.println("ganhooooooooooooooooou");
             LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
             LevelProgress thisLevelProgress;
             switch(level.getIdFase()){
