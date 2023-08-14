@@ -1,20 +1,7 @@
 package src.com.game.view;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
-import src.com.game.utils.TelaUtils;
 
 public class GameScreen extends Tela {
     GameView gameView = new GameView();
@@ -57,10 +44,21 @@ public class GameScreen extends Tela {
     }
 
     public void initNewGame(String id){
+
         gameView.startGameLevel(id);
     }
 
-    public void changeScreen(){
-        goTo(Jogo.rankingScreen);
+    public void changeScreenLevel(){
+        Jogo.mapaScreen = new MapScreen();
+        goTo(Jogo.mapaScreen);
     }
+
+    public void changeScreenWin(){
+        goTo(Jogo.winScreen);
+    }
+
+    public void changeScreenDead(){
+        goTo(Jogo.deadScreen);
+    }
+
 }

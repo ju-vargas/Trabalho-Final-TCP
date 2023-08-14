@@ -20,7 +20,7 @@ public class MapScreen extends Tela {
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.insets = new Insets(0, 150, 0, 150);	
+		constraints.insets = new Insets(0, 75, 0, 75);	
 		
         LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
         String[] sprite = new String[3];
@@ -39,18 +39,24 @@ public class MapScreen extends Tela {
         else   
             sprite[2] = "notbutton";
     
+        JButton buttonMenu = createCircularButton("Menu", "menubutton");
 		JButton button1 = createCircularButton("Fase 1", sprite[0]);
 		JButton button2 = createCircularButton("Fase 2", sprite[1]);
 		JButton button3 = createCircularButton("Fim",sprite[2]);
 	
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-		add(button1, constraints);
+        add(buttonMenu,constraints); 
+
+        
 		constraints.gridx = 1;
 		constraints.gridy = 1;
-		add(button2, constraints);
+		add(button1, constraints);
 		constraints.gridx = 2;
 		constraints.gridy = 0;
+		add(button2, constraints);
+        constraints.gridx = 3;
+		constraints.gridy = 1;
 		add(button3, constraints);
 
         button1.addActionListener(new ActionListener() {
@@ -66,8 +72,11 @@ public class MapScreen extends Tela {
                 }
 
                 //SE esta em progresso ou eh a primeira vez fazendo, só vai pro jogo
-                goTo(Jogo.gameScreen);
-                Jogo.initNewGame("1");
+                
+                Jogo.faseIntroduction = new FaseIntroduction("1");
+                goTo(Jogo.faseIntroduction);
+                //goTo(Jogo.gameScreen);
+                //Jogo.initNewGame("1");
             }
         });
 
@@ -82,8 +91,10 @@ public class MapScreen extends Tela {
                         SaveLevel.saveLevel(level2,"2");
                         //manda a classe limpa
                     }
-                    goTo(Jogo.gameScreen);
-                    Jogo.initNewGame("2");
+                    Jogo.faseIntroduction = new FaseIntroduction("2");
+                    goTo(Jogo.faseIntroduction);
+                    // goTo(Jogo.gameScreen);
+                    // Jogo.initNewGame("2");
                 } 
             }
         });
@@ -94,6 +105,13 @@ public class MapScreen extends Tela {
                 if(loadedProgress[1].isCompleted()){
                     goTo(Jogo.rankingScreen);
                 } 
+            }
+        });
+
+        buttonMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goTo(Jogo.optionsScreen);    
             }
         });
 	}
