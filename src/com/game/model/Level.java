@@ -34,6 +34,7 @@ public class Level implements Serializable {
        this.isEnd = false;
        this.isComplete = false; 
     }
+
     public boolean isEnd(){
         return this.isEnd;
     }
