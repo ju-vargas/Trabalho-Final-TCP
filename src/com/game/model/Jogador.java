@@ -1,16 +1,13 @@
 package src.com.game.model;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Jogador implements Serializable {
 
-	private int tamanho;
-	private int[] posicao;
-	private int pontuacao;
+	// private int tamanho;
+	// private int[] posicao;
+	// private int pontuacao;
 	private String nome = "Cláudio";
-	private int velocidade;
+	//private int velocidade;
 
 	public String getNome() {
 		return nome;

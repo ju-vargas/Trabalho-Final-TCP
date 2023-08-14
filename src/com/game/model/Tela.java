@@ -8,30 +8,6 @@ public class Tela extends JFrame {
 
 	private TelaUtils telaUtils = new TelaUtils();
 
-	private int altura;
-
-	private int largura;
-
-	public void abrir() {
-
-	}
-
-	public void fechar() {
-
-	}
-
-	public void teclaDigitada() {
-
-	}
-
-	public void teclaPressionada() {
-
-	}
-
-	public void teclaSolta() {
-
-	}
-
 	public Tela(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(Jogo.WIDTH, Jogo.HEIGHT);

@@ -223,7 +223,7 @@ public class GameView extends JPanel implements ActionListener {
                             break;
                             
                     }
-                    Jogo.gameScreen.goTo(Jogo.mapaScreen);
+                    Jogo.gameScreen.changeScreenLevel();
                     nomeDecente = true;
                     resetTimer();
                     isRunning = false;

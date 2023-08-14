@@ -12,7 +12,7 @@ import src.com.game.controler.Jogo;
 
 
 public class LevelMap implements Serializable{
-    private String mapId; 
+    //private String mapId; 
     private int[][] mapConstraints;
     private int[] pointCoordinates = new int[2];
     private int[] powerUpCoordinates = new int[2];
@@ -37,7 +37,7 @@ public class LevelMap implements Serializable{
     }
     
     public LevelMap(String id, String path){
-        this.mapId = id;
+        //this.mapId = id;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             int[][] matrix = new int[Jogo.XBlocks][Jogo.YBlocks];
