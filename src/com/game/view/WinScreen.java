@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.controler.Jogo;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
-public class WinScreen extends Tela {
+public class WinScreen extends Screen {
     Fonts configStyle = new Fonts();
 
     private String[] text = {

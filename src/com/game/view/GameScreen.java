@@ -1,9 +1,9 @@
 package src.com.game.view;
 
 import src.com.game.controler.Jogo;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 
-public class GameScreen extends Tela {
+public class GameScreen extends Screen {
     GameView gameView = new GameView();
 
     public GameScreen() {

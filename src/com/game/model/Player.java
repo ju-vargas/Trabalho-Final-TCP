@@ -32,7 +32,7 @@ public class Player implements Serializable{
         this.isDead = false; 
         bodyX[0] = 0;
         bodyY[0] = Jogo.HEADER_SIZE;
-    }
+    } 
     /*GETTERS and SETTERS */
     public LocalDateTime getEndSpeedUpTime() {
         return endSpeedUpTime;

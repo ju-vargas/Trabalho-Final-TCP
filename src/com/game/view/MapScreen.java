@@ -1,8 +1,8 @@
 package src.com.game.view;
 import src.com.game.model.Level;
-import src.com.game.model.Save;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import src.com.game.controler.SaveLevel;
 import src.com.game.controler.GameProgress;
 import src.com.game.controler.Jogo;
 
-public class MapScreen extends Tela {
+public class MapScreen extends Screen {
 
 	public MapScreen(){
         super();

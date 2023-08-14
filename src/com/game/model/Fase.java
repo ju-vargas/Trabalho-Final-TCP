@@ -6,7 +6,7 @@ public class Fase {
 	// private Jogador jogador;
 
 	private int numeroFase;
-
+	
 	private int numeroFrutas;
 
 	private int numeroObstaculos;
