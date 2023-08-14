@@ -25,13 +25,13 @@ import src.com.game.controler.GameProgress;
 
 
 public class GameView extends JPanel implements ActionListener {
-    private static int INTERVAL = 125; //o clock do jogo
+    private static int INTERVAL = 40; //o clock do jogo
     //private Level level = new Level(1,2,3,Jogo.PATH_LEVEL1);
     private Level level; 
     private Fonts style = new Fonts(); 
 
     private boolean isRunning = false;
-    Timer timer;
+    Timer timer = new Timer(INTERVAL, this);
     private double miliseconds = 0;
     private double seconds = 0;
     private int minutes = 0;
@@ -46,16 +46,10 @@ public class GameView extends JPanel implements ActionListener {
         addKeyListener(new GetKeyPressed());
     }
 
-    public void startGameLevel(String id) {
-        System.out.println("oiii aqui roda");
-        //Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
-        //SaveLevel.saveLevel(level1, "1");
-        //Level level2 = new Level("1",2,3,Jogo.PATH_LEVEL2);
-        //SaveLevel.saveLevel(level2, "2");
-        
+    public void startGameLevel(String id) {   
         level = SaveLevel.loadLevel(id);
         isRunning = true;
-        timer = new Timer(INTERVAL, this);
+        resetTimer();
         timer.start();
     }
 
@@ -83,8 +77,10 @@ public class GameView extends JPanel implements ActionListener {
                     GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
                     break;
             }
-            SaveLevel.saveLevel(level, level.getIdFase());      
-            Jogo.gameScreen.changeScreen();
+            SaveLevel.saveLevel(level, level.getIdFase());   
+            Jogo.gameScreen.goTo(Jogo.winScreen);
+            resetTimer();
+            isRunning = false;
         } 
         else if (level.isEnd()) {
             fimDeJogo(g);
@@ -175,7 +171,18 @@ public class GameView extends JPanel implements ActionListener {
                         break;
                 }
             }
+            if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                Jogo.gameScreen.goTo(Jogo.mapaScreen);
+                resetTimer();
+                isRunning = false;
+            }
         }
+    }
+
+    private void resetTimer(){
+        miliseconds = 0;
+        seconds = 0;
+        minutes = 0;
     }
     
     private void updateTimer(){

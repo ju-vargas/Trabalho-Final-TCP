@@ -75,7 +75,6 @@ public class Level implements Serializable {
         return false;
     }
     public void upScore(){
-        System.out.println("FUI CHAMADO");
         Point.applyEffect(player);
         this.newPoint();
     }
