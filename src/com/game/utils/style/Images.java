@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 
 public class Images {
-    private BufferedImage backgroundImage;
+    private static BufferedImage backgroundImage;
     
     public Images(){
         try {
@@ -17,7 +17,7 @@ public class Images {
         }
     }
 
-    public BufferedImage itemMapa(String name){
+    public static BufferedImage itemMapa(String name){
         switch(name){
             case "point":
                 try {

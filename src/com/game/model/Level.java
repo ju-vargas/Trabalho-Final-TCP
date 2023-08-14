@@ -15,6 +15,7 @@ public class Level {
     private LevelMap map; 
     private Player player;
     private Point point;
+    private PowerUp powerUp;
 
     /*
      * possivelmente nesse construtor aqui
@@ -25,7 +26,10 @@ public class Level {
        this.numPoints = numPoints; 
        this.map = new LevelMap(id, path);
        this.player = new Player('D');
-       this.point = new Point(map.getRandomCoordinates());
+       this.point = new Point(map.getRandomCoordinates(),1,"point");
+       map.setPointCoordinates(point.getCoordinates());
+       this.powerUp = new PowerUp(map.getRandomCoordinates(), 2, 3, "energy");
+       map.setPowerUpCoordinates(powerUp.getCoordinates());
        this.isEnd = false;
        this.isComplete = false; 
     }
@@ -51,23 +55,39 @@ public class Level {
         return this.idFase;
     }    
     public boolean isColliding(){
-        this.isEnd =  this.player.checkCollision(this.map.getMapConstraints());
+        this.isEnd =  this.player.checkCollision(this.map.getMapConstraints(), this);
         return this.isEnd;
     }
     public void newPoint(){
-        point.setPosition(map.getRandomCoordinates());
+        int coordinates[] = map.getRandomCoordinates();
+        map.setPointCoordinates(coordinates);
+        point.setCoordinates(coordinates);
+    }
+    public void newPowerUp(){
+        int coordinates[] = map.getRandomCoordinates();
+        map.setPowerUpCoordinates(coordinates);
+        powerUp.setCoordinates(coordinates);
     }
     public boolean checkScore(){
-        if(player.madePoint(point.getPosition())){
-            if (player.getPoints() == this.numPoints)
-            return true; 
-            this.newPoint();
-        }
+        if (player.getPoints() == this.numPoints)
+            return true;
         return false;
+    }
+    public void upScore(){
+        Point.applyEffect(player);
+        this.newPoint();
+    }
+
+    public void checkPowerUp(){
+        PowerUp.applyEffect(player);
+        map.removeObject(powerUp.getCoordinates(), powerUp);
     }
     public void render(Graphics g){
         map.render(g);
         player.render(g);
         point.render(g);
+        if(powerUp.getCoordinates() != null){
+            powerUp.render(g);
+        }
     }
 }
