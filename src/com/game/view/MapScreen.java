@@ -27,7 +27,6 @@ public class MapScreen extends Tela {
         for(int i = 0; i<2; i++){
             if (loadedProgress[i].isCompleted() == true){
                 sprite[i] = "completebutton";
-                System.out.println("EAIII");
             }
             else if(loadedProgress[i].isRunning() == true){
                 sprite[i] = "almostbutton"; 
@@ -103,13 +102,9 @@ public class MapScreen extends Tela {
         Images imageFont = new Images();
         Fonts font = new Fonts();
 
-        System.out.println("O TYPE AQ eh "+ type);
-
         JButton button = new JButton(label);
         button.setPreferredSize(new Dimension(100, 100));
 
-        System.out.println("esse eh o tipo do " + label); 
-        System.out.println(type);
         button.setIcon(imageFont.button(type));
 
         button.setVerticalTextPosition(AbstractButton.CENTER);

@@ -78,9 +78,8 @@ public class GameView extends JPanel implements ActionListener {
                     GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
                     break;
             }
-            SaveLevel.saveLevel(level, level.getIdFase());
-            
-            
+            SaveLevel.saveLevel(level, level.getIdFase());      
+            Jogo.gameScreen.changeScreen();
         } 
         else if (level.isEnd()) {
             fimDeJogo(g);
@@ -115,7 +114,7 @@ public class GameView extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
-            timer.setDelay(INTERVAL / level.getPlayer().getSpeed());
+            timer.setDelay(INTERVAL * level.getPlayer().getSpeed());
             level.getPlayer().walk(); 
             if (level.getPlayer().isSpeededUp()){
                 if (checkEndOfSpeedUp(level.getPlayer())){
@@ -168,7 +167,7 @@ public class GameView extends JPanel implements ActionListener {
     }
     
     private void updateTimer(){
-        miliseconds = miliseconds + ((double) 1 / level.getPlayer().getSpeed());
+        miliseconds = miliseconds + ((double) 1 * level.getPlayer().getSpeed());
         seconds = (double) miliseconds/(1000/(INTERVAL));
         if (seconds % 60 == 0 && miliseconds % (1000/INTERVAL) == 0){
             minutes++;

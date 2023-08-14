@@ -73,17 +73,19 @@ public class OptionsScreen extends Tela {
                 Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
                 SaveLevel.saveLevel(level2,"2");
                 
-                System.out.println("AAAA");
+                // System.out.println("AAAA");
                 GameProgress.printGameProgress();
 
 
                 //E ai vai pro jogo
+                Jogo.mapaScreen = new MapScreen();
                 goTo(Jogo.introductionScreen);
             }
         });
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Jogo.mapaScreen = new MapScreen();
                 goTo(Jogo.mapaScreen);
             }
         });
