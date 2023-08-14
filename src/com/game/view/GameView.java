@@ -26,12 +26,13 @@ import src.com.game.controler.GameProgress;
 
 public class GameView extends JPanel implements ActionListener {
     private static int INTERVAL = Jogo.STANDART_INTERVAL; //o clock do jogo
-    //private Level level = new Level(1,2,3,Jogo.PATH_LEVEL1);
     private Level level; 
     private Fonts style = new Fonts(); 
 
     private boolean isRunning = false;
     Timer timer = new Timer(INTERVAL, this);
+    private Timer renderTimer; // Variável de classe para o Timer
+
     private double time = 0;
     private double miliseconds = 0;
     private double seconds = 0;
@@ -39,13 +40,29 @@ public class GameView extends JPanel implements ActionListener {
     private boolean isAnyKeyPressed = false;
     Random random;
     private boolean nomeDecente = false;
-    
+
+    private int counterSprite = 0; 
+    private String labelRander = "";
+    private String[] prefixRender = {
+        "1",
+        "2",
+        "3",
+        "4"
+    };
+
+    /*
+     * muda o label a cada 1 segunda
+     * concatena o label com o prefixo da direcao
+     * manda pra renderizar 
+     */
+
     public GameView() {
         random = new Random();
         setBackground(new Color(206, 206, 206));
         setPreferredSize(new Dimension(Jogo.WIDTH, Jogo.HEIGHT));
         setFocusable(true);
         addKeyListener(new GetKeyPressed());
+        renderTimer();
     }
 
     public void startGameLevel(String id) {   
@@ -53,12 +70,9 @@ public class GameView extends JPanel implements ActionListener {
         isRunning = true;
         resetTimer();
         timer.start();
-        /**
-         *
-         * @todo JULIANA
-         * 
-         */
-        GameProgress.printGameProgress();
+        renderTimer.restart();
+       
+        //GameProgress.printGameProgress();
         
         LevelProgress[] timeProgress = GameProgress.loadGameProgress();
         if (id == "1" && timeProgress[0].isRunning()){
@@ -82,6 +96,21 @@ public class GameView extends JPanel implements ActionListener {
         drawScreen(g);
     }
 
+    public void renderTimer() {
+        renderTimer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(counterSprite < 3){
+                    counterSprite++;
+                }
+                else    
+                    counterSprite = 0;
+                labelRander = prefixRender[counterSprite]; 
+                // System.out.println("label: " + labelRander);
+            }
+        });
+    }
+
     public void drawScreen(Graphics g) {
         if (level.getPlayer().getSize() < Jogo.INICIAL_PLAYER_SIZE){
             level.getPlayer().increaseSize();
@@ -91,8 +120,7 @@ public class GameView extends JPanel implements ActionListener {
             if(!nomeDecente){
                 LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
                 LevelProgress thisLevelProgress;
-                
-                time = miliseconds/(1000/(INTERVAL));
+                time = seconds + minutes*60;
                 switch(level.getIdFase()){
                     case "1":
                         thisLevelProgress = new LevelProgress(1, true, false, (int) time); 
@@ -132,7 +160,7 @@ public class GameView extends JPanel implements ActionListener {
             }
         } 
         else{
-            level.render(g);
+            level.render(g, labelRander);
             
             /*render HEADER */
             g.setColor(Color.red);
@@ -208,7 +236,7 @@ public class GameView extends JPanel implements ActionListener {
                 if(!nomeDecente){
                     LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
                     LevelProgress thisLevelProgress;
-                    time = miliseconds/(1000/(INTERVAL));
+                    time = seconds + minutes*60;
                     switch(level.getIdFase()){
                         case "1":
                             thisLevelProgress = new LevelProgress(1, false, true, (int) time); 
@@ -242,9 +270,10 @@ public class GameView extends JPanel implements ActionListener {
         miliseconds = miliseconds + ((double) 1 * level.getPlayer().getSpeed());
         time = time + ((double) 1 * level.getPlayer().getSpeed());
         seconds = (double) miliseconds/(1000/(INTERVAL));
-        if (seconds % 60 == 0 && miliseconds % (1000/INTERVAL) == 0){
+        if (seconds > 60){
             minutes++;
             seconds = 0;
+            miliseconds = 0;
         }
     }
     
