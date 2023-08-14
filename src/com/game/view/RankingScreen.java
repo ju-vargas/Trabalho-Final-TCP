@@ -1,10 +1,14 @@
 package src.com.game.view;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
 
 
@@ -30,6 +34,7 @@ public class RankingScreen extends Tela {
             setLayout(new GridBagLayout());
 
             GridBagConstraints duvidei = new GridBagConstraints();
+            duvidei.insets = new Insets(10,10,10,10);
     
             JLabel textoLabel = new JLabel("RANKING");
             textoLabel.setFont(new Font("Arial", Font.BOLD, 40));
@@ -64,7 +69,18 @@ public class RankingScreen extends Tela {
             //frame.getContentPane().add(scrollPane, duvidei);
             add(scrollPane, duvidei);
             
-            //frame.setVisible(true);
+            JButton menuButton = new JButton("Menu");
+        
+            duvidei.gridy = 2;
+            duvidei.gridx = 0;
+            add(menuButton, duvidei);
+                
+            menuButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    goTo(Jogo.optionsScreen);
+                };
+            });
         }
 
 }

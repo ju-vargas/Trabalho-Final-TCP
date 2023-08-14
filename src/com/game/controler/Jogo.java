@@ -43,6 +43,7 @@ public class Jogo {
 
     public static boolean isGameRunning = false;
 
+    public static OptionsScreen optionsScreen = new OptionsScreen();
     public static GameScreen gameScreen = new GameScreen();
     public static RankingScreen rankingScreen = new RankingScreen();
     public static RulesScreen rulesScreen = new RulesScreen();

@@ -47,6 +47,8 @@ public class RootScreen extends Tela {
 		rulesButton.setFont(styles.boldButton());
 		JButton exitButton = new JButton("Sair");
 		exitButton.setFont(styles.boldButton());
+        JButton menuOptions = new JButton("Opções");
+		menuOptions.setFont(styles.boldButton());
 
 		buttonsPanel.add(introductionButton);
         buttonsPanel.add(winButton);
@@ -55,6 +57,7 @@ public class RootScreen extends Tela {
         buttonsPanel.add(rankingButton);
         buttonsPanel.add(rulesButton);
 		buttonsPanel.add(exitButton);
+        buttonsPanel.add(menuOptions);
         
 		mainConstraints.gridx = 0;
 		mainConstraints.gridy = 1;
@@ -103,6 +106,12 @@ public class RootScreen extends Tela {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             };
+        });
+        menuOptions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goTo(Jogo.optionsScreen);
+            }
         });
     }
 }
