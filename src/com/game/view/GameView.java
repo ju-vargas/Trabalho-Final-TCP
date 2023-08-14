@@ -21,8 +21,8 @@ public class GameView extends JPanel implements ActionListener {
 
     private boolean isRunning = false;
     Timer timer;
-    private int miliseconds = 0;
-    private int seconds = 0;
+    private double miliseconds = 0;
+    private double seconds = 0;
     private int minutes = 0;
     Random random;
     
@@ -64,7 +64,7 @@ public class GameView extends JPanel implements ActionListener {
             int points = level1.getPlayer().getPoints();
 
             g.drawString("Pontos: " + points, (Jogo.WIDTH - metrics.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
-            g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (Jogo.WIDTH - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
+            g.drawString("Tempo: " + minutes + "min"  + ((int) seconds) + "s", (Jogo.WIDTH - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
         }
     }
 
@@ -85,11 +85,11 @@ public class GameView extends JPanel implements ActionListener {
         if (isRunning) {
             timer.setDelay(INTERVAL / level1.getPlayer().getSpeed());
             level1.getPlayer().walk(); 
-            if (!level1.getPlayer().isSpeededUp()){
-                level1.checkPowerUp();
-            }else if (checkEndOfSpeedUp(level1.getPlayer())){
-                level1.getPlayer().speedDown();
-                level1.newPowerUp();
+            if (level1.getPlayer().isSpeededUp()){
+                if (checkEndOfSpeedUp(level1.getPlayer())){
+                    level1.getPlayer().speedDown();
+                    level1.newPowerUp();
+                }
             }
             if (!level1.isComplete())
                 level1.setComplete(level1.checkScore());
@@ -136,8 +136,8 @@ public class GameView extends JPanel implements ActionListener {
     }
     
     private void updateTimer(){
-        miliseconds++;
-        seconds = (int)miliseconds/(1000/(INTERVAL / level1.getPlayer().getSpeed()));
+        miliseconds = miliseconds + ((double) 1 / level1.getPlayer().getSpeed());
+        seconds = (double) miliseconds/(1000/(INTERVAL));
         if (seconds % 60 == 0 && miliseconds % (1000/INTERVAL) == 0){
             minutes++;
             seconds = 0;

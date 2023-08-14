@@ -55,7 +55,7 @@ public class Level {
         return this.idFase;
     }    
     public boolean isColliding(){
-        this.isEnd =  this.player.checkCollision(this.map.getMapConstraints());
+        this.isEnd =  this.player.checkCollision(this.map.getMapConstraints(), this);
         return this.isEnd;
     }
     public void newPoint(){
@@ -69,19 +69,18 @@ public class Level {
         powerUp.setCoordinates(coordinates);
     }
     public boolean checkScore(){
-        if(player.hasCollide(point.getCoordinates())){
-            Point.applyEffect(player);
-            if (player.getPoints() == this.numPoints)
-                return true; 
-            this.newPoint();
-        }
+        if (player.getPoints() == this.numPoints)
+            return true;
         return false;
     }
+    public void upScore(){
+        Point.applyEffect(player);
+        this.newPoint();
+    }
+
     public void checkPowerUp(){
-        if(player.hasCollide(powerUp.getCoordinates())){
-            PowerUp.applyEffect(player);
-            map.removeObject(powerUp.getCoordinates(), powerUp);
-        }
+        PowerUp.applyEffect(player);
+        map.removeObject(powerUp.getCoordinates(), powerUp);
     }
     public void render(Graphics g){
         map.render(g);

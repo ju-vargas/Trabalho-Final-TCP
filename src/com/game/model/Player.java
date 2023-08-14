@@ -111,26 +111,34 @@ public class Player {
         }
     }
 
-    public boolean checkCollision(int[][] map){
+    public boolean checkCollision(int[][] map, Level level){
         for (int i = this.size; i > 0; i--) {
             if (this.bodyX[0] == this.bodyX[i] && this.bodyY[0] == this.bodyY[i]) {
                 this.isDead = true;
                 break;
             }
         }
+
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                if(map[i][j] == 1){
+                if(map[i][j] != 0){
                     int[] position = getPosition(i,j);
                     if (position[0] == this.bodyX[0] && position[1] == this.bodyY[0]){
+                        if (map[i][j] == 1)
                             this.isDead = true;
+                        if (map[i][j] == 2)
+                            level.upScore();
+                        if (map[i][j] == 3)
+                            level.checkPowerUp();
                     }
                 }
             }
         }
+
         if (this.bodyX[0] < 0 || this.bodyX[0] > Jogo.MAX_WIDTH) {
             isDead = true;
         }
+
         if (this.bodyY[0] < 0 || this.bodyY[0] > Jogo.MAX_HEIGHT) {
             isDead = true;
         }
