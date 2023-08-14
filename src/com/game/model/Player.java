@@ -10,6 +10,7 @@ public class Player implements Serializable{
     private String name;
     private char direction;
     private int size; 
+
     private LocalDateTime endSpeedUpTime; 
 
     private int speed; 
@@ -18,17 +19,19 @@ public class Player implements Serializable{
     private int points;
     private boolean isDead; 
 
-    private int[] bodyX = new int[Jogo.UNITS];;
-    private int[] bodyY = new int[Jogo.UNITS];;
+    private int[] bodyX = new int[Jogo.UNITS];
+    private int[] bodyY = new int[Jogo.UNITS];
     
     public Player(char direction){
         this.name = "";
         this.direction = direction;
-        this.size = Jogo.INICIAL_PLAYER_SIZE; 
+        this.size = -1; 
         this.endSpeedUpTime = null; 
         this.speed = 1;
         this.points = 0;
         this.isDead = false; 
+        bodyX[0] = 0;
+        bodyY[0] = Jogo.HEADER_SIZE;
     }
     /*GETTERS and SETTERS */
     public LocalDateTime getEndSpeedUpTime() {
@@ -60,13 +63,15 @@ public class Player implements Serializable{
     public int getPoints(){
         return this.points;
     }
+    public int getSize() {
+        return size;
+    }
     public void increaseSize() {
         this.size = size+1;
     }
     public void increasePoints(int point){
         this.points += point;
     }
-
 
     public void moveUp(){
         if (this.direction != 'B') {
@@ -116,6 +121,7 @@ public class Player implements Serializable{
         for (int i = this.size; i > 0; i--) {
             if (this.bodyX[0] == this.bodyX[i] && this.bodyY[0] == this.bodyY[i]) {
                 this.isDead = true;
+                // System.out.println("morreu por colidir no próprio corpo");
                 break;
             }
         }
@@ -124,8 +130,10 @@ public class Player implements Serializable{
                 if(map[i][j] != 0){
                     int[] position = getPosition(i,j);
                     if (position[0] == this.bodyX[0] && position[1] == this.bodyY[0]){
-                        if (map[i][j] == 1)
+                        if (map[i][j] == 1){
+                            // System.out.println("morreu por colidir no mapa");
                             this.isDead = true;
+                        }
                         if (map[i][j] == 2)
                             level.upScore();
                         if (map[i][j] == 3)
@@ -134,12 +142,13 @@ public class Player implements Serializable{
                 }
             }
         }
-
-        if (this.bodyX[0] < 0 || this.bodyX[0] > Jogo.MAX_WIDTH) {
+        // System.out.println(this.bodyX[0]+","+(this.bodyY[0]+Jogo.HEADER_SIZE));
+        if (this.bodyX[0] < 0 || this.bodyX[0] + Jogo.BLOCK_SIZE > Jogo.WIDTH) {
             isDead = true;
+            // System.out.println("morreu por colidir passar no width");
         }
-
-        if (this.bodyY[0] < 0 || this.bodyY[0] > Jogo.MAX_HEIGHT) {
+        if (this.bodyY[0] < Jogo.HEADER_SIZE || this.bodyY[0] + Jogo.HEADER_SIZE > Jogo.HEIGHT) {
+            // System.out.println("morreu por colidir passar no height");
             isDead = true;
         }
         return this.isDead;
@@ -165,7 +174,8 @@ public class Player implements Serializable{
             if (i == 0) {
                 g.setColor(new Color(223, 113, 37));
                 g.fillRect(this.bodyX[0], this.bodyY[0], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            } else {
+            } 
+            else {
                 g.setColor(new Color(214, 154, 58));
                 g.fillRect(this.bodyX[i], this.bodyY[i], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
             }

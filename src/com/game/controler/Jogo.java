@@ -23,8 +23,8 @@ public class Jogo {
 
     public static int WINDOW_HEIGHT_DIFFERENCE;
     public static int WINDOW_WIDTH_DIFFERENCE;
-    public static int MAX_HEIGHT = HEIGHT - WINDOW_HEIGHT_DIFFERENCE;
-    public static int MAX_WIDTH = WIDTH - WINDOW_WIDTH_DIFFERENCE;
+    public static int MAX_HEIGHT = HEIGHT;
+    public static int MAX_WIDTH = WIDTH;
 
     public static int BLOCK_SIZE = 20;
     public static int UNITS = WIDTH * HEIGHT / (BLOCK_SIZE * BLOCK_SIZE);

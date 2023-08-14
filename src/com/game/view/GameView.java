@@ -25,7 +25,7 @@ import src.com.game.controler.GameProgress;
 
 
 public class GameView extends JPanel implements ActionListener {
-    private static int INTERVAL = 40; //o clock do jogo
+    private static int INTERVAL = 125; //o clock do jogo
     //private Level level = new Level(1,2,3,Jogo.PATH_LEVEL1);
     private Level level; 
     private Fonts style = new Fonts(); 
@@ -35,6 +35,7 @@ public class GameView extends JPanel implements ActionListener {
     private double miliseconds = 0;
     private double seconds = 0;
     private int minutes = 0;
+    private boolean isAnyKeyPressed = false;
     Random random;
     
     public GameView() {
@@ -65,6 +66,10 @@ public class GameView extends JPanel implements ActionListener {
     }
 
     public void drawScreen(Graphics g) {
+        if (level.getPlayer().getSize() < Jogo.INICIAL_PLAYER_SIZE){
+            level.getPlayer().increaseSize();
+        }
+        isAnyKeyPressed =  false;
         if (level.isComplete()){
             LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
             LevelProgress thisLevelProgress;
@@ -147,21 +152,28 @@ public class GameView extends JPanel implements ActionListener {
     public class GetKeyPressed extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT:
-                level.getPlayer().moveLeft();
-                break;
-                case KeyEvent.VK_RIGHT:
-                level.getPlayer().moveRight();
-                break;
-                case KeyEvent.VK_UP:
-                level.getPlayer().moveUp();
-                break;
-                case KeyEvent.VK_DOWN:
-                level.getPlayer().moveDown();
-                break;
-                default:
-                break;
+            if (!isAnyKeyPressed){
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_LEFT:
+                        level.getPlayer().moveLeft();                     
+                        isAnyKeyPressed = true;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        level.getPlayer().moveRight();
+                        isAnyKeyPressed = true;                   
+                        break;
+                    case KeyEvent.VK_UP:
+                        level.getPlayer().moveUp();
+                        isAnyKeyPressed = true;                   
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        level.getPlayer().moveDown();
+                        isAnyKeyPressed = true;                   
+                        break;
+                    default:
+                        isAnyKeyPressed = false;
+                        break;
+                }
             }
         }
     }
