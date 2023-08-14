@@ -76,6 +76,7 @@ public class Level implements Serializable {
     }
     public void upScore(){
         Point.applyEffect(player);
+        map.removeObject(point.getCoordinates());
         this.newPoint();
     }
 
@@ -83,9 +84,9 @@ public class Level implements Serializable {
         PowerUp.applyEffect(player);
         map.removeObject(powerUp.getCoordinates(), powerUp);
     }
-    public void render(Graphics g){
+    public void render(Graphics g, String labelRender){
         map.render(g);
-        player.render(g);
+        player.render(g, labelRender);
         point.render(g);
         if(powerUp.getCoordinates() != null){
             powerUp.render(g);

@@ -71,7 +71,6 @@ public class FaseIntroduction extends Tela {
         continueToNext.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(id);
                 switch (id){
                     case "1": 
                         goTo(Jogo.gameScreen);

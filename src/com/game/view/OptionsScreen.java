@@ -10,7 +10,7 @@ import src.com.game.controler.SaveLevel;
 import src.com.game.model.Level;
 import src.com.game.model.Tela;
 import src.com.game.controler.GameProgress;
-import src.com.game.utils.TelaUtils;
+//import src.com.game.utils.TelaUtils;
 
 
 import src.com.game.utils.style.Fonts;

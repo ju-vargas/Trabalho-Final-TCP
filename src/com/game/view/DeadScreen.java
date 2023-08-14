@@ -68,7 +68,7 @@ public class DeadScreen extends Tela {
         mapButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Jogo.mapaScreen);
+                Jogo.gameScreen.changeScreenLevel();
             }
         });
         menuButton.addActionListener(new ActionListener() {

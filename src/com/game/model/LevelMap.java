@@ -12,7 +12,7 @@ import src.com.game.controler.Jogo;
 
 
 public class LevelMap implements Serializable{
-    private String mapId; 
+    //private String mapId; 
     private int[][] mapConstraints;
     private int[] pointCoordinates = new int[2];
     private int[] powerUpCoordinates = new int[2];
@@ -24,7 +24,7 @@ public class LevelMap implements Serializable{
 
     public void setPointCoordinates(int[] pointCoord) {
         this.pointCoordinates = pointCoord;
-        this.mapConstraints[pointCoord[0]][pointCoord[1]] = 2;
+        this.mapConstraints[pointCoord[0]][pointCoord[1]] = Jogo.POINT_ID;
     }
 
     public int[] getPowerUpCoordinates() {
@@ -33,11 +33,11 @@ public class LevelMap implements Serializable{
 
     public void setPowerUpCoordinates(int[] powerUpCoord) {
         this.powerUpCoordinates = powerUpCoord;
-        this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = 3;
+        this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = Jogo.POWERUP_ID;
     }
     
     public LevelMap(String id, String path){
-        this.mapId = id;
+        //this.mapId = id;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             int[][] matrix = new int[Jogo.XBlocks][Jogo.YBlocks];
@@ -101,15 +101,19 @@ public class LevelMap implements Serializable{
         pw.setCoordinates(null);
     }
 
+    public void removeObject(int[] coord){
+        this.mapConstraints[coord[0]][coord[1]] = 0;
+    }
+
     public void render(Graphics g){
         for (int i = 0; i < this.mapConstraints.length; i++) {
             for (int j = 0; j < this.mapConstraints[i].length; j++) {
                 int blockID = this.mapConstraints[i][j];
                 switch (blockID){
-                    case 0 :
+                    case Jogo.EMPTY_BLOCK_ID:
                         g.setColor(new Color(((i*1) % 255), (i*2) % 255, (i*1) % 255));
                         break;
-                    case 1:
+                    case Jogo.OBSTACLE_ID:
                         g.setColor(new Color(255, 0, 0));
                         break;
                     }

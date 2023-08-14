@@ -27,4 +27,11 @@ public class Images implements Serializable{
         backgroundIcon = new ImageIcon(path);
         return backgroundIcon; 
     }
+
+    public static ImageIcon headPlayer(String name){
+        String path;
+        path = "resources/sprites/" + name + ".png";
+        backgroundIcon = new ImageIcon(path);
+        return backgroundIcon;     
+    }
 }
