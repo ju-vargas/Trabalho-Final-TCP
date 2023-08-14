@@ -208,9 +208,9 @@ public class GameView extends JPanel implements ActionListener {
                 if(!nomeDecente){
                     LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
                     LevelProgress thisLevelProgress;
+                    time = miliseconds/(1000/(INTERVAL));
                     switch(level.getIdFase()){
                         case "1":
-                            time = miliseconds/(1000/(INTERVAL));
                             thisLevelProgress = new LevelProgress(1, false, true, (int) time); 
                             GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                             SaveLevel.saveLevel(level, level.getIdFase());

@@ -72,7 +72,7 @@ public class WinScreen extends Tela {
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 String enteredName = nameTextField.getText();
-				
+				GameProgress.printGameProgress();
                 LevelProgress[] playerProgress = GameProgress.loadGameProgress();
                 int seconds = 0, minutes = 0; 
                 seconds = playerProgress[0].getTime() + playerProgress[1].getTime();
@@ -81,6 +81,7 @@ public class WinScreen extends Tela {
                 String timePrint = "";
                 timePrint = String.valueOf(minutes) + "min" + String.valueOf(seconds) + "s";
 
+                System.out.println(enteredName + ": " + timePrint);
                 Jogo.rankingScreen = new RankingScreen();
                 goTo(Jogo.rankingScreen); 
 
