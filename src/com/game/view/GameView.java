@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 
@@ -24,21 +25,15 @@ import src.com.game.controler.GameProgress;
 
 
 public class GameView extends JPanel implements ActionListener {
-    private static int INTERVAL = 50; //o clock do jogo
-
-
+    private static int INTERVAL = 40; //o clock do jogo
     //private Level level = new Level(1,2,3,Jogo.PATH_LEVEL1);
     private Level level; 
-
-
-    
     private Fonts style = new Fonts(); 
 
     private boolean isRunning = false;
-
     Timer timer;
-    private int miliseconds = 0;
-    private int seconds = 0;
+    private double miliseconds = 0;
+    private double seconds = 0;
     private int minutes = 0;
     Random random;
     
@@ -75,11 +70,11 @@ public class GameView extends JPanel implements ActionListener {
             LevelProgress thisLevelProgress;
             switch(level.getIdFase()){
                 case "1":
-                    thisLevelProgress = new LevelProgress(1, true, false, seconds); 
+                    thisLevelProgress = new LevelProgress(1, true, false, (int) miliseconds); 
                     GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                     break;
                 case "2":
-                    thisLevelProgress = new LevelProgress(2, true, false, seconds); 
+                    thisLevelProgress = new LevelProgress(2, true, false, (int) miliseconds); 
                     GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
                     break;
             }
@@ -120,7 +115,14 @@ public class GameView extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
+            timer.setDelay(INTERVAL / level.getPlayer().getSpeed());
             level.getPlayer().walk(); 
+            if (level.getPlayer().isSpeededUp()){
+                if (checkEndOfSpeedUp(level.getPlayer())){
+                    level.getPlayer().speedDown();
+                    level.newPowerUp();
+                }
+            }
             if (!level.isComplete())
                 level.setComplete(level.checkScore());
             if (level.isColliding()) 
@@ -128,6 +130,19 @@ public class GameView extends JPanel implements ActionListener {
             updateTimer();
         }
         repaint();
+    }
+
+    private boolean checkEndOfSpeedUp(src.com.game.model.Player player){
+        int minutes = LocalDateTime.now().getMinute();
+        int seconds = LocalDateTime.now().getSecond();
+
+        LocalDateTime endTime = player.getEndSpeedUpTime();
+        if(endTime.getMinute() <= minutes){
+            if (endTime.getSecond() <= seconds){
+                return true;
+            }
+        }
+        return false;
     }
 
     public class GetKeyPressed extends KeyAdapter {
@@ -153,8 +168,8 @@ public class GameView extends JPanel implements ActionListener {
     }
     
     private void updateTimer(){
-        miliseconds++;
-        seconds = (int)miliseconds/(1000/INTERVAL);
+        miliseconds = miliseconds + ((double) 1 / level.getPlayer().getSpeed());
+        seconds = (double) miliseconds/(1000/(INTERVAL));
         if (seconds % 60 == 0 && miliseconds % (1000/INTERVAL) == 0){
             minutes++;
             seconds = 0;

@@ -2,7 +2,10 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
 import src.com.game.utils.style.Fonts;
 
@@ -89,6 +92,19 @@ public class RulesScreen extends Tela {
 		constraintsMain.gridy = 1;
 		mainPanel.add(gridPanel, constraintsMain);
         add(mainPanel);
+
+        JButton menuButton = new JButton("Menu");
+        
+        constraintsMain.gridy = 2;
+        constraintsMain.gridx = 0;
+        mainPanel.add(menuButton, constraintsMain);
+            
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goTo(Jogo.optionsScreen);
+            };
+        });
     };
 }
 

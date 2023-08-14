@@ -14,9 +14,28 @@ import src.com.game.controler.Jogo;
 public class LevelMap implements Serializable{
     private String mapId; 
     private int[][] mapConstraints;
-    private int[] randomPosition = new int[2];
+    private int[] pointCoordinates = new int[2];
+    private int[] powerUpCoordinates = new int[2];
     private Random random;
 
+    public int[] getPointCoordinates() {
+        return pointCoordinates;
+    }
+
+    public void setPointCoordinates(int[] pointCoord) {
+        this.pointCoordinates = pointCoord;
+        this.mapConstraints[pointCoord[0]][pointCoord[1]] = 2;
+    }
+
+    public int[] getPowerUpCoordinates() {
+        return powerUpCoordinates;
+    }
+
+    public void setPowerUpCoordinates(int[] powerUpCoord) {
+        this.powerUpCoordinates = powerUpCoord;
+        this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = 3;
+    }
+    
     public LevelMap(String id, String path){
         this.mapId = id;
         try {
@@ -44,7 +63,18 @@ public class LevelMap implements Serializable{
         return this.mapConstraints;
     }
 
+    public static void printMap(int[][] map){
+        for (int[] row : map) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public int[] getRandomCoordinates() {
+        int[] randomCoordinates = new int[2];
+
         random = new Random();
         boolean validPosition = false;
         int randomX;
@@ -55,11 +85,22 @@ public class LevelMap implements Serializable{
             validPosition = this.mapConstraints[randomX][randomY] == 0 ? true : false;
         }while(!validPosition);
 
-        this.randomPosition[0] = randomX*Jogo.BLOCK_SIZE;
-        this.randomPosition[1] = Jogo.HEADER_SIZE+randomY*Jogo.BLOCK_SIZE;
+        randomCoordinates[0] = randomX;
+        randomCoordinates[1] = randomY;
     
-        return this.randomPosition;
+        return randomCoordinates;
     }    
+
+    public static int[] getPositionByCoordinates(int[] coord){
+        int position[] = {coord[0] * Jogo.BLOCK_SIZE, coord[1]*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE};
+        return position;
+    }
+
+    public void removeObject(int[] coord, PowerUp pw){
+        this.mapConstraints[coord[0]][coord[1]] = 0;
+        pw.setCoordinates(null);
+    }
+
     public void render(Graphics g){
         for (int i = 0; i < this.mapConstraints.length; i++) {
             for (int j = 0; j < this.mapConstraints[i].length; j++) {
@@ -72,7 +113,7 @@ public class LevelMap implements Serializable{
                         g.setColor(new Color(255, 0, 0));
                         break;
                     }
-                g.fillRect(i*Jogo.BLOCK_SIZE, Jogo.HEADER_SIZE+j*Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
+                g.fillRect(i*Jogo.BLOCK_SIZE, j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE, Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
             }
         }
     }

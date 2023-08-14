@@ -4,13 +4,12 @@ import javax.swing.ImageIcon;
 import java.io.Serializable;
 
 public class Images implements Serializable{
-    private ImageIcon backgroundIcon;
+    private static ImageIcon backgroundIcon;
     
     public Images(){
         backgroundIcon = new ImageIcon("resources/sprites/error.png");
     }
-
-    public ImageIcon itemMapa(String name){
+    public static ImageIcon itemMapa(String name){
         switch(name){
             case "point":
                 backgroundIcon = new ImageIcon("resources/sprites/cafe.png");
@@ -22,7 +21,7 @@ public class Images implements Serializable{
         }
         return backgroundIcon; 
     }
-
+    
     public ImageIcon button(String name){
         String path; 
         path = "resources/sprites/" + name + ".png";

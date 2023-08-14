@@ -2,6 +2,7 @@ package src.com.game.model;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import src.com.game.controler.Jogo;
 
@@ -9,8 +10,11 @@ public class Player implements Serializable{
     private String name;
     private char direction;
     private int size; 
-    private int time; 
+    private LocalDateTime endSpeedUpTime; 
+
     private int speed; 
+    private boolean isSpeededUp;
+
     private int points;
     private boolean isDead; 
 
@@ -21,17 +25,17 @@ public class Player implements Serializable{
         this.name = "";
         this.direction = direction;
         this.size = Jogo.INICIAL_PLAYER_SIZE; 
-        this.time = 0; 
-        this.speed = 0;
+        this.endSpeedUpTime = null; 
+        this.speed = 1;
         this.points = 0;
         this.isDead = false; 
     }
     /*GETTERS and SETTERS */
-    public int getTime() {
-        return time;
+    public LocalDateTime getEndSpeedUpTime() {
+        return endSpeedUpTime;
     }
-    public void setTime(int time) {
-        this.time = time;
+    public void setEndSpeedUpTime(LocalDateTime endSpeedUpTime) {
+        this.endSpeedUpTime = endSpeedUpTime;
     }
     public String getName() {
         return name;
@@ -42,19 +46,27 @@ public class Player implements Serializable{
     public int getSpeed() {
         return speed;
     }
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public boolean isSpeededUp() {
+        return isSpeededUp;
+    }
+    public void speedUp(int value){
+        this.isSpeededUp = true;
+        this.speed = value;
+    }
+    public void speedDown(){
+        this.isSpeededUp = false;
+        this.speed = 1;
     }
     public int getPoints(){
         return this.points;
     }
-
     public void increaseSize() {
         this.size = size+1;
     }
     public void increasePoints(int point){
         this.points += point;
     }
+
 
     public void moveUp(){
         if (this.direction != 'B') {
@@ -100,42 +112,50 @@ public class Player implements Serializable{
         }
     }
 
-    public boolean checkCollision(int[][] map){
+    public boolean checkCollision(int[][] map, Level level){
         for (int i = this.size; i > 0; i--) {
             if (this.bodyX[0] == this.bodyX[i] && this.bodyY[0] == this.bodyY[i]) {
                 this.isDead = true;
                 break;
             }
         }
+
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                if(map[i][j] == 1){
+                if(map[i][j] != 0){
                     int[] position = getPosition(i,j);
                     if (position[0] == this.bodyX[0] && position[1] == this.bodyY[0]){
+                        if (map[i][j] == 1)
                             this.isDead = true;
+                        if (map[i][j] == 2)
+                            level.upScore();
+                        if (map[i][j] == 3)
+                            level.checkPowerUp();
                     }
                 }
             }
         }
+
         if (this.bodyX[0] < 0 || this.bodyX[0] > Jogo.MAX_WIDTH) {
             isDead = true;
         }
+
         if (this.bodyY[0] < 0 || this.bodyY[0] > Jogo.MAX_HEIGHT) {
             isDead = true;
         }
         return this.isDead;
     }
+
     private int[] getPosition(int i, int j){
         int[] position = new int[2];
         position[0] = i*Jogo.BLOCK_SIZE;
-        position[1] = Jogo.HEADER_SIZE+j*Jogo.BLOCK_SIZE;
+        position[1] = j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE;
         return position;
     }
 
-    public boolean madePoint(int[] pos){
-        if (this.bodyX[0] == pos[0] && this.bodyY[0] == pos[1]) {
-            this.increaseSize();
-            this.points++;
+    public boolean hasCollide(int[] coord){
+        int position[] = LevelMap.getPositionByCoordinates(coord);
+        if (this.bodyX[0] == position[0] && this.bodyY[0] == position[1]) {
             return true; 
         }
         return false;

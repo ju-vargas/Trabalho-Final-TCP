@@ -17,9 +17,10 @@ import src.com.game.view.RootScreen;
 public class Jogo {
     public static CardLayout cardLayout;
     public static JPanel cardPanel;
-    public static final int WIDTH = 1400;
+    public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
     public static final int HEADER_SIZE = 60;
+
     public static int WINDOW_HEIGHT_DIFFERENCE;
     public static int WINDOW_WIDTH_DIFFERENCE;
     public static int MAX_HEIGHT = HEIGHT - WINDOW_HEIGHT_DIFFERENCE;
@@ -44,6 +45,7 @@ public class Jogo {
 
     public static boolean isGameRunning = false;
 
+    public static OptionsScreen optionsScreen = new OptionsScreen();
     public static GameScreen gameScreen = new GameScreen();
     public static RankingScreen rankingScreen = new RankingScreen();
     public static RulesScreen rulesScreen = new RulesScreen();
@@ -53,7 +55,7 @@ public class Jogo {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            OptionsScreen frame = new OptionsScreen();
+            RootScreen frame = new RootScreen();
             frame.setVisible(true);
         });
     }
