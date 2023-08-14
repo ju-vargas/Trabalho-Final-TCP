@@ -6,7 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import src.com.game.controler.GameProgress;
 import src.com.game.controler.Jogo;
+import src.com.game.controler.LevelProgress;
 import src.com.game.model.Tela;
 import src.com.game.utils.style.Fonts;
 
@@ -69,12 +71,16 @@ public class WinScreen extends Tela {
 		nameTextField.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-                //AQUI FICA A STRING COM O NOME DO VENCEDOR
                 String enteredName = nameTextField.getText();
 				
-                //AQUI FICA O TEMPO QUE ELE FEZ (ler dos arquivos e somar)
-                
+                LevelProgress[] playerProgress = GameProgress.loadGameProgress();
+                int seconds = 0, minutes = 0; 
+                seconds = playerProgress[0].getTime() + playerProgress[1].getTime();
+                minutes = (int) seconds/(60000/(Jogo.STANDART_INTERVAL));
+
+                String timePrint = "";
+                timePrint = String.valueOf(minutes) + "min" + String.valueOf(seconds) + "s";
+
                 Jogo.rankingScreen = new RankingScreen();
                 goTo(Jogo.rankingScreen); 
 

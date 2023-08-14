@@ -25,7 +25,7 @@ import src.com.game.controler.GameProgress;
 
 
 public class GameView extends JPanel implements ActionListener {
-    private static int INTERVAL = 40; //o clock do jogo
+    private static int INTERVAL = Jogo.STANDART_INTERVAL; //o clock do jogo
     //private Level level = new Level(1,2,3,Jogo.PATH_LEVEL1);
     private Level level; 
     private Fonts style = new Fonts(); 
@@ -58,19 +58,21 @@ public class GameView extends JPanel implements ActionListener {
          * @todo JULIANA
          * 
          */
-        // LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
-        // if (id == "1" && loadedProgress[0].isRunning()){
-        //     time = loadedProgress[0].getTime();
-        //     miliseconds = time;
-        //     seconds = (double) miliseconds/(1000/(INTERVAL));
-        //     minutes = (int) seconds/(60000/(INTERVAL));
-        // }
-        // else if (id == "2" && loadedProgress[1].isRunning()){
-        //     time = loadedProgress[1].getTime();
-        //     miliseconds = time;
-        //     seconds = (double) miliseconds/(1000/(INTERVAL));
-        //     minutes = (double) seconds/(60000/(INTERVAL));
-        // }
+        GameProgress.printGameProgress();
+        
+        LevelProgress[] timeProgress = GameProgress.loadGameProgress();
+        if (id == "1" && timeProgress[0].isRunning()){
+            time = timeProgress[0].getTime();
+            seconds = (double) time;
+            miliseconds = seconds*(1000/(INTERVAL));
+            minutes = (int) seconds/(60000/(INTERVAL));
+        }
+        else if (id == "2" && timeProgress[1].isRunning()){
+            time = timeProgress[1].getTime();
+            seconds = (double) time;
+            miliseconds = seconds*(1000/(INTERVAL));
+            minutes = (int) seconds/(60000/(INTERVAL));
+        }
         nomeDecente = false;
     }
 
@@ -89,13 +91,13 @@ public class GameView extends JPanel implements ActionListener {
             if(!nomeDecente){
                 LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
                 LevelProgress thisLevelProgress;
+                
+                time = miliseconds/(1000/(INTERVAL));
                 switch(level.getIdFase()){
                     case "1":
-                        time = miliseconds/(1000/(INTERVAL));
                         thisLevelProgress = new LevelProgress(1, true, false, (int) time); 
                         GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                         SaveLevel.saveLevel(level, level.getIdFase());
-                        GameProgress.printGameProgress();      
                         Jogo.gameScreen.changeScreenLevel();
                         break;
                     case "2":
@@ -123,6 +125,7 @@ public class GameView extends JPanel implements ActionListener {
                         GameProgress.clearGameProgress(2);
                         Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
                         SaveLevel.saveLevel(level2,"2");
+                        break;
                 }
                 Jogo.gameScreen.changeScreenDead();
                 nomeDecente = true;
@@ -217,6 +220,7 @@ public class GameView extends JPanel implements ActionListener {
                             thisLevelProgress = new LevelProgress(2, false, true, (int) time); 
                             GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
                             SaveLevel.saveLevel(level, level.getIdFase());      
+                            break;
                             
                     }
                     Jogo.gameScreen.goTo(Jogo.mapaScreen);

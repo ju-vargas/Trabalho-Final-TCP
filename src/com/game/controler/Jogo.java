@@ -1,6 +1,8 @@
 package src.com.game.controler;
 
 import javax.swing.*;
+import javax.swing.text.html.Option;
+
 import java.awt.*;
 
 import src.com.game.view.OptionsScreen;
@@ -35,6 +37,7 @@ public class Jogo {
 
     public static int INICIAL_PLAYER_SIZE = 6;
 
+    public static final int STANDART_INTERVAL = 40;
 
 
     /*
