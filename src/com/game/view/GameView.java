@@ -71,19 +71,33 @@ public class GameView extends JPanel implements ActionListener {
                 case "1":
                     thisLevelProgress = new LevelProgress(1, true, false, (int) miliseconds); 
                     GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
+                    SaveLevel.saveLevel(level, level.getIdFase());      
+                    Jogo.gameScreen.changeScreenLevel();
                     break;
                 case "2":
                     thisLevelProgress = new LevelProgress(2, true, false, (int) miliseconds); 
                     GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
+                    SaveLevel.saveLevel(level, level.getIdFase());      
+                    Jogo.gameScreen.changeScreenWin();
                     break;
             }
-            SaveLevel.saveLevel(level, level.getIdFase());   
-            Jogo.gameScreen.goTo(Jogo.winScreen);
+            // SaveLevel.saveLevel(level, level.getIdFase());   
             resetTimer();
             isRunning = false;
         } 
         else if (level.isEnd()) {
-            fimDeJogo(g);
+            switch(level.getIdFase()){
+                case "1":
+                    GameProgress.clearGameProgress(1);
+                    Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+                    SaveLevel.saveLevel(level1,"1");
+                    break; 
+                case "2":
+                    GameProgress.clearGameProgress(2);
+                    Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
+                    SaveLevel.saveLevel(level2,"2");
+            }
+            Jogo.gameScreen.changeScreenDead();
         } 
         else{
             level.render(g);
@@ -98,19 +112,6 @@ public class GameView extends JPanel implements ActionListener {
             g.drawString("Pontos: " + points, (Jogo.WIDTH - 300 - metrics.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
             g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (Jogo.WIDTH - 300 - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
         }
-    }
-
-    public void fimDeJogo(Graphics g) {
-        int points = level.getPlayer().getPoints();
-
-        g.setColor(Color.red);
-        g.setFont(style.regularTitle());
-        FontMetrics fontePontuacao = getFontMetrics(g.getFont());
-        g.drawString("Pontos: " + points, (Jogo.WIDTH - fontePontuacao.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
-        g.setColor(Color.red);
-        g.setFont(style.regularTitle());
-        FontMetrics fonteFinal = getFontMetrics(g.getFont());
-        g.drawString("\uD83D\uDE1D Fim do Jogo.", (Jogo.WIDTH - fonteFinal.stringWidth("Fim do Jogo")) / 2, Jogo.HEIGHT / 2);
     }
 
     public void actionPerformed(ActionEvent e) {

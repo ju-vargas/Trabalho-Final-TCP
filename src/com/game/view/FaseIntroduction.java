@@ -1,6 +1,5 @@
 package src.com.game.view;
 
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,17 +9,22 @@ import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
 import src.com.game.utils.style.Fonts;
 
-public class WinScreen extends Tela {
+public class FaseIntroduction extends Tela {
     Fonts configStyle = new Fonts();
+    private String[] text = new String[3]; 
 
-    private String[] text = {
-        "O aluno finalmente conseguiu chegar ao professor.",
-        "Agora você permanecerá como humano!",
-        "(Até a próxima cadeira da matemática)",
-    };
+    public FaseIntroduction(String id) {
+        if(id == "1"){
+            this.text[0] = "O INF é um lugar distante.";
+            this.text[1] = "É preciso enfrentar uma grande jornada para descer até a matemática.";
+            this.text[2] = "Desvie dos obstaculos para cumprir seu objetivo."; 
+        }    
+        else if(id == "2"){
+            this.text[0] =  "Os prédios da matemática são todos iguais.";
+            this.text[1] = "Se você for capaz de encontrar a sala do professor...";
+            this.text[2] = "Poderá rever sua nota e voltar a sua forma normal!";
+        }
 
-
-    public WinScreen() {
         setLayout(new GridBagLayout());
         setBackground(Color.PINK);     
     
@@ -39,57 +43,49 @@ public class WinScreen extends Tela {
         JLabel textIntroduction = new JLabel(text[0]);
         textIntroduction.setFont(configStyle.regularLabel());
         textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
-        constraintsGrid.gridy = 0;
+        constraintsGrid.gridy = 1;
+        constraintsGrid.gridx = 2;
         gridPanel.add(textIntroduction, constraintsGrid);
     
         JLabel textIntroduction1 = new JLabel(text[1]);
         textIntroduction1.setFont(configStyle.regularLabel());
         textIntroduction1.setHorizontalAlignment(SwingConstants.CENTER);
-        constraintsGrid.gridy = 1;
+        constraintsGrid.gridy = 2;
         gridPanel.add(textIntroduction1, constraintsGrid);
     
         JLabel textIntroduction2 = new JLabel(text[2]);
         textIntroduction2.setFont(configStyle.regularLabel());
         textIntroduction2.setHorizontalAlignment(SwingConstants.CENTER);
-        constraintsGrid.gridy = 2;
+        constraintsGrid.gridy = 3;
         gridPanel.add(textIntroduction2, constraintsGrid);
 
         constraintsMain.gridy = 0;
         mainPanel.add(gridPanel,constraintsMain);
         
-
-		JPanel containerName = new JPanel(new FlowLayout());
-		containerName.setBackground(new Color(0, 0, 0,0));
-
-		JLabel nameLabel = new JLabel("Nome:");
-		nameLabel.setFont(configStyle.regularLabel());
-		JTextField nameTextField = new JTextField(20);
-		nameTextField.setFont(configStyle.regularLabel());
-		
-		nameTextField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-                //AQUI FICA A STRING COM O NOME DO VENCEDOR
-                String enteredName = nameTextField.getText();
-				
-                //AQUI FICA O TEMPO QUE ELE FEZ (ler dos arquivos e somar)
-                
-                Jogo.rankingScreen = new RankingScreen();
-                goTo(Jogo.rankingScreen); 
-
-				//setar o nome do jogador aqui, da classe
-			}
-		});
-
-		containerName.add(nameLabel);
-		containerName.add(nameTextField);
-
+        JButton continueToNext = new JButton("Continuar");
+        continueToNext.setFont(configStyle.regularButton());
         constraintsMain.gridy = 1;
-		mainPanel.add(containerName,constraintsMain);
-
+        mainPanel.add(continueToNext,constraintsMain);
         add(mainPanel);
-    };
+
+        continueToNext.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(id);
+                switch (id){
+                    case "1": 
+                        goTo(Jogo.gameScreen);
+                        Jogo.initNewGame("1");
+                        break;
+                    case "2":
+                        goTo(Jogo.gameScreen);
+                        Jogo.initNewGame("2");
+                        break;
+                }
+                //goTo(Jogo.mapaScreen);
+            }
+        });
+    }    
 }
 
 

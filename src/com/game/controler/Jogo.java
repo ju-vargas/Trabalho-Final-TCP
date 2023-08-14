@@ -2,7 +2,6 @@ package src.com.game.controler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Spliterator.OfPrimitive;
 
 import src.com.game.view.OptionsScreen;
 import src.com.game.view.IntroductionScreen;
@@ -12,6 +11,9 @@ import src.com.game.view.MapScreen;
 import src.com.game.view.GameScreen;
 import src.com.game.view.RankingScreen;
 import src.com.game.view.RootScreen;
+import src.com.game.view.DeadScreen;
+import src.com.game.view.FaseIntroduction;
+import src.com.game.view.FaseScreen;
 
 
 public class Jogo {
@@ -52,6 +54,8 @@ public class Jogo {
     public static MapScreen mapaScreen = new MapScreen();
     public static IntroductionScreen introductionScreen = new IntroductionScreen();
     public static WinScreen winScreen = new WinScreen();
+    public static FaseIntroduction faseIntroduction = new FaseIntroduction("1");
+    public static DeadScreen deadScreen = new DeadScreen();
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
