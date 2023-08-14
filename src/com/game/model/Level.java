@@ -1,12 +1,13 @@
 package src.com.game.model;
 import java.awt.*;
+import java.io.Serializable;
 
 import src.com.game.model.LevelMap;
 import src.com.game.model.Player;
 import src.com.game.model.Point;
 
-public class Level {
-    private int idFase;
+public class Level implements Serializable {
+    private String idFase;
     private int numPoints;
     
     private boolean isComplete;
@@ -21,7 +22,7 @@ public class Level {
      * possivelmente nesse construtor aqui
      * que vai ser o gerencialmente de continue e tal 
      */
-    public Level(int id, int numPowerUps, int numPoints, String path){
+    public Level(String id, int numPowerUps, int numPoints, String path){
        this.idFase = id;
        this.numPoints = numPoints; 
        this.map = new LevelMap(id, path);
@@ -51,7 +52,7 @@ public class Level {
     public LevelMap getMap(){
         return map;
     }
-    public int getIdFase(){
+    public String getIdFase(){
         return this.idFase;
     }    
     public boolean isColliding(){

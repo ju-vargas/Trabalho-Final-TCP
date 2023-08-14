@@ -5,12 +5,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
+import java.io.Serializable;
+
 
 import src.com.game.controler.Jogo;
 
 
-public class LevelMap {
-    private int mapId; 
+public class LevelMap implements Serializable{
+    private String mapId; 
     private int[][] mapConstraints;
     private int[] pointCoordinates = new int[2];
     private int[] powerUpCoordinates = new int[2];
@@ -34,7 +36,7 @@ public class LevelMap {
         this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = 3;
     }
     
-    public LevelMap(int id, String path){
+    public LevelMap(String id, String path){
         this.mapId = id;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));

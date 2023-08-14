@@ -1,11 +1,12 @@
 package src.com.game.model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import src.com.game.controler.Jogo;
 
-public class Player {
+public class Player implements Serializable{
     private String name;
     private char direction;
     private int size; 
@@ -118,7 +119,6 @@ public class Player {
                 break;
             }
         }
-
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 if(map[i][j] != 0){
