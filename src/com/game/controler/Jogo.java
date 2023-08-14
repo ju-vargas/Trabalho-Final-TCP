@@ -17,7 +17,7 @@ import src.com.game.view.RootScreen;
 public class Jogo {
     public static CardLayout cardLayout;
     public static JPanel cardPanel;
-    public static final int WIDTH = 1280;
+    public static final int WIDTH = 1400;
 	public static final int HEIGHT = 720;
     public static final int HEADER_SIZE = 60;
 

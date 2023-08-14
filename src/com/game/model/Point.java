@@ -1,11 +1,5 @@
 package src.com.game.model;
-import java.awt.*;
 import java.io.Serializable;
-
-
-import javax.swing.ImageIcon;
-import src.com.game.model.LevelMapObject;
-import src.com.game.utils.style.Images;;
 
 public class Point extends LevelMapObject implements Serializable {  
     private static int value = 0;
