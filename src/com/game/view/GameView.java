@@ -32,11 +32,13 @@ public class GameView extends JPanel implements ActionListener {
 
     private boolean isRunning = false;
     Timer timer = new Timer(INTERVAL, this);
+    private double time = 0;
     private double miliseconds = 0;
     private double seconds = 0;
-    private int minutes = 0;
+    private double minutes = 0;
     private boolean isAnyKeyPressed = false;
     Random random;
+    private boolean nomeDecente = false;
     
     public GameView() {
         random = new Random();
@@ -51,6 +53,25 @@ public class GameView extends JPanel implements ActionListener {
         isRunning = true;
         resetTimer();
         timer.start();
+        /**
+         *
+         * @todo JULIANA
+         * 
+         */
+        // LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
+        // if (id == "1" && loadedProgress[0].isRunning()){
+        //     time = loadedProgress[0].getTime();
+        //     miliseconds = time;
+        //     seconds = (double) miliseconds/(1000/(INTERVAL));
+        //     minutes = (int) seconds/(60000/(INTERVAL));
+        // }
+        // else if (id == "2" && loadedProgress[1].isRunning()){
+        //     time = loadedProgress[1].getTime();
+        //     miliseconds = time;
+        //     seconds = (double) miliseconds/(1000/(INTERVAL));
+        //     minutes = (double) seconds/(60000/(INTERVAL));
+        // }
+        nomeDecente = false;
     }
 
     @Override
@@ -65,39 +86,47 @@ public class GameView extends JPanel implements ActionListener {
         }
         isAnyKeyPressed =  false;
         if (level.isComplete()){
-            LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
-            LevelProgress thisLevelProgress;
-            switch(level.getIdFase()){
-                case "1":
-                    thisLevelProgress = new LevelProgress(1, true, false, (int) miliseconds); 
-                    GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
-                    SaveLevel.saveLevel(level, level.getIdFase());      
-                    Jogo.gameScreen.changeScreenLevel();
-                    break;
-                case "2":
-                    thisLevelProgress = new LevelProgress(2, true, false, (int) miliseconds); 
-                    GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
-                    SaveLevel.saveLevel(level, level.getIdFase());      
-                    Jogo.gameScreen.changeScreenWin();
-                    break;
+            if(!nomeDecente){
+                LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
+                LevelProgress thisLevelProgress;
+                switch(level.getIdFase()){
+                    case "1":
+                        time = miliseconds/(1000/(INTERVAL));
+                        thisLevelProgress = new LevelProgress(1, true, false, (int) time); 
+                        GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
+                        SaveLevel.saveLevel(level, level.getIdFase());
+                        GameProgress.printGameProgress();      
+                        Jogo.gameScreen.changeScreenLevel();
+                        break;
+                    case "2":
+                        thisLevelProgress = new LevelProgress(2, true, false, (int) time); 
+                        GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
+                        SaveLevel.saveLevel(level, level.getIdFase());      
+                        Jogo.gameScreen.changeScreenWin();  
+                        break;
+                }
+                nomeDecente = true;
             }
             // SaveLevel.saveLevel(level, level.getIdFase());   
             resetTimer();
             isRunning = false;
         } 
         else if (level.isEnd()) {
-            switch(level.getIdFase()){
-                case "1":
-                    GameProgress.clearGameProgress(1);
-                    Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
-                    SaveLevel.saveLevel(level1,"1");
-                    break; 
-                case "2":
-                    GameProgress.clearGameProgress(2);
-                    Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
-                    SaveLevel.saveLevel(level2,"2");
+            if(!nomeDecente){
+                switch(level.getIdFase()){
+                    case "1":
+                        GameProgress.clearGameProgress(1);
+                        Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+                        SaveLevel.saveLevel(level1,"1");
+                        break; 
+                    case "2":
+                        GameProgress.clearGameProgress(2);
+                        Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
+                        SaveLevel.saveLevel(level2,"2");
+                }
+                Jogo.gameScreen.changeScreenDead();
+                nomeDecente = true;
             }
-            Jogo.gameScreen.changeScreenDead();
         } 
         else{
             level.render(g);
@@ -173,9 +202,28 @@ public class GameView extends JPanel implements ActionListener {
                 }
             }
             if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                Jogo.gameScreen.goTo(Jogo.mapaScreen);
-                resetTimer();
-                isRunning = false;
+                if(!nomeDecente){
+                    LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
+                    LevelProgress thisLevelProgress;
+                    switch(level.getIdFase()){
+                        case "1":
+                            time = miliseconds/(1000/(INTERVAL));
+                            thisLevelProgress = new LevelProgress(1, false, true, (int) time); 
+                            GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
+                            SaveLevel.saveLevel(level, level.getIdFase());
+                            GameProgress.printGameProgress();      
+                            break;
+                        case "2":
+                            thisLevelProgress = new LevelProgress(2, false, true, (int) time); 
+                            GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
+                            SaveLevel.saveLevel(level, level.getIdFase());      
+                            
+                    }
+                    Jogo.gameScreen.goTo(Jogo.mapaScreen);
+                    nomeDecente = true;
+                    resetTimer();
+                    isRunning = false;
+                }
             }
         }
     }
@@ -188,11 +236,11 @@ public class GameView extends JPanel implements ActionListener {
     
     private void updateTimer(){
         miliseconds = miliseconds + ((double) 1 * level.getPlayer().getSpeed());
+        time = time + ((double) 1 * level.getPlayer().getSpeed());
         seconds = (double) miliseconds/(1000/(INTERVAL));
         if (seconds % 60 == 0 && miliseconds % (1000/INTERVAL) == 0){
             minutes++;
             seconds = 0;
-            miliseconds = 0;
         }
     }
     

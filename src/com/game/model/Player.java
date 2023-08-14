@@ -134,8 +134,12 @@ public class Player implements Serializable{
                             // System.out.println("morreu por colidir no mapa");
                             this.isDead = true;
                         }
-                        if (map[i][j] == 2)
+                        if (map[i][j] == 2){
+                            System.out.println("ÓOOIA");
+                            System.out.println(position[0]+","+position[1]);
+                            System.out.println(this.bodyX[0]+","+this.bodyY[1]);
                             level.upScore();
+                        }
                         if (map[i][j] == 3)
                             level.checkPowerUp();
                     }
