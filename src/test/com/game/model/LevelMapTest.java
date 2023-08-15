@@ -4,41 +4,51 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertArrayEquals;
 
-import src.com.game.controler.Jogo;
 import src.com.game.model.LevelMap;
-import src.com.game.view.GameScreen;
+import src.com.game.model.PowerUp;
 
 public class LevelMapTest {
 
     private LevelMap levelMap;
+    private PowerUp pw;
 
     @Before
     public void setUp() {
-        try {
-            levelMap = new LevelMap("1", Jogo.PATH_LEVEL1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail("Failed to set up LevelMap");
-        }
-    }
     
-    @Test
-    public void testGetPointCoordinates() {
-        int[] pointCoordinates = levelMap.getPointCoordinates();
-        assertNotNull("Point coordinates are not null", pointCoordinates);
-        assertEquals("Point X coordinate is within bounds", true, pointCoordinates[0] >= 0 && pointCoordinates[0] < Jogo.XBlocks);
-        assertEquals("Point Y coordinate is within bounds", true, pointCoordinates[1] >= 0 && pointCoordinates[1] < Jogo.YBlocks);
+        int[][] initialMapConstraints = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        levelMap = new LevelMap("1", "resources/maps/source/1.txt");
+        levelMap.setMapConstraints(initialMapConstraints);
+
+        pw = new PowerUp(new int[]{1, 1}, 1, 2, null);
     }
 
     @Test
-    public void testGetPowerUpCoordinates() {
-        int[] powerUpCoordinates = levelMap.getPowerUpCoordinates();
-        assertNotNull("Power-up coordinates are not null", powerUpCoordinates);
-        assertEquals("Power-up X coordinate is within bounds", true, powerUpCoordinates[0] >= 0 && powerUpCoordinates[0] < Jogo.XBlocks);
-        assertEquals("Power-up Y coordinate is within bounds", true, powerUpCoordinates[1] >= 0 && powerUpCoordinates[1] < Jogo.YBlocks);
+    public void testRemoveObject() {
+        int[] coord = {1, 1}; 
+
+        levelMap.removeObject(coord, pw);
+
+        int[][] expectedMapConstraints = {
+                {1, 2, 3},
+                {4, 0, 6}, 
+                {7, 8, 9}
+        };
+
+        int[][] actualMapConstraints = levelMap.getMapConstraints();
+        assertArrayEquals(expectedMapConstraints, actualMapConstraints);
+    }
+
+    // Utilidade para comparar matrizes
+    private void assertArrayEquals(int[][] expected, int[][] actual) {
+        for (int i = 0; i < expected.length; i++) {
+            for (int j = 0; j < expected[i].length; j++) {
+                assertEquals(expected[i][j], actual[i][j]);
+            }
+        }
     }
 }

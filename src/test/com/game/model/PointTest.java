@@ -1,26 +1,40 @@
+package src.test.com.game.model;
+
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
+
 
 import src.com.game.model.Player;
 import src.com.game.model.Point;
 
 public class PointTest {
 
-    @Test
-    public void testApplyEffect() {
-        Player player = new Player('C'); // Criando um jogador fictício
-        int initialValue = player.getPoints();
-        int initialSize = player.getSize();
+    private Player player;
 
-        int pointValue = 10; // Valor do ponto a ser adicionado
-        Point point = new Point(new int[]{0, 0}, pointValue, "point_image");
-
-        Point.applyEffect(player);
-
-        // Verificando se os pontos e o tamanho do jogador foram atualizados corretamente
-        assertEquals(initialValue + pointValue, player.getPoints());
-        assertEquals(initialSize + 1, player.getSize());
+    @Before
+    public void setup() {
+        player = new Player('C'); // You can adjust the initial direction as needed
     }
 
-    // Adicione mais testes aqui, conforme necessário
+    @Test
+    public void testApplyEffect() {
+        int originalPoints = player.getPoints();
+        int originalSize = player.getSize();
+
+        Point point = new Point(new int[]{0, 0}, 10, "image.png");
+        Point.applyEffect(player); // Access the static method in a static way
+
+        int newPoints = player.getPoints();
+        int newSize = player.getSize();
+
+        assertEquals(originalPoints + 10, newPoints);
+        assertEquals(originalSize + 1, newSize);
+    }
 }
+
+
+
+
+
+

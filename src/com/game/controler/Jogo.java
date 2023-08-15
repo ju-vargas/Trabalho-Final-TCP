@@ -3,17 +3,7 @@ package src.com.game.controler;
 import javax.swing.*;
 import java.awt.*;
 
-import src.com.game.view.OptionsScreen;
-import src.com.game.view.IntroductionScreen;
-import src.com.game.view.RulesScreen;
-import src.com.game.view.WinScreen;
-import src.com.game.view.MapScreen;
-import src.com.game.view.GameScreen;
-import src.com.game.view.RankingScreen;
-import src.com.game.view.RootScreen;
-import src.com.game.view.DeadScreen;
-import src.com.game.view.FaseIntroduction;
-import src.com.game.view.FaseScreen;
+import src.com.game.view.*;
 
 
 public class Jogo {

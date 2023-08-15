@@ -18,6 +18,10 @@ public class LevelMap implements Serializable{
     private int[] powerUpCoordinates = new int[2];
     private Random random;
 
+    public void setMapConstraints(int[][] mapConstraints) {
+        this.mapConstraints = mapConstraints;
+    }
+
     public int[] getPointCoordinates() {
         return pointCoordinates;
     }

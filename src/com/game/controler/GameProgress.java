@@ -4,6 +4,8 @@ import java.io.*;
 import src.com.game.controler.LevelProgress;
 
 public class GameProgress {
+
+    private static LevelProgress[] loadedProgress = loadGameProgress();;
     // public static void main(String[] args) {
     //      LevelProgress level1 = new LevelProgress(1, false, false, 0);
     //      LevelProgress level2 = new LevelProgress(2, false, false, 0);
@@ -18,7 +20,7 @@ public class GameProgress {
     //      }
     // }
     public static void clearGameProgress(int id){
-        LevelProgress[] loadedProgress = loadGameProgress();
+        //LevelProgress[] loadedProgress = loadGameProgress();
         switch (id){
             case 1: 
                 LevelProgress level1 = new LevelProgress(1, false, false, 0);
@@ -34,11 +36,11 @@ public class GameProgress {
             
             default:
                 break;
-        }
+        } 
     }
 
     public static void printGameProgress(){
-        LevelProgress[] loadedProgress = loadGameProgress();
+        //LevelProgress[] loadedProgress = loadGameProgress();
         if (loadedProgress != null) {
             for (int i = 0; i < loadedProgress.length; i++) {
                 System.out.println("Fase " + (i + 1) + ": Concluída=" + loadedProgress[i].isCompleted() + ", Tempo=" + loadedProgress[i].getTime() + ", Andamento=" + loadedProgress[i].isRunning());

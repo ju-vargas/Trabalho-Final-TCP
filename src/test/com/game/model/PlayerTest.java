@@ -11,22 +11,35 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PlayerTest {
+
     private Player player;
     private Level mockLevel;
-    private int[][] mockMap;
+    private int[][] mockMap = new int[Jogo.XBlocks][Jogo.YBlocks];
 
     @Before
     public void setUp() {
-        player = new Player('C'); // You can set the initial direction as needed
-        mockLevel = new Level("1", 2, 3, Jogo.PATH_LEVEL1); // You might need to adjust this based on your Level class
-        mockMap = new int[Jogo.XBlocks][Jogo.YBlocks];
+        player = new Player('C');
+        mockLevel = new Level("1", 2, 3, "resources/maps/source/1.txt");
     }
 
     @Test
     public void testNoCollision() {
         // Test when there is no collision
+        //System.out.println(player.getPoints());
+        
         boolean result = player.checkCollision(mockMap, mockLevel);
-        assertFalse(result); // Expecting no collision
+        System.out.println("result" + result);
+        assertFalse("Resultado:"+ result, result); // Expecting no collision
+    }
+
+    public static void main(String[] args) {
+        //Player playerTest;
+        //playerTest = new Player('C');
+        //playerTest.testNoCollision();
+        //System.out.println("Player speed: " + playerTest.getSpeed());
+
+        
+
     }
 
 }

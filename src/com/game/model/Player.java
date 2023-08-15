@@ -9,6 +9,10 @@ import src.com.game.controler.Jogo;
 public class Player implements Serializable{
     private String name;
     private char direction;
+    public char getDirection() {
+        return direction;
+    }
+
     private int size; 
 
     private LocalDateTime endSpeedUpTime; 
