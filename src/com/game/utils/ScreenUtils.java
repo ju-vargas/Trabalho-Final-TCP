@@ -20,13 +20,7 @@ public class ScreenUtils {
         esse.setBounds(desse.getX(), desse.getY(), desse.getWidth(), desse.getHeight());
         esse.setExtendedState(desse.getExtendedState());
         esse.setVisible(true);
-        new Timer().schedule(
-            new TimerTask(){
-                @Override
-                public void run(){
-                    desse.setVisible(false);
-                }
-        }, 100);
+        desse.setVisible(false);
 
     }
     
