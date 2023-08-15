@@ -23,9 +23,9 @@ public class Level implements Serializable {
        this.numPoints = numPoints; 
        this.map = new LevelMap(id, path);
        this.player = new Player('D');
-       this.point = new Point(map.getRandomCoordinates(),1,"point");
+       this.point = new Point(map.getRandomCoordinates(),1,"cafe");
        map.setPointCoordinates(point.getCoordinates());
-       this.powerUp = new PowerUp(map.getRandomCoordinates(), 2, 3, "energy");
+       this.powerUp = new PowerUp(map.getRandomCoordinates(), 2, 3, "docinho");
        map.setPowerUpCoordinates(powerUp.getCoordinates());
        this.isEnd = false;
        this.isComplete = false; 
@@ -76,7 +76,7 @@ public class Level implements Serializable {
         this.newPoint();
     }
 
-    public void checkPowerUp(){
+    public void pickPowerup(){
         PowerUp.applyEffect(player);
         map.removeObject(powerUp.getCoordinates(), powerUp);
     }

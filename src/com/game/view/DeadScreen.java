@@ -2,6 +2,8 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,7 +29,8 @@ public class DeadScreen extends Tela {
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraintsGrid = new GridBagConstraints();
-        gridPanel.setBackground(Color.YELLOW);
+        gridPanel.setBackground(new Color(150,150,150,127));
+        gridPanel.setBorder(new EmptyBorder(60, 80, 60, 80));
 
         // JLabel textIntroduction = new JLabel(text[0]);
         // textIntroduction.setFont(configStyle.regularLabel());

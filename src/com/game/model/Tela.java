@@ -4,7 +4,7 @@ import javax.swing.*;
 import src.com.game.controler.Jogo;
 import src.com.game.utils.TelaUtils;
 
-public class Tela extends JFrame {
+public abstract class Tela extends JFrame {
 
 	private TelaUtils telaUtils = new TelaUtils();
 

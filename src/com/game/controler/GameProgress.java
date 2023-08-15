@@ -22,13 +22,11 @@ public class GameProgress {
             case 1: 
                 LevelProgress level1 = new LevelProgress(1, false, false, 0);
                 saveGameProgress(level1, loadedProgress[1]);
-                // System.out.println("LIMPEI O 1");
                 break;
                 
             case 2: 
                 LevelProgress level2 = new LevelProgress(2, false, false, 0);
                 saveGameProgress(loadedProgress[0],level2);
-                // System.out.println("LIMPEI O 2");
                 break;
             
             default:

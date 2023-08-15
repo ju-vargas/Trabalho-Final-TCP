@@ -22,8 +22,6 @@ public abstract class LevelMapObject implements Serializable {
         int x = position[0];
         int y = position[1];
         icon.paintIcon(null, g, x, y);
-        // g.setColor(new Color(0, 0, 255));
-        // g.fillRect(x, y, Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
     }
 
     public int[] getCoordinates() {

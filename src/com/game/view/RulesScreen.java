@@ -2,6 +2,8 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +24,6 @@ public class RulesScreen extends Tela {
 		"Não implicar com os colegas"
     };
 
-
     public RulesScreen() {
         super();
         
@@ -38,14 +39,16 @@ public class RulesScreen extends Tela {
 		JLabel title = new JLabel("REGRAS"); 
 		title.setFont(configStyle.regularTitle());
         title.setOpaque(true);
-        title.setBackground(Color.YELLOW);
+        title.setBackground(new Color(150,150,150,127));
+        title.setBorder(new EmptyBorder(30, 170, 30, 170));
 		constraintsMain.gridy = 0;
         mainPanel.add(title,constraintsMain);
 		
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraintsGrid = new GridBagConstraints();
-        gridPanel.setBackground(Color.YELLOW);
+        gridPanel.setBackground(new Color(150,150,150,127));
+        gridPanel.setBorder(new EmptyBorder(30, 80, 30, 80));
 
         JLabel rule0 = new JLabel(rules[0]);
         rule0.setFont(configStyle.regularLabel());

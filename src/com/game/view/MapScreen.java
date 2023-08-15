@@ -26,7 +26,6 @@ public class MapScreen extends Tela {
     
     public void update(){
         this.getContentPane().removeAll();
-        // this.removeAll();
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(0, 75, 0, 75);	
@@ -57,7 +56,6 @@ public class MapScreen extends Tela {
 		constraints.gridy = 0;
         this.add(buttonMenu,constraints); 
 
-        
 		constraints.gridx = 1;
 		constraints.gridy = 1;
         int level1Time[] = TimerUtils.getTimeComponents(loadedProgress[0].getTime());
@@ -98,8 +96,6 @@ public class MapScreen extends Tela {
                 
                 Jogo.faseIntroduction = new FaseIntroduction("1");
                 goTo(Jogo.faseIntroduction);
-                //goTo(Jogo.gameScreen);
-                //Jogo.initNewGame("1");
             }
         });
 
@@ -116,8 +112,6 @@ public class MapScreen extends Tela {
                     }
                     Jogo.faseIntroduction = new FaseIntroduction("2");
                     goTo(Jogo.faseIntroduction);
-                    // goTo(Jogo.gameScreen);
-                    // Jogo.initNewGame("2");
                 } 
             }
         });

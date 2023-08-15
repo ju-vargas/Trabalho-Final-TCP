@@ -20,13 +20,6 @@ import src.com.game.model.Level;
 import src.com.game.controler.SaveLevel;
 import src.com.game.controler.LevelProgress;
 import src.com.game.controler.GameProgress;
-/*
- * se isRunning, eu procuro o arquivo
- * se nao eu crio um novo em cima, ou novo jogo
- * pq isCompleted cria novo jogo
- * preciso lembrar de reescrever as informacoes quando acabar
- */
-
 
 public class GameView extends JPanel implements ActionListener {
     private static int INTERVAL = Jogo.STANDART_INTERVAL; //o clock do jogo
