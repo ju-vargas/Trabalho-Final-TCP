@@ -15,3 +15,4 @@ public class Point extends LevelMapObject {
         player.increaseSize();
     }
 }
+ 

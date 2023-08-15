@@ -10,13 +10,17 @@ import java.io.Serializable;
 
 import src.com.game.controler.Jogo;
 
-
+ 
 public class LevelMap implements Serializable{
     //private String mapId; 
     private int[][] mapConstraints;
     private int[] pointCoordinates = new int[2];
     private int[] powerUpCoordinates = new int[2];
     private Random random;
+
+    public void setMapConstraints(int[][] mapConstraints) {
+        this.mapConstraints = mapConstraints;
+    }
 
     public int[] getPointCoordinates() {
         return pointCoordinates;
@@ -35,7 +39,7 @@ public class LevelMap implements Serializable{
         this.powerUpCoordinates = powerUpCoord;
         this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = Jogo.POWERUP_ID;
     }
-    
+     
     public LevelMap(String id, String path){
         //this.mapId = id;
         try {

@@ -1,15 +1,16 @@
-package src.com.game.model;
+
+
 
 import java.io.*;
 import java.util.ArrayList;
 import src.com.game.view.GameScreen;
 
-public class Save implements Serializable {
+public class SaveExample implements Serializable {
 
     private ArrayList<GameScreen> gameScreens;
 	private Jogador playerSave;
 
-    public Save() {
+    public SaveExample() {
         this.gameScreens = new ArrayList<GameScreen>();
 		this.playerSave = new Jogador();
     }
