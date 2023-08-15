@@ -11,6 +11,7 @@ import java.io.*;
 
 import src.com.game.controler.Game;
 import src.com.game.model.Screen;
+import src.com.game.utils.style.Fonts;
 
 
 class Player {
@@ -32,13 +33,15 @@ public class RankingScreen extends Screen {
         public RankingScreen() {
             super();
 
+            Fonts font = new Fonts();
+
             setLayout(new GridBagLayout());
 
             GridBagConstraints duvidei = new GridBagConstraints();
             duvidei.insets = new Insets(10,10,10,10);
     
             JLabel textoLabel = new JLabel("RANKING");
-            textoLabel.setFont(new Font("Arial", Font.BOLD, 40));
+            textoLabel.setFont(font.boldTitle());
             textoLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
             
             duvidei.gridx = 0;
@@ -87,7 +90,7 @@ public class RankingScreen extends Screen {
                     String content = "<html>" + fileContent.toString() + "</html>"; // Encapsula em <html>...</html>
                     
                     JLabel textooLabel = new JLabel(content);
-                    textooLabel.setFont(new Font("Arial", Font.BOLD, 20));
+                   // textooLabel.setFont(font.regularLabel());
                     textooLabel.setHorizontalAlignment(SwingConstants.LEFT); // Habilita HTML rendering
                     textooLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
                     duvidei.gridy = 1;

@@ -1,5 +1,6 @@
 ARTHUR: 11 segundos
 deusss: 14 segundos
+caue: 16 segundos
 jaque: 20 segundos
 juliaa: 22 segundos
 arthuruur: 22 segundos
