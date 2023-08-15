@@ -5,6 +5,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import src.com.game.controler.GameProgress;
 import src.com.game.controler.Jogo;
@@ -20,6 +23,21 @@ public class WinScreen extends Tela {
         "Agora você permanecerá como humano!",
         "(Até a próxima cadeira da matemática)",
     };
+
+    public void saveRanking(int points, String playerName) {
+            try {
+                FileWriter fileWriter = new FileWriter("src/com/game/view/ranking.txt", true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                String pointsString = Integer.toString(points);
+                bufferedWriter.write(playerName + " - " + pointsString + " segundos");
+                bufferedWriter.newLine();;
+                bufferedWriter.close();
+    
+                System.out.println("Variável salva com sucesso no arquivo do ranking");
+            } catch (IOException e) {
+                System.err.println("Erro ao salvar a variável no arquivo: " + e.getMessage());
+            }
+        }
 
 
     public WinScreen() {
@@ -82,12 +100,16 @@ public class WinScreen extends Tela {
                 timePrint = String.valueOf(minutes) + "min" + String.valueOf(seconds) + "s";
 
                 System.out.println(enteredName + ": " + timePrint);
+
+                saveRanking(seconds, enteredName);
                 Jogo.rankingScreen = new RankingScreen();
                 goTo(Jogo.rankingScreen); 
 
 				//setar o nome do jogador aqui, da classe
 			}
 		});
+
+        
 
 		containerName.add(nameLabel);
 		containerName.add(nameTextField);

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
@@ -21,6 +24,8 @@ class Player {
         this.score = score;
     }
 }
+
+
 public class RankingScreen extends Tela {
         //public static void main(String[] args) {
 
@@ -30,7 +35,7 @@ public class RankingScreen extends Tela {
         
         public RankingScreen() {
             super();
-            
+
             setLayout(new GridBagLayout());
 
             GridBagConstraints duvidei = new GridBagConstraints();
@@ -39,35 +44,54 @@ public class RankingScreen extends Tela {
             JLabel textoLabel = new JLabel("RANKING");
             textoLabel.setFont(new Font("Arial", Font.BOLD, 40));
             textoLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
-    
+            
             duvidei.gridx = 0;
             duvidei.gridy = 0;
             add(textoLabel, duvidei);
-            // Adicionando o JLabel à janela
-    
-            List<Player> players = new ArrayList<>();
-            players.add(new Player("Juliana", 150));
-            players.add(new Player("Arthur", 200));
-            players.add(new Player("Julia", 100));
-            players.add(new Player("JP", 120));
-            
-            // Ordenar os jogadores por pontuação
-            Collections.sort(players, Comparator.comparingInt(p -> +p.score));
-            
-            
-            DefaultListModel<String> listModel = new DefaultListModel<>();
-            
-            for (Player player : players) {
-                listModel.addElement(player.name + " - tempo: " + player.score + " segundos");
+
+            String filename = "src/com/game/view/ranking.txt"; // Substitua pelo caminho do seu arquivo
+
+            int lineCount = 0;
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                while (reader.readLine() != null) {
+                    lineCount++;
+                }
+
+                System.out.println("O arquivo tem " + lineCount + " linhas.");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            
-            JList<String> playerList = new JList<>(listModel);
-            JScrollPane scrollPane = new JScrollPane(playerList);
-            //scrollPane.setFont(new Font("Arial", Font.BOLD, 70));
+            if(lineCount == 6){
+                StringBuilder fileContent = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        fileContent.append(line).append("<br>"); // Adiciona a linha ao conteúdo com tag <br>
+                    }
+                
+                    String content = "<html>" + fileContent.toString() + "</html>"; // Encapsula em <html>...</html>
+                    
+                    JLabel textooLabel = new JLabel(content);
+                    textooLabel.setFont(new Font("Arial", Font.BOLD, 20));
+                    textooLabel.setHorizontalAlignment(SwingConstants.LEFT); // Habilita HTML rendering
+                    textooLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
+                    duvidei.gridy = 1;
+                    duvidei.gridx = 0;
+                    add(textooLabel, duvidei);
+                    System.out.println("Conteúdo completo do arquivo:\n" + content);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                JLabel textooooLabel = new JLabel("AAAAAAAAAA");
+                textooooLabel.setFont(new Font("Arial", Font.BOLD, 40));
+                textooooLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
+                
             duvidei.gridx = 0;
             duvidei.gridy = 1;
-            //frame.getContentPane().add(scrollPane, duvidei);
-            add(scrollPane, duvidei);
+            add(textoLabel, duvidei);
+            }
             
             JButton menuButton = new JButton("Menu");
         

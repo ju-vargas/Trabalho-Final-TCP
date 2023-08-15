@@ -1,0 +1,6 @@
+juliaa: 22 segundos
+juliana: 24 segundos
+jp: 30 segundos
+arthur: 35 segundos
+sofia: 47 segundos
+
