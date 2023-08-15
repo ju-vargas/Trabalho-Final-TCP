@@ -8,14 +8,14 @@ import java.awt.event.ActionListener;
 import src.com.game.controler.Jogo;
 import src.com.game.controler.SaveLevel;
 import src.com.game.model.Level;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 import src.com.game.controler.GameProgress;
 //import src.com.game.utils.TelaUtils;
 
 
 import src.com.game.utils.style.Fonts;
 
-public class OptionsScreen extends Tela {    
+public class OptionsScreen extends Screen {    
     public OptionsScreen() {    
         super();
         setLocationRelativeTo(null);

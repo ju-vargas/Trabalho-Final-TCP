@@ -3,17 +3,7 @@ package src.com.game.controler;
 import javax.swing.*;
 import java.awt.*;
 
-import src.com.game.view.OptionsScreen;
-import src.com.game.view.IntroductionScreen;
-import src.com.game.view.RulesScreen;
-import src.com.game.view.WinScreen;
-import src.com.game.view.MapScreen;
-import src.com.game.view.GameScreen;
-import src.com.game.view.RankingScreen;
-//import src.com.game.view.RootScreen;
-import src.com.game.view.DeadScreen;
-import src.com.game.view.FaseIntroduction;
-//import src.com.game.view.FaseScreen;
+import src.com.game.view.*;
 
 
 public class Jogo {
@@ -22,10 +12,6 @@ public class Jogo {
     public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
     public static final int HEADER_SIZE = 60;
-    public static final int EMPTY_BLOCK_ID = 0;
-    public static final int OBSTACLE_ID = 1;
-    public static final int POINT_ID = 2;
-    public static final int POWERUP_ID = 3;
 
     public static final int BLOCK_SIZE = 30;
     public static final int UNITS = WIDTH * HEIGHT / (BLOCK_SIZE * BLOCK_SIZE);

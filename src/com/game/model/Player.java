@@ -13,6 +13,10 @@ import src.com.game.utils.style.Images;
 public class Player implements Serializable{
     private String name;
     private char direction;
+    public char getDirection() {
+        return direction;
+    }
+
     private int size; 
 
     private LocalDateTime endSpeedUpTime; 
@@ -39,7 +43,7 @@ public class Player implements Serializable{
         this.isDead = false; 
         bodyX[0] = 0;
         bodyY[0] = Jogo.HEADER_SIZE;
-    }
+    } 
     /*GETTERS and SETTERS */
     public LocalDateTime getEndSpeedUpTime() {
         return endSpeedUpTime;
