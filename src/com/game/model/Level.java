@@ -2,10 +2,6 @@ package src.com.game.model;
 import java.awt.*;
 import java.io.Serializable;
 
-import src.com.game.model.LevelMap;
-import src.com.game.model.Player;
-import src.com.game.model.Point;
-
 public class Level implements Serializable {
     private String idFase;
     private int numPoints;
