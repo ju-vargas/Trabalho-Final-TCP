@@ -69,9 +69,7 @@ public class GameView extends JPanel implements ActionListener {
         isRunning = true;
         resetTimer();
         timer.start();
-        renderTimer.restart();
-       
-        //GameProgress.printGameProgress();
+        renderTimer.restart();       
         
         LevelProgress[] timeProgress = GameProgress.loadGameProgress();
         if (id == "1" && timeProgress[0].isRunning()){
@@ -105,7 +103,6 @@ public class GameView extends JPanel implements ActionListener {
                 else    
                     counterSprite = 0;
                 labelRander = prefixRender[counterSprite]; 
-                // System.out.println("label: " + labelRander);
             }
         });
     }

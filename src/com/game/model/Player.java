@@ -189,21 +189,6 @@ public class Player implements Serializable{
             label = labelRender + bodySprite[i];
             ImageIcon icon = Images.headPlayer(label);
             icon.paintIcon(null, g, this.bodyX[i], this.bodyY[i]);
-            // if (i == 0) {
-            //     System.out.println(labelRender);
-
-            //     ImageIcon icon = Images.headPlayer(label);
-            //     int x = this.bodyX[0];
-            //     int y = this.bodyY[0];
-            //     icon.paintIcon(null, g, x, y);
-            //     //g.fillRect(this.bodyX[0], this.bodyY[0], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            // } 
-            // else {
-            //     ImageIcon icon2 = Images.headPlayer(label);
-            //     icon2.paintIcon(null, g, this.bodyX[i], this.bodyY[i]);
-            //     //g.setColor(new Color(214, 154, 58));
-            //     //g.fillRect(this.bodyX[i], this.bodyY[i], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            // }
         }
     }
 }

@@ -10,7 +10,6 @@ import src.com.game.controler.SaveLevel;
 import src.com.game.model.Level;
 import src.com.game.model.Screen;
 import src.com.game.controler.GameProgress;
-//import src.com.game.utils.TelaUtils;
 
 
 import src.com.game.utils.style.Fonts;
@@ -73,12 +72,10 @@ public class OptionsScreen extends Screen {
                 Level level2 = new Level("2",2,3,Game.PATH_LEVEL2);
                 SaveLevel.saveLevel(level2,"2");
                 
-                // System.out.println("AAAA");
                 GameProgress.printGameProgress();
 
 
                 //E ai vai pro jogo
-                // Jogo.mapaScreen = new MapScreen();
                 Game.mapaScreen.update();
                 goTo(Game.introductionScreen);
             }
@@ -86,7 +83,6 @@ public class OptionsScreen extends Screen {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Jogo.mapaScreen = new MapScreen();
                 Game.mapaScreen.update();
                 goTo(Game.mapaScreen);
             }

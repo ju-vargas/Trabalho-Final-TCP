@@ -1,7 +1,7 @@
 package src.com.game.view;
 import src.com.game.model.Level;
 import src.com.game.model.Screen;
-//import src.com.game.model.Save;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 

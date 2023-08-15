@@ -14,7 +14,6 @@ public class Fonts implements Serializable{
         try {
             FONT = Font.createFont(Font.TRUETYPE_FONT,
             new File("resources/font/Margarine-Regular.ttf"));
-            // System.out.println("sucesso");
 
         }catch (FontFormatException | IOException e){
             System.out.println(e);

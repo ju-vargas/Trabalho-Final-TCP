@@ -3,14 +3,14 @@ package src.test.com.game.model;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import src.com.game.model.Screen;
+import src.com.game.view.OptionsScreen;
 
 public class ScreenTest {
 
     @Test
     public void testTelaCreation() {
         
-        Screen tela = new Screen();
+        OptionsScreen tela = new OptionsScreen();
         assertNotNull(tela);
     }
 }

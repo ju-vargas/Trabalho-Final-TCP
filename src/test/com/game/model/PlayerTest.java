@@ -14,7 +14,7 @@ public class PlayerTest {
 
     private Player player;
     private Level mockLevel;
-    private int[][] mockMap = new int[Game.XBlocks][Game.YBlocks];
+    private int[][] mockMap = new int[Game.X_BLOCKS][Game.Y_BLOCKS];
 
     @Before
     public void setUp() {
@@ -25,7 +25,6 @@ public class PlayerTest {
     @Test
     public void testNoCollision() {
         // Test when there is no collision
-        //System.out.println(player.getPoints());
         
         boolean result = player.checkCollision(mockMap, mockLevel);
         System.out.println("result" + result);
@@ -37,9 +36,6 @@ public class PlayerTest {
         //playerTest = new Player('C');
         //playerTest.testNoCollision();
         //System.out.println("Player speed: " + playerTest.getSpeed());
-
-        
-
     }
 
 }

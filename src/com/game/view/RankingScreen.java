@@ -23,13 +23,7 @@ class Player {
         this.score = score;
     }
 }
-public class RankingScreen extends Screen {
-        //public static void main(String[] args) {
-
-        //JFrame frame = new JFrame("Ranking de Jogadores");
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setSize(1280, 720);
-        
+public class RankingScreen extends Screen {        
         public RankingScreen() {
             super();
 
@@ -90,7 +84,6 @@ public class RankingScreen extends Screen {
                     String content = "<html>" + fileContent.toString() + "</html>"; // Encapsula em <html>...</html>
                     
                     JLabel textooLabel = new JLabel(content);
-                   // textooLabel.setFont(font.regularLabel());
                     textooLabel.setHorizontalAlignment(SwingConstants.LEFT); // Habilita HTML rendering
                     textooLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
                     duvidei.gridy = 1;
