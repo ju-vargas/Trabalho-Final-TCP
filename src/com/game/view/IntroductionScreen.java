@@ -2,20 +2,22 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.controler.Jogo;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
-public class IntroductionScreen extends Tela {
+public class IntroductionScreen extends Screen {
     Fonts configStyle = new Fonts();
 
     private String[] text = {
-        "O semestre foi difícil... pela terceira vez.",
-        "Mas espere! O professor esqueceu de considerar uma questão da prova",
-        "Encontre o professor para reaver sua nota e quebrar a maldição.",
+        "\"O semestre foi difícil... pela terceira vez.\"",
+        "\"Mas espere! O professor esqueceu de considerar uma questão da prova\"",
+        "\"Encontre o professor para reaver sua nota e quebrar a maldição.\"",
     };
 
 
@@ -33,7 +35,7 @@ public class IntroductionScreen extends Tela {
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraintsGrid = new GridBagConstraints();
-        gridPanel.setBackground(Color.YELLOW);
+        gridPanel.setBackground(new Color(150,150,150,127));
 
         JLabel textIntroduction = new JLabel(text[0]);
         textIntroduction.setFont(configStyle.regularLabel());
@@ -54,6 +56,7 @@ public class IntroductionScreen extends Tela {
         constraintsGrid.gridy = 3;
         gridPanel.add(textIntroduction2, constraintsGrid);
 
+        gridPanel.setBorder(new EmptyBorder(150, 30, 150, 30));
         constraintsMain.gridy = 0;
         mainPanel.add(gridPanel,constraintsMain);
         
@@ -65,8 +68,7 @@ public class IntroductionScreen extends Tela {
 
         continueToNext.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                
+            public void actionPerformed(ActionEvent e) {                
                 goTo(Jogo.mapaScreen);
             }
         });

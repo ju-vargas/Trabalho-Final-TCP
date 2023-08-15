@@ -10,13 +10,17 @@ import java.io.Serializable;
 
 import src.com.game.controler.Jogo;
 
-
+ 
 public class LevelMap implements Serializable{
     //private String mapId; 
     private int[][] mapConstraints;
     private int[] pointCoordinates = new int[2];
     private int[] powerUpCoordinates = new int[2];
     private Random random;
+
+    public void setMapConstraints(int[][] mapConstraints) {
+        this.mapConstraints = mapConstraints;
+    }
 
     public int[] getPointCoordinates() {
         return pointCoordinates;
@@ -35,19 +39,18 @@ public class LevelMap implements Serializable{
         this.powerUpCoordinates = powerUpCoord;
         this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = Jogo.POWERUP_ID;
     }
-    
+     
     public LevelMap(String id, String path){
         //this.mapId = id;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
-            int[][] matrix = new int[Jogo.XBlocks][Jogo.YBlocks];
+            int[][] matrix = new int[Jogo.X_BLOCKS][Jogo.Y_BLOCKS];
 
-            for (int rowIndex = 0; rowIndex < Jogo.XBlocks; rowIndex++) {
+            for (int colIndex = 0; colIndex < Jogo.Y_BLOCKS; colIndex++) {
                 String line = reader.readLine();
                 String[] components = line.split(" ");
-
-                for (int colIndex = 0; colIndex < Jogo.YBlocks; colIndex++) {
-                matrix[rowIndex][colIndex] = Integer.parseInt(components[colIndex]);
+                for (int rowIndex = 0; rowIndex < Jogo.X_BLOCKS; rowIndex++) {
+                    matrix[rowIndex][colIndex] = Integer.parseInt(components[rowIndex]);
                 }
             }
             reader.close();
@@ -80,8 +83,8 @@ public class LevelMap implements Serializable{
         int randomX;
         int randomY;
         do{
-            randomX = random.nextInt(Jogo.XBlocks-1);
-            randomY = random.nextInt(Jogo.YBlocks-1);
+            randomX = random.nextInt(Jogo.X_BLOCKS-1);
+            randomY = random.nextInt(Jogo.Y_BLOCKS-1);
             validPosition = this.mapConstraints[randomX][randomY] == 0 ? true : false;
         }while(!validPosition);
 
@@ -112,13 +115,14 @@ public class LevelMap implements Serializable{
                 switch (blockID){
                     case Jogo.EMPTY_BLOCK_ID:
                         g.setColor(new Color(0,0,0,0));
-                        
+                        g.fillRect(i*Jogo.BLOCK_SIZE, j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE, Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
                         break;
                     case Jogo.OBSTACLE_ID:
-                        g.setColor(new Color(255, 0, 0));
+                        int coord[] = {i,j};
+                        Obstacle obstacle = new Obstacle(coord, "obstacle");
+                        obstacle.render(g);
                         break;
-                    }
-                g.fillRect(i*Jogo.BLOCK_SIZE, j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE, Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
+                }
             }
         }
     }

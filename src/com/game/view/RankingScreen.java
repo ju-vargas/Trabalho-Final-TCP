@@ -10,7 +10,7 @@ import java.util.List;
 import java.io.*;
 
 import src.com.game.controler.Jogo;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 
 
 class Player {
@@ -22,9 +22,7 @@ class Player {
         this.score = score;
     }
 }
-
-
-public class RankingScreen extends Tela {
+public class RankingScreen extends Screen {
         //public static void main(String[] args) {
 
         //JFrame frame = new JFrame("Ranking de Jogadores");

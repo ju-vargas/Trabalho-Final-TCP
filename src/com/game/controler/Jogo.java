@@ -3,17 +3,7 @@ package src.com.game.controler;
 import javax.swing.*;
 import java.awt.*;
 
-import src.com.game.view.OptionsScreen;
-import src.com.game.view.IntroductionScreen;
-import src.com.game.view.RulesScreen;
-import src.com.game.view.WinScreen;
-import src.com.game.view.MapScreen;
-import src.com.game.view.GameScreen;
-import src.com.game.view.RankingScreen;
-//import src.com.game.view.RootScreen;
-import src.com.game.view.DeadScreen;
-import src.com.game.view.FaseIntroduction;
-//import src.com.game.view.FaseScreen;
+import src.com.game.view.*;
 
 
 public class Jogo {
@@ -22,25 +12,19 @@ public class Jogo {
     public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
     public static final int HEADER_SIZE = 60;
+
+    public static final int BLOCK_SIZE = 30;
+    public static final int UNITS = WIDTH * HEIGHT / (BLOCK_SIZE * BLOCK_SIZE);
+    public static final int X_BLOCKS = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
+    public static final int Y_BLOCKS = (int) 650 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
+
     public static final int EMPTY_BLOCK_ID = 0;
     public static final int OBSTACLE_ID = 1;
     public static final int POINT_ID = 2;
     public static final int POWERUP_ID = 3;
 
-    public static int WINDOW_HEIGHT_DIFFERENCE;
-    public static int WINDOW_WIDTH_DIFFERENCE;
-    public static int MAX_HEIGHT = HEIGHT;
-    public static int MAX_WIDTH = WIDTH;
-
-    public static int BLOCK_SIZE = 30;
-    public static int UNITS = WIDTH * HEIGHT / (BLOCK_SIZE * BLOCK_SIZE);
-    public static int XBlocks = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
-    public static int YBlocks = (int) 620 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
-
-    public static int INICIAL_PLAYER_SIZE = 6;
-
-    public static final int STANDART_INTERVAL = 40;
-
+    public static final int INICIAL_PLAYER_SIZE = 6;
+    public static final int STANDART_INTERVAL = 60;
 
     /*
      * criar uma classe depois so pra ter os paths certinhos!!
@@ -48,9 +32,6 @@ public class Jogo {
      */
     public static String PATH_LEVEL1 = "resources/maps/source/1.txt";
     public static String PATH_LEVEL2 = "resources/maps/source/2.txt";
-
-
-    public static boolean isGameRunning = false;
 
     public static OptionsScreen optionsScreen = new OptionsScreen();
     public static GameScreen gameScreen = new GameScreen();

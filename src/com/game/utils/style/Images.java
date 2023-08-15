@@ -9,15 +9,7 @@ public class Images implements Serializable{
         backgroundIcon = new ImageIcon("resources/sprites/error.png");
     }
     public static ImageIcon itemMapa(String name){
-        switch(name){
-            case "point":
-                backgroundIcon = new ImageIcon("resources/sprites/cafe.png");
-                break; 
-
-            case "energy": 
-                backgroundIcon = new ImageIcon("resources/sprites/energy.png");
-                break; 
-        }
+        backgroundIcon = new ImageIcon("resources/sprites/"+name+".png");
         return backgroundIcon; 
     }
     

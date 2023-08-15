@@ -2,14 +2,16 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.controler.Jogo;
-import src.com.game.model.Tela;
+import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
-public class FaseIntroduction extends Tela {
+public class FaseIntroduction extends Screen {
     Fonts configStyle = new Fonts();
     private String[] text = new String[3]; 
 
@@ -38,8 +40,9 @@ public class FaseIntroduction extends Tela {
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraintsGrid = new GridBagConstraints();
-        gridPanel.setBackground(Color.YELLOW);
-
+        gridPanel.setBackground(new Color(150,150,150,127));
+        gridPanel.setBorder(new EmptyBorder(150, 30, 150, 30));
+        
         JLabel textIntroduction = new JLabel(text[0]);
         textIntroduction.setFont(configStyle.regularLabel());
         textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
@@ -81,7 +84,6 @@ public class FaseIntroduction extends Tela {
                         Jogo.initNewGame("2");
                         break;
                 }
-                //goTo(Jogo.mapaScreen);
             }
         });
     }    

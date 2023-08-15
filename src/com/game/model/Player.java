@@ -13,6 +13,10 @@ import src.com.game.utils.style.Images;
 public class Player implements Serializable{
     private String name;
     private char direction;
+    public char getDirection() {
+        return direction;
+    }
+
     private int size; 
 
     private LocalDateTime endSpeedUpTime; 
@@ -39,7 +43,7 @@ public class Player implements Serializable{
         this.isDead = false; 
         bodyX[0] = 0;
         bodyY[0] = Jogo.HEADER_SIZE;
-    }
+    } 
     /*GETTERS and SETTERS */
     public LocalDateTime getEndSpeedUpTime() {
         return endSpeedUpTime;
@@ -144,25 +148,22 @@ public class Player implements Serializable{
                             this.isDead = true;
                         }
                         if (map[i][j] == Jogo.POINT_ID){
-                            System.out.println("ÓOOIA");
-                            System.out.println(position[0]+","+position[1]);
-                            System.out.println(this.bodyX[0]+","+this.bodyY[1]);
                             level.upScore();
                         }
-                        if (map[i][j] == Jogo.POWERUP_ID)
-                            level.checkPowerUp();
+                        if (map[i][j] == Jogo.POWERUP_ID){
+                            level.pickPowerup();
+                        }
                     }
                 }
             }
         }
-        // System.out.println(this.bodyX[0]+","+(this.bodyY[0]+Jogo.HEADER_SIZE));
         if (this.bodyX[0] < 0 || this.bodyX[0] + Jogo.BLOCK_SIZE > Jogo.WIDTH) {
             isDead = true;
             // System.out.println("morreu por colidir passar no width");
         }
         if (this.bodyY[0] < Jogo.HEADER_SIZE || this.bodyY[0] + Jogo.HEADER_SIZE > Jogo.HEIGHT) {
-            // System.out.println("morreu por colidir passar no height");
             isDead = true;
+            // System.out.println("morreu por colidir passar no height");
         }
         return this.isDead;
     }
