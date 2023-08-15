@@ -111,7 +111,8 @@ public class LevelMap implements Serializable{
                 int blockID = this.mapConstraints[i][j];
                 switch (blockID){
                     case Jogo.EMPTY_BLOCK_ID:
-                        g.setColor(new Color(((i*1) % 255), (i*2) % 255, (i*1) % 255));
+                        g.setColor(new Color(0,0,0,0));
+                        
                         break;
                     case Jogo.OBSTACLE_ID:
                         g.setColor(new Color(255, 0, 0));
