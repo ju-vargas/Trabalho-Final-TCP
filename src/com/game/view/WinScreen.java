@@ -29,7 +29,7 @@ public class WinScreen extends Tela {
                 FileWriter fileWriter = new FileWriter("src/com/game/view/ranking.txt", true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 String pointsString = Integer.toString(points);
-                bufferedWriter.write(playerName + " - " + pointsString + " segundos");
+                bufferedWriter.write(playerName + ": " + pointsString + " segundos");
                 bufferedWriter.newLine();;
                 bufferedWriter.close();
     

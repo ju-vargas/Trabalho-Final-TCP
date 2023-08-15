@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import src.com.game.controler.Jogo;
 import src.com.game.model.Tela;
@@ -49,25 +47,43 @@ public class RankingScreen extends Tela {
             duvidei.gridy = 0;
             add(textoLabel, duvidei);
 
-            String filename = "src/com/game/view/ranking.txt"; // Substitua pelo caminho do seu arquivo
+            String filename = "src/com/game/view/ranking.txt"; 
 
-            int lineCount = 0;
+                List<String> lines = new ArrayList<>();
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-                while (reader.readLine() != null) {
-                    lineCount++;
-                }
-
-                System.out.println("O arquivo tem " + lineCount + " linhas.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(lineCount == 6){
-                StringBuilder fileContent = new StringBuilder();
                 try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        fileContent.append(line).append("<br>"); // Adiciona a linha ao conteúdo com tag <br>
+                        lines.add(line);
+                    }
+        
+                    Collections.sort(lines, new Comparator<String>() {
+                        @Override
+                        public int compare(String line1, String line2) {
+                            int seconds1 = Integer.parseInt(line1.split(": ")[1].split(" segundos")[0]);
+                            int seconds2 = Integer.parseInt(line2.split(": ")[1].split(" segundos")[0]);
+                            return Integer.compare(seconds1, seconds2);
+                        }
+                    });
+        
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+                        for (String sortedLine : lines) {
+                            writer.write(sortedLine);
+                            writer.newLine();
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                
+                int lineCount = 0;
+
+                StringBuilder fileContent = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                    String line;
+                    while ((line = reader.readLine()) != null && lineCount < 5) {
+                        fileContent.append(line).append("<br>"); 
+                        lineCount++;
                     }
                 
                     String content = "<html>" + fileContent.toString() + "</html>"; // Encapsula em <html>...</html>
@@ -83,15 +99,6 @@ public class RankingScreen extends Tela {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
-                JLabel textooooLabel = new JLabel("AAAAAAAAAA");
-                textooooLabel.setFont(new Font("Arial", Font.BOLD, 40));
-                textooooLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
-                
-            duvidei.gridx = 0;
-            duvidei.gridy = 1;
-            add(textoLabel, duvidei);
-            }
             
             JButton menuButton = new JButton("Menu");
         
