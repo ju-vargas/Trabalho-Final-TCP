@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import src.com.game.controler.GameProgress;
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.controler.LevelProgress;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
@@ -94,7 +94,7 @@ public class WinScreen extends Screen {
                 LevelProgress[] playerProgress = GameProgress.loadGameProgress();
                 int seconds = 0, minutes = 0; 
                 seconds = playerProgress[0].getTime() + playerProgress[1].getTime();
-                minutes = (int) seconds/(60000/(Jogo.STANDART_INTERVAL));
+                minutes = (int) seconds/(60000/(Game.STANDART_INTERVAL));
 
                 String timePrint = "";
                 timePrint = String.valueOf(minutes) + "min" + String.valueOf(seconds) + "s";
@@ -102,8 +102,8 @@ public class WinScreen extends Screen {
                 System.out.println(enteredName + ": " + timePrint);
 
                 saveRanking(seconds, enteredName);
-                Jogo.rankingScreen = new RankingScreen();
-                goTo(Jogo.rankingScreen); 
+                Game.rankingScreen = new RankingScreen();
+                goTo(Game.rankingScreen); 
 
 				//setar o nome do jogador aqui, da classe
 			}

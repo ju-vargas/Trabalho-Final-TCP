@@ -14,7 +14,7 @@ import src.com.game.utils.style.*;
 import src.com.game.controler.LevelProgress;
 import src.com.game.controler.SaveLevel;
 import src.com.game.controler.GameProgress;
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 
 public class MapScreen extends Screen {
 
@@ -88,14 +88,14 @@ public class MapScreen extends Screen {
                 //SE esta completo e clica, refaz o nivel
                 if (loadedProgress[0].isCompleted()){
                     GameProgress.clearGameProgress(1);
-                    Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+                    Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
                     SaveLevel.saveLevel(level1,"1");
                 }
 
                 //SE esta em progresso ou eh a primeira vez fazendo, só vai pro jogo
                 
-                Jogo.faseIntroduction = new FaseIntroduction("1");
-                goTo(Jogo.faseIntroduction);
+                Game.faseIntroduction = new FaseIntroduction("1");
+                goTo(Game.faseIntroduction);
             }
         });
 
@@ -106,12 +106,12 @@ public class MapScreen extends Screen {
                 if(loadedProgress[0].isCompleted()){
                     if (loadedProgress[1].isCompleted()){
                         GameProgress.clearGameProgress(1);
-                        Level level2 = new Level("1",2,3,Jogo.PATH_LEVEL2);
+                        Level level2 = new Level("1",2,3,Game.PATH_LEVEL2);
                         SaveLevel.saveLevel(level2,"2");
                         //manda a classe limpa
                     }
-                    Jogo.faseIntroduction = new FaseIntroduction("2");
-                    goTo(Jogo.faseIntroduction);
+                    Game.faseIntroduction = new FaseIntroduction("2");
+                    goTo(Game.faseIntroduction);
                 } 
             }
         });
@@ -120,7 +120,7 @@ public class MapScreen extends Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(loadedProgress[1].isCompleted()){
-                    goTo(Jogo.rankingScreen);
+                    goTo(Game.rankingScreen);
                 } 
             }
         });
@@ -128,7 +128,7 @@ public class MapScreen extends Screen {
         buttonMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Jogo.optionsScreen);    
+                goTo(Game.optionsScreen);    
             }
         });
     }

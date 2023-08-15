@@ -1,6 +1,6 @@
 package src.com.game.view;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.model.Screen;
 
 public class GameScreen extends Screen {
@@ -50,16 +50,16 @@ public class GameScreen extends Screen {
 
     public void changeScreenLevel(){
         // Jogo.mapaScreen = new MapScreen();
-        Jogo.mapaScreen.update();
-        goTo(Jogo.mapaScreen);
+        Game.mapaScreen.update();
+        goTo(Game.mapaScreen);
     }
 
     public void changeScreenWin(){
-        goTo(Jogo.winScreen);
+        goTo(Game.winScreen);
     }
 
     public void changeScreenDead(){
-        goTo(Jogo.deadScreen);
+        goTo(Game.deadScreen);
     }
 
 }

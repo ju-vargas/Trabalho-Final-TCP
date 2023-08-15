@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author arthu
  */
-public class TelaUtils {
+public class ScreenUtils {
     
     public void irDePara(javax.swing.JFrame desse, javax.swing.JFrame esse){
         /*

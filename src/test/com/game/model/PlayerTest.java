@@ -1,6 +1,6 @@
 package src.test.com.game.model;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.model.Player;
 
 import static org.junit.Assert.assertFalse;
@@ -14,7 +14,7 @@ public class PlayerTest {
 
     private Player player;
     private Level mockLevel;
-    private int[][] mockMap = new int[Jogo.XBlocks][Jogo.YBlocks];
+    private int[][] mockMap = new int[Game.XBlocks][Game.YBlocks];
 
     @Before
     public void setUp() {

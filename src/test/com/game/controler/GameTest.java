@@ -4,22 +4,22 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.*;
 
 import src.com.game.view.GameScreen;
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 
 public class GameTest {
 
-    private Jogo game;
+    private Game game;
 
     @Before
     public void setUp() {
-        game = new Jogo();
+        game = new Game();
     }
 
     @Test
     public void testInitNewGame() {
         String id = "1";
 
-        Jogo.initNewGame(id);
+        Game.initNewGame(id);
         assertNotNull(game); // Make sure gameScreen is initialized
     }
 }

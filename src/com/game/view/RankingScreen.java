@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.io.*;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.model.Screen;
 
 
@@ -107,7 +107,7 @@ public class RankingScreen extends Screen {
             menuButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    goTo(Jogo.optionsScreen);
+                    goTo(Game.optionsScreen);
                 };
             });
         }

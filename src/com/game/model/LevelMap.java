@@ -8,7 +8,7 @@ import java.util.Random;
 import java.io.Serializable;
 
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 
  
 public class LevelMap implements Serializable{
@@ -28,7 +28,7 @@ public class LevelMap implements Serializable{
 
     public void setPointCoordinates(int[] pointCoord) {
         this.pointCoordinates = pointCoord;
-        this.mapConstraints[pointCoord[0]][pointCoord[1]] = Jogo.POINT_ID;
+        this.mapConstraints[pointCoord[0]][pointCoord[1]] = Game.POINT_ID;
     }
 
     public int[] getPowerUpCoordinates() {
@@ -37,19 +37,19 @@ public class LevelMap implements Serializable{
 
     public void setPowerUpCoordinates(int[] powerUpCoord) {
         this.powerUpCoordinates = powerUpCoord;
-        this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = Jogo.POWERUP_ID;
+        this.mapConstraints[powerUpCoord[0]][powerUpCoord[1]] = Game.POWERUP_ID;
     }
      
     public LevelMap(String id, String path){
         //this.mapId = id;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
-            int[][] matrix = new int[Jogo.X_BLOCKS][Jogo.Y_BLOCKS];
+            int[][] matrix = new int[Game.X_BLOCKS][Game.Y_BLOCKS];
 
-            for (int colIndex = 0; colIndex < Jogo.Y_BLOCKS; colIndex++) {
+            for (int colIndex = 0; colIndex < Game.Y_BLOCKS; colIndex++) {
                 String line = reader.readLine();
                 String[] components = line.split(" ");
-                for (int rowIndex = 0; rowIndex < Jogo.X_BLOCKS; rowIndex++) {
+                for (int rowIndex = 0; rowIndex < Game.X_BLOCKS; rowIndex++) {
                     matrix[rowIndex][colIndex] = Integer.parseInt(components[rowIndex]);
                 }
             }
@@ -83,8 +83,8 @@ public class LevelMap implements Serializable{
         int randomX;
         int randomY;
         do{
-            randomX = random.nextInt(Jogo.X_BLOCKS-1);
-            randomY = random.nextInt(Jogo.Y_BLOCKS-1);
+            randomX = random.nextInt(Game.X_BLOCKS-1);
+            randomY = random.nextInt(Game.Y_BLOCKS-1);
             validPosition = this.mapConstraints[randomX][randomY] == 0 ? true : false;
         }while(!validPosition);
 
@@ -95,7 +95,7 @@ public class LevelMap implements Serializable{
     }    
 
     public static int[] getPositionByCoordinates(int[] coord){
-        int position[] = {coord[0] * Jogo.BLOCK_SIZE, coord[1]*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE};
+        int position[] = {coord[0] * Game.BLOCK_SIZE, coord[1]*Game.BLOCK_SIZE + Game.HEADER_SIZE};
         return position;
     }
 
@@ -113,11 +113,11 @@ public class LevelMap implements Serializable{
             for (int j = 0; j < this.mapConstraints[i].length; j++) {
                 int blockID = this.mapConstraints[i][j];
                 switch (blockID){
-                    case Jogo.EMPTY_BLOCK_ID:
+                    case Game.EMPTY_BLOCK_ID:
                         g.setColor(new Color(0,0,0,0));
-                        g.fillRect(i*Jogo.BLOCK_SIZE, j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE, Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
+                        g.fillRect(i*Game.BLOCK_SIZE, j*Game.BLOCK_SIZE + Game.HEADER_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
                         break;
-                    case Jogo.OBSTACLE_ID:
+                    case Game.OBSTACLE_ID:
                         int coord[] = {i,j};
                         Obstacle obstacle = new Obstacle(coord, "obstacle");
                         obstacle.render(g);

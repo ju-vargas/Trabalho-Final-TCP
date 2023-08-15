@@ -6,7 +6,7 @@ import java.awt.*;
 import src.com.game.view.*;
 
 
-public class Jogo {
+public class Game {
     public static CardLayout cardLayout;
     public static JPanel cardPanel;
     public static final int WIDTH = 1280;
