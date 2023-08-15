@@ -35,11 +35,11 @@ public class Jogo {
     public static int BLOCK_SIZE = 30;
     public static int UNITS = WIDTH * HEIGHT / (BLOCK_SIZE * BLOCK_SIZE);
     public static int XBlocks = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
-    public static int YBlocks = (int) 620 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
+    public static int YBlocks = (int) 650 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
 
     public static int INICIAL_PLAYER_SIZE = 6;
 
-    public static final int STANDART_INTERVAL = 40;
+    public static final int STANDART_INTERVAL = 60;
 
 
     /*

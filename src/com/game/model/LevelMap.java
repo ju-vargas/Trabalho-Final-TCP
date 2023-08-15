@@ -42,16 +42,20 @@ public class LevelMap implements Serializable{
             BufferedReader reader = new BufferedReader(new FileReader(path));
             int[][] matrix = new int[Jogo.XBlocks][Jogo.YBlocks];
 
-            for (int rowIndex = 0; rowIndex < Jogo.XBlocks; rowIndex++) {
+            for (int colIndex = 0; colIndex < Jogo.YBlocks; colIndex++) {
                 String line = reader.readLine();
                 String[] components = line.split(" ");
-
-                for (int colIndex = 0; colIndex < Jogo.YBlocks; colIndex++) {
-                matrix[rowIndex][colIndex] = Integer.parseInt(components[colIndex]);
+                for (String string : components) {
+                    System.out.print(string);
+                }
+                System.out.println("++");
+                for (int rowIndex = 0; rowIndex < Jogo.XBlocks; rowIndex++) {
+                    matrix[rowIndex][colIndex] = Integer.parseInt(components[rowIndex]);
                 }
             }
             reader.close();
             this.mapConstraints = matrix;
+            LevelMap.printMap(matrix);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,9 +11,8 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
+import java.text.DecimalFormat;
 
 import src.com.game.controler.Jogo;
 import src.com.game.utils.style.Fonts;
@@ -176,9 +175,6 @@ public class GameView extends JPanel implements ActionListener {
 
             level.render(g, labelRander);
             
-            /*render HEADER */
-
-
             g.setColor(Color.BLACK);
             g.setFont(style.regularTitle());
             FontMetrics metrics = getFontMetrics(g.getFont());
@@ -186,7 +182,7 @@ public class GameView extends JPanel implements ActionListener {
             int points = level.getPlayer().getPoints();
 
             g.drawString("Pontos: " + points, (Jogo.WIDTH - 300 - metrics.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
-            g.drawString("Tempo: " + minutes + "min"  + seconds + "s", (Jogo.WIDTH - 300 - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
+            g.drawString("Tempo: " + minutes + "min"  + (new DecimalFormat("#,##0.00").format(seconds)) + "s", (Jogo.WIDTH - 300 - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
         }
     }
 
