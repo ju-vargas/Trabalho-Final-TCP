@@ -3,8 +3,12 @@ package src.com.game.model;
 import java.awt.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import javax.swing.ImageIcon;
 
 import src.com.game.controler.Jogo;
+import src.com.game.utils.style.Images;
 
 public class Player implements Serializable{
     private String name;
@@ -26,9 +30,12 @@ public class Player implements Serializable{
     private int[] bodyX = new int[Jogo.UNITS];
     private int[] bodyY = new int[Jogo.UNITS];
     
+    private char[] bodySprite = new char[Jogo.UNITS];
+    
     public Player(char direction){
         this.name = "";
         this.direction = direction;
+        Arrays.fill(this.bodySprite,direction);
         this.size = -1; 
         this.endSpeedUpTime = null; 
         this.speed = 1;
@@ -102,6 +109,7 @@ public class Player implements Serializable{
         for (int i = this.size; i > 0; i--) {
             this.bodyX[i] = this.bodyX[i - 1];
             this.bodyY[i] = this.bodyY[i - 1];
+            this.bodySprite[i] = this.bodySprite[i - 1];
         }
         switch (this.direction) {
             case 'C':
@@ -119,6 +127,7 @@ public class Player implements Serializable{
             default: 
                 break;
         }
+        this.bodySprite[0] = this.direction;
     }
 
     public boolean checkCollision(int[][] map, Level level){
@@ -134,17 +143,17 @@ public class Player implements Serializable{
                 if(map[i][j] != 0){
                     int[] position = getPosition(i,j);
                     if (position[0] == this.bodyX[0] && position[1] == this.bodyY[0]){
-                        if (map[i][j] == 1){
+                        if (map[i][j] == Jogo.OBSTACLE_ID){
                             // System.out.println("morreu por colidir no mapa");
                             this.isDead = true;
                         }
-                        if (map[i][j] == 2){
+                        if (map[i][j] == Jogo.POINT_ID){
                             System.out.println("ÓOOIA");
                             System.out.println(position[0]+","+position[1]);
                             System.out.println(this.bodyX[0]+","+this.bodyY[1]);
                             level.upScore();
                         }
-                        if (map[i][j] == 3)
+                        if (map[i][j] == Jogo.POWERUP_ID)
                             level.checkPowerUp();
                     }
                 }
@@ -177,16 +186,27 @@ public class Player implements Serializable{
         return false;
     }
 
-    public void render(Graphics g){
+    public void render(Graphics g, String labelRender){
+        String label; 
         for (int i = 0; i < this.size; i++) {
-            if (i == 0) {
-                g.setColor(new Color(223, 113, 37));
-                g.fillRect(this.bodyX[0], this.bodyY[0], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            } 
-            else {
-                g.setColor(new Color(214, 154, 58));
-                g.fillRect(this.bodyX[i], this.bodyY[i], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            }
+            label = labelRender + bodySprite[i];
+            ImageIcon icon = Images.headPlayer(label);
+            icon.paintIcon(null, g, this.bodyX[i], this.bodyY[i]);
+            // if (i == 0) {
+            //     System.out.println(labelRender);
+
+            //     ImageIcon icon = Images.headPlayer(label);
+            //     int x = this.bodyX[0];
+            //     int y = this.bodyY[0];
+            //     icon.paintIcon(null, g, x, y);
+            //     //g.fillRect(this.bodyX[0], this.bodyY[0], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
+            // } 
+            // else {
+            //     ImageIcon icon2 = Images.headPlayer(label);
+            //     icon2.paintIcon(null, g, this.bodyX[i], this.bodyY[i]);
+            //     //g.setColor(new Color(214, 154, 58));
+            //     //g.fillRect(this.bodyX[i], this.bodyY[i], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
+            // }
         }
     }
 }

@@ -21,6 +21,7 @@ public class LevelProgress implements Serializable {
 
     public int getTime() {
         return this.time;
+
     }
 
     public boolean isRunning() {

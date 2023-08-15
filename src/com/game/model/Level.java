@@ -2,10 +2,6 @@ package src.com.game.model;
 import java.awt.*;
 import java.io.Serializable;
 
-import src.com.game.model.LevelMap;
-import src.com.game.model.Player;
-import src.com.game.model.Point;
-
 public class Level implements Serializable {
     private String idFase;
     private int numPoints;
@@ -77,6 +73,7 @@ public class Level implements Serializable {
     }
     public void upScore(){
         Point.applyEffect(player);
+        map.removeObject(point.getCoordinates());
         this.newPoint();
     }
 
@@ -84,9 +81,9 @@ public class Level implements Serializable {
         PowerUp.applyEffect(player);
         map.removeObject(powerUp.getCoordinates(), powerUp);
     }
-    public void render(Graphics g){
+    public void render(Graphics g, String labelRender){
         map.render(g);
-        player.render(g);
+        player.render(g, labelRender);
         point.render(g);
         if(powerUp.getCoordinates() != null){
             powerUp.render(g);

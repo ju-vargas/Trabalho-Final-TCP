@@ -1,7 +1,6 @@
 package src.com.game.controler;
 
 import java.io.*;
-import src.com.game.controler.LevelProgress;
 
 public class GameProgress {
 

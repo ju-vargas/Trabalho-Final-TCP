@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-import src.com.game.controler.Jogo;
+//import src.com.game.controler.Jogo;
 import src.com.game.utils.style.Images;
 
 public abstract class LevelMapObject implements Serializable {

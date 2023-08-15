@@ -68,6 +68,7 @@ public class DeadScreen extends Screen {
         mapButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Jogo.gameScreen.changeScreenLevel();
                 goTo(Jogo.mapaScreen);
             }
         });
