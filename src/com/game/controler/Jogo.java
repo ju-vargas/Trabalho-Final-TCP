@@ -18,6 +18,11 @@ public class Jogo {
     public static final int X_BLOCKS = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
     public static final int Y_BLOCKS = (int) 650 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
 
+    public static final int EMPTY_BLOCK_ID = 0;
+    public static final int OBSTACLE_ID = 1;
+    public static final int POINT_ID = 2;
+    public static final int POWERUP_ID = 3;
+
     public static final int INICIAL_PLAYER_SIZE = 6;
     public static final int STANDART_INTERVAL = 60;
 

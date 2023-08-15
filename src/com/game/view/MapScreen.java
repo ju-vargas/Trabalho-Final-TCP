@@ -1,7 +1,7 @@
 package src.com.game.view;
 import src.com.game.model.Level;
+import src.com.game.model.Screen;
 //import src.com.game.model.Save;
-import src.com.game.model.Tela;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -16,7 +16,7 @@ import src.com.game.controler.SaveLevel;
 import src.com.game.controler.GameProgress;
 import src.com.game.controler.Jogo;
 
-public class MapScreen extends Tela {
+public class MapScreen extends Screen {
 
 	public MapScreen(){
         super();

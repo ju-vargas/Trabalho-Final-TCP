@@ -68,8 +68,7 @@ public class IntroductionScreen extends Screen {
 
         continueToNext.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                
+            public void actionPerformed(ActionEvent e) {                
                 goTo(Jogo.mapaScreen);
             }
         });
