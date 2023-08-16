@@ -10,7 +10,6 @@ public class ScreenUtils {
         esse.setExtendedState(desse.getExtendedState());
         esse.setVisible(true);
         desse.setVisible(false);
-
     }
 }
 

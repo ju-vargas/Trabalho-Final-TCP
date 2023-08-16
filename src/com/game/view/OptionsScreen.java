@@ -65,8 +65,10 @@ public class OptionsScreen extends Screen {
             public void actionPerformed(ActionEvent e) {
                 
                 //NOVO JOGO limpa todo o progresso
+
                 GameProgress.clearGameProgress(1);
                 GameProgress.clearGameProgress(2);
+                
                 Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
                 SaveLevel.saveLevel(level1,"1");
                 Level level2 = new Level("2",2,3,Game.PATH_LEVEL2);

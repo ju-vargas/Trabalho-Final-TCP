@@ -1,14 +1,16 @@
 package src.test.com.game.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.junit.Before;
 
 import src.com.game.model.Player;
 import src.com.game.model.PowerUp;
 
-public class PowerUpTest {
+public class PowerUpTest { 
 
     /*@Test
     public void testApplyEffect() {
@@ -17,33 +19,30 @@ public class PowerUpTest {
         assertEquals(speedValue, player.getSpeed());
         assertNotNull(player.getEndSpeedUpTime());
     }*/
+
+    Player player;
+
+    @Before
+    public void setUp(){
+        player = new Player('C');
+    }
     
     @Test
-    public void testMoveUp() {
-        Player player = new Player('C');
-        player.moveUp();
-        assertEquals('C', player.getDirection());
-    }
+    public void testApplyEffect(){
 
-    @Test
-    public void testMoveDown() {
-        Player player = new Player('C');
-        player.moveDown();
-        assertEquals('B', player.getDirection());
-    }
+        double originalSpeed = player.getSpeed();
+        double speedValue = 3;
+        double speedPoweredUp = originalSpeed + speedValue;
+        int speedUpDuration = 3;
 
-    @Test
-    public void testMoveRight() {
-        Player player = new Player('C');
-        player.moveRight();
-        assertEquals('D', player.getDirection());
-    }
+        int[] coord = {4, 2};
+        PowerUp pw = new PowerUp(coord, speedValue, speedUpDuration, "image.jp");
+        
+        PowerUp.applyEffect(player);
 
-    @Test
-    public void testMoveLeft() {
-        Player player = new Player('C');
-        player.moveLeft();
-        assertEquals('E', player.getDirection());
-    }
+        double playerSpeedUp = ;
 
+        //player.speedUp(3.0);
+        assertEquals(speedPoweredUp, player.getSpeed());
+    }
 }
