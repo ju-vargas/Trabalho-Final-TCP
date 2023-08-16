@@ -5,12 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.controler.SaveLevel;
 import src.com.game.model.Level;
 import src.com.game.model.Screen;
 import src.com.game.controler.GameProgress;
-//import src.com.game.utils.TelaUtils;
 
 
 import src.com.game.utils.style.Fonts;
@@ -66,41 +65,40 @@ public class OptionsScreen extends Screen {
             public void actionPerformed(ActionEvent e) {
                 
                 //NOVO JOGO limpa todo o progresso
+
                 GameProgress.clearGameProgress(1);
                 GameProgress.clearGameProgress(2);
-                Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+                
+                Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
                 SaveLevel.saveLevel(level1,"1");
-                Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
+                Level level2 = new Level("2",2,3,Game.PATH_LEVEL2);
                 SaveLevel.saveLevel(level2,"2");
                 
-                // System.out.println("AAAA");
                 GameProgress.printGameProgress();
 
 
                 //E ai vai pro jogo
-                // Jogo.mapaScreen = new MapScreen();
-                Jogo.mapaScreen.update();
-                goTo(Jogo.introductionScreen);
+                Game.mapaScreen.update();
+                goTo(Game.introductionScreen);
             }
         });
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Jogo.mapaScreen = new MapScreen();
-                Jogo.mapaScreen.update();
-                goTo(Jogo.mapaScreen);
+                Game.mapaScreen.update();
+                goTo(Game.mapaScreen);
             }
         });
         rankingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Jogo.rankingScreen);
+                goTo(Game.rankingScreen);
             }
         });
         rulesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {    
-                goTo(Jogo.rulesScreen);
+                goTo(Game.rulesScreen);
             }
         });
 		exitButton.addActionListener(new ActionListener() {

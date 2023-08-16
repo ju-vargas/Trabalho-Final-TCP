@@ -3,6 +3,8 @@ package src.com.game.view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -10,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import src.com.game.controler.GameProgress;
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.controler.LevelProgress;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
@@ -54,7 +56,8 @@ public class WinScreen extends Screen {
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraintsGrid = new GridBagConstraints();
-        gridPanel.setBackground(Color.YELLOW);
+        gridPanel.setBackground(new Color(150,150,150,127));
+        gridPanel.setBorder(new EmptyBorder(30, 80, 30, 80));
 
         JLabel textIntroduction = new JLabel(text[0]);
         textIntroduction.setFont(configStyle.regularLabel());
@@ -94,7 +97,7 @@ public class WinScreen extends Screen {
                 LevelProgress[] playerProgress = GameProgress.loadGameProgress();
                 int seconds = 0, minutes = 0; 
                 seconds = playerProgress[0].getTime() + playerProgress[1].getTime();
-                minutes = (int) seconds/(60000/(Jogo.STANDART_INTERVAL));
+                minutes = (int) seconds/(60000/(Game.STANDART_INTERVAL));
 
                 String timePrint = "";
                 timePrint = String.valueOf(minutes) + "min" + String.valueOf(seconds) + "s";
@@ -102,8 +105,8 @@ public class WinScreen extends Screen {
                 System.out.println(enteredName + ": " + timePrint);
 
                 saveRanking(seconds, enteredName);
-                Jogo.rankingScreen = new RankingScreen();
-                goTo(Jogo.rankingScreen); 
+                Game.rankingScreen = new RankingScreen();
+                goTo(Game.rankingScreen); 
 
 				//setar o nome do jogador aqui, da classe
 			}

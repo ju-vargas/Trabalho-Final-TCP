@@ -1,23 +1,23 @@
 package src.com.game.model;
 import javax.swing.*;
 
-import src.com.game.controler.Jogo;
-import src.com.game.utils.TelaUtils;
+import src.com.game.controler.Game;
+import src.com.game.utils.ScreenUtils;
 
 public abstract class Screen extends JFrame {
 
-	private TelaUtils telaUtils = new TelaUtils();
+	private ScreenUtils telaUtils = new ScreenUtils();
 
 	public Screen(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(Jogo.WIDTH, Jogo.HEIGHT);
+		setSize(Game.WIDTH, Game.HEIGHT);
 	}
 
-	public TelaUtils getTelaUtils() {
+	public ScreenUtils getTelaUtils() {
 		return telaUtils;
 	}
 
-	public void setTelaUtils(TelaUtils telaUtils) {
+	public void setTelaUtils(ScreenUtils telaUtils) {
 		this.telaUtils = telaUtils;
 	}
 

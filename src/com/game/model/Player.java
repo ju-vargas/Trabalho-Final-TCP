@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.utils.style.Images;
 
 public class Player implements Serializable{
@@ -21,16 +21,16 @@ public class Player implements Serializable{
 
     private LocalDateTime endSpeedUpTime; 
 
-    private int speed; 
+    private double speed; 
     private boolean isSpeededUp;
 
     private int points;
     private boolean isDead; 
 
-    private int[] bodyX = new int[Jogo.UNITS];
-    private int[] bodyY = new int[Jogo.UNITS];
+    private int[] bodyX = new int[Game.UNITS];
+    private int[] bodyY = new int[Game.UNITS];
     
-    private char[] bodySprite = new char[Jogo.UNITS];
+    private char[] bodySprite = new char[Game.UNITS];
     
     public Player(char direction){
         this.name = "";
@@ -42,7 +42,7 @@ public class Player implements Serializable{
         this.points = 0;
         this.isDead = false; 
         bodyX[0] = 0;
-        bodyY[0] = Jogo.HEADER_SIZE;
+        bodyY[0] = Game.HEADER_SIZE;
     } 
     /*GETTERS and SETTERS */
     public LocalDateTime getEndSpeedUpTime() {
@@ -57,13 +57,13 @@ public class Player implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
     public boolean isSpeededUp() {
         return isSpeededUp;
     }
-    public void speedUp(int value){
+    public void speedUp(double value){
         this.isSpeededUp = true;
         this.speed = value;
     }
@@ -113,16 +113,16 @@ public class Player implements Serializable{
         }
         switch (this.direction) {
             case 'C':
-                this.bodyY[0] = (this.bodyY[0] - Jogo.BLOCK_SIZE);
+                this.bodyY[0] = (this.bodyY[0] - Game.BLOCK_SIZE);
                 break;
             case 'B':
-                this.bodyY[0] = (this.bodyY[0] + Jogo.BLOCK_SIZE);
+                this.bodyY[0] = (this.bodyY[0] + Game.BLOCK_SIZE);
                 break;
             case 'E':
-                this.bodyX[0] = (this.bodyX[0] - Jogo.BLOCK_SIZE);
+                this.bodyX[0] = (this.bodyX[0] - Game.BLOCK_SIZE);
                 break;
             case 'D':
-                this.bodyX[0] = (this.bodyX[0] + Jogo.BLOCK_SIZE);
+                this.bodyX[0] = (this.bodyX[0] + Game.BLOCK_SIZE);
                 break;
             default: 
                 break;
@@ -143,25 +143,25 @@ public class Player implements Serializable{
                 if(map[i][j] != 0){
                     int[] position = getPosition(i,j);
                     if (position[0] == this.bodyX[0] && position[1] == this.bodyY[0]){
-                        if (map[i][j] == Jogo.OBSTACLE_ID){
+                        if (map[i][j] == Game.OBSTACLE_ID){
                             // System.out.println("morreu por colidir no mapa");
                             this.isDead = true;
                         }
-                        if (map[i][j] == Jogo.POINT_ID){
+                        if (map[i][j] == Game.POINT_ID){
                             level.upScore();
                         }
-                        if (map[i][j] == Jogo.POWERUP_ID){
+                        if (map[i][j] == Game.POWERUP_ID){
                             level.pickPowerup();
                         }
                     }
                 }
             }
         }
-        if (this.bodyX[0] < 0 || this.bodyX[0] + Jogo.BLOCK_SIZE > Jogo.WIDTH) {
+        if (this.bodyX[0] < 0 || this.bodyX[0] + Game.BLOCK_SIZE > Game.WIDTH) {
             isDead = true;
             // System.out.println("morreu por colidir passar no width");
         }
-        if (this.bodyY[0] < Jogo.HEADER_SIZE || this.bodyY[0] + Jogo.HEADER_SIZE > Jogo.HEIGHT) {
+        if (this.bodyY[0] < Game.HEADER_SIZE || this.bodyY[0] + Game.HEADER_SIZE > Game.HEIGHT) {
             isDead = true;
             // System.out.println("morreu por colidir passar no height");
         }
@@ -170,8 +170,8 @@ public class Player implements Serializable{
 
     private int[] getPosition(int i, int j){
         int[] position = new int[2];
-        position[0] = i*Jogo.BLOCK_SIZE;
-        position[1] = j*Jogo.BLOCK_SIZE + Jogo.HEADER_SIZE;
+        position[0] = i*Game.BLOCK_SIZE;
+        position[1] = j*Game.BLOCK_SIZE + Game.HEADER_SIZE;
         return position;
     }
 
@@ -189,21 +189,6 @@ public class Player implements Serializable{
             label = labelRender + bodySprite[i];
             ImageIcon icon = Images.headPlayer(label);
             icon.paintIcon(null, g, this.bodyX[i], this.bodyY[i]);
-            // if (i == 0) {
-            //     System.out.println(labelRender);
-
-            //     ImageIcon icon = Images.headPlayer(label);
-            //     int x = this.bodyX[0];
-            //     int y = this.bodyY[0];
-            //     icon.paintIcon(null, g, x, y);
-            //     //g.fillRect(this.bodyX[0], this.bodyY[0], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            // } 
-            // else {
-            //     ImageIcon icon2 = Images.headPlayer(label);
-            //     icon2.paintIcon(null, g, this.bodyX[i], this.bodyY[i]);
-            //     //g.setColor(new Color(214, 154, 58));
-            //     //g.fillRect(this.bodyX[i], this.bodyY[i], Jogo.BLOCK_SIZE, Jogo.BLOCK_SIZE);
-            // }
         }
     }
 }

@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -76,12 +76,12 @@ public class FaseIntroduction extends Screen {
             public void actionPerformed(ActionEvent e) {
                 switch (id){
                     case "1": 
-                        goTo(Jogo.gameScreen);
-                        Jogo.initNewGame("1");
+                        goTo(Game.gameScreen);
+                        Game.initNewGame("1");
                         break;
                     case "2":
-                        goTo(Jogo.gameScreen);
-                        Jogo.initNewGame("2");
+                        goTo(Game.gameScreen);
+                        Game.initNewGame("2");
                         break;
                 }
             }

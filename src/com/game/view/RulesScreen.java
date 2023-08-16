@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -105,7 +105,7 @@ public class RulesScreen extends Screen {
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Jogo.optionsScreen);
+                goTo(Game.optionsScreen);
             };
         });
     };

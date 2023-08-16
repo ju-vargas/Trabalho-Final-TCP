@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -31,13 +31,6 @@ public class DeadScreen extends Screen {
         GridBagConstraints constraintsGrid = new GridBagConstraints();
         gridPanel.setBackground(new Color(150,150,150,127));
         gridPanel.setBorder(new EmptyBorder(60, 80, 60, 80));
-
-        // JLabel textIntroduction = new JLabel(text[0]);
-        // textIntroduction.setFont(configStyle.regularLabel());
-        // textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
-        // constraintsGrid.gridy = 1;
-        // constraintsGrid.gridx = 2;
-        // gridPanel.add(textIntroduction, constraintsGrid);
     
         JLabel textIntroduction1 = new JLabel("Você morreu!");
         textIntroduction1.setFont(configStyle.regularLabel());
@@ -45,12 +38,6 @@ public class DeadScreen extends Screen {
         constraintsGrid.gridy = 2;
         constraintsMain.gridx = 2; 
         gridPanel.add(textIntroduction1, constraintsGrid);
-    
-        // JLabel textIntroduction2 = new JLabel(text[2]);
-        // textIntroduction2.setFont(configStyle.regularLabel());
-        // textIntroduction2.setHorizontalAlignment(SwingConstants.CENTER);
-        // constraintsGrid.gridy = 3;
-        // gridPanel.add(textIntroduction2, constraintsGrid);
 
         constraintsMain.gridy = 0;
         mainPanel.add(gridPanel,constraintsMain);
@@ -71,14 +58,14 @@ public class DeadScreen extends Screen {
         mapButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Jogo.gameScreen.changeScreenLevel();
-                goTo(Jogo.mapaScreen);
+                Game.gameScreen.changeScreenLevel();
+                goTo(Game.mapaScreen);
             }
         });
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Jogo.optionsScreen);
+                goTo(Game.optionsScreen);
             }
         });
     }    

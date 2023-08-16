@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import src.com.game.controler.Jogo;
+import src.com.game.controler.Game;
 import src.com.game.utils.style.Fonts;
 import src.com.game.model.Level;
 import src.com.game.controler.SaveLevel;
@@ -22,7 +22,7 @@ import src.com.game.controler.LevelProgress;
 import src.com.game.controler.GameProgress;
 
 public class GameView extends JPanel implements ActionListener {
-    private static int INTERVAL = Jogo.STANDART_INTERVAL; //o clock do jogo
+    private static int INTERVAL = Game.STANDART_INTERVAL; //o clock do jogo
     private Level level; 
     private Fonts style = new Fonts(); 
 
@@ -58,7 +58,7 @@ public class GameView extends JPanel implements ActionListener {
     public GameView() {
         random = new Random();
         setBackground(new Color(206, 206, 206));
-        setPreferredSize(new Dimension(Jogo.WIDTH, Jogo.HEIGHT));
+        setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
         setFocusable(true);
         addKeyListener(new GetKeyPressed());
         renderTimer();
@@ -69,9 +69,7 @@ public class GameView extends JPanel implements ActionListener {
         isRunning = true;
         resetTimer();
         timer.start();
-        renderTimer.restart();
-       
-        //GameProgress.printGameProgress();
+        renderTimer.restart();       
         
         LevelProgress[] timeProgress = GameProgress.loadGameProgress();
         if (id == "1" && timeProgress[0].isRunning()){
@@ -105,13 +103,12 @@ public class GameView extends JPanel implements ActionListener {
                 else    
                     counterSprite = 0;
                 labelRander = prefixRender[counterSprite]; 
-                // System.out.println("label: " + labelRander);
             }
         });
     }
 
     public void drawScreen(Graphics g) {
-        if (level.getPlayer().getSize() < Jogo.INICIAL_PLAYER_SIZE){
+        if (level.getPlayer().getSize() < Game.INICIAL_PLAYER_SIZE){
             level.getPlayer().increaseSize();
         }
         isAnyKeyPressed =  false;
@@ -125,13 +122,13 @@ public class GameView extends JPanel implements ActionListener {
                         thisLevelProgress = new LevelProgress(1, true, false, (int) time); 
                         GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                         SaveLevel.saveLevel(level, level.getIdFase());
-                        Jogo.gameScreen.changeScreenLevel();
+                        Game.gameScreen.changeScreenLevel();
                         break;
                     case "2":
                         thisLevelProgress = new LevelProgress(2, true, false, (int) time); 
                         GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
                         SaveLevel.saveLevel(level, level.getIdFase());      
-                        Jogo.gameScreen.changeScreenWin();  
+                        Game.gameScreen.changeScreenWin();  
                         break;
                 }
                 nomeDecente = true;
@@ -145,16 +142,16 @@ public class GameView extends JPanel implements ActionListener {
                 switch(level.getIdFase()){
                     case "1":
                         GameProgress.clearGameProgress(1);
-                        Level level1 = new Level("1",2,3,Jogo.PATH_LEVEL1);
+                        Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
                         SaveLevel.saveLevel(level1,"1");
                         break; 
                     case "2":
                         GameProgress.clearGameProgress(2);
-                        Level level2 = new Level("2",2,3,Jogo.PATH_LEVEL2);
+                        Level level2 = new Level("2",2,3,Game.PATH_LEVEL2);
                         SaveLevel.saveLevel(level2,"2");
                         break;
                 }
-                Jogo.gameScreen.changeScreenDead();
+                Game.gameScreen.changeScreenDead();
                 nomeDecente = true;
             }
         } 
@@ -174,14 +171,15 @@ public class GameView extends JPanel implements ActionListener {
 
             int points = level.getPlayer().getPoints();
 
-            g.drawString("Pontos: " + points, (Jogo.WIDTH - 300 - metrics.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
-            g.drawString("Tempo: " + minutes + "min"  + (new DecimalFormat("#,##0.00").format(seconds)) + "s", (Jogo.WIDTH - 300 - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
+            g.drawString("Pontos: " + points, (Game.WIDTH - 300 - metrics.stringWidth("Pontos: " + points)) / 2, g.getFont().getSize());
+            g.drawString("Tempo: " + minutes + "min"  + (new DecimalFormat("#,##0.00").format(seconds)) + "s", (Game.WIDTH - 300 - 2*metrics.stringWidth("Pontos: " + points)), g.getFont().getSize());
         }
     }
 
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
-            timer.setDelay(INTERVAL * level.getPlayer().getSpeed());
+            int newDelay = (int) Math.round(INTERVAL / level.getPlayer().getSpeed());
+            timer.setDelay(newDelay);
             level.getPlayer().walk(); 
             if (level.getPlayer().isSpeededUp()){
                 if (checkEndOfSpeedUp(level.getPlayer())){
@@ -256,7 +254,7 @@ public class GameView extends JPanel implements ActionListener {
                             break;
                             
                     }
-                    Jogo.gameScreen.changeScreenLevel();
+                    Game.gameScreen.changeScreenLevel();
                     nomeDecente = true;
                     resetTimer();
                     isRunning = false;
@@ -272,8 +270,8 @@ public class GameView extends JPanel implements ActionListener {
     }
     
     private void updateTimer(){
-        miliseconds = miliseconds + ((double) 1 * level.getPlayer().getSpeed());
-        time = time + ((double) 1 * level.getPlayer().getSpeed());
+        miliseconds = miliseconds + ((double) 1 / level.getPlayer().getSpeed());
+        time = time + ((double) 1 / level.getPlayer().getSpeed());
         seconds = (double) miliseconds/(1000/(INTERVAL));
         if (seconds > 60){
             minutes++;
