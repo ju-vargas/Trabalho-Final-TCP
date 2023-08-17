@@ -11,7 +11,7 @@ public class Game {
 	public static final int HEIGHT = 720;
     public static final int HEADER_SIZE = 60;
 
-    public static final int BLOCK_SIZE = 30;
+    public static final int BLOCK_SIZE = 60;
     public static final int UNITS = WIDTH * HEIGHT / (BLOCK_SIZE * BLOCK_SIZE);
     public static final int X_BLOCKS = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
     public static final int Y_BLOCKS = (int) 650 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
@@ -22,7 +22,7 @@ public class Game {
     public static final int POWERUP_ID = 3;
 
     public static final int INICIAL_PLAYER_SIZE = 6;
-    public static final int STANDART_INTERVAL = 60;
+    public static final int STANDART_INTERVAL = 160;
 
     /*
      * criar uma classe depois so pra ter os paths certinhos!!

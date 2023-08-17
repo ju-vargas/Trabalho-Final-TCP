@@ -14,6 +14,7 @@ import java.io.IOException;
 import src.com.game.controler.GameProgress;
 import src.com.game.controler.Game;
 import src.com.game.controler.LevelProgress;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -43,10 +44,10 @@ public class WinScreen extends Screen {
 
 
     public WinScreen() {
-        setLayout(new GridBagLayout());
-        setBackground(Color.PINK);     
-    
-        JPanel mainPanel = new JPanel();
+            
+        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/ranking.png");        
+
+        //JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBackground(new Color(0,0,0,0));
 

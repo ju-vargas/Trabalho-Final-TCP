@@ -10,6 +10,7 @@ import java.util.List;
 import java.io.*;
 
 import src.com.game.controler.Game;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -28,8 +29,9 @@ public class RankingScreen extends Screen {
             super();
 
             Fonts font = new Fonts();
-
-            setLayout(new GridBagLayout());
+            
+            BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/ranking.png");        
+            mainPanel.setLayout(new GridBagLayout());
 
             GridBagConstraints duvidei = new GridBagConstraints();
             duvidei.insets = new Insets(10,10,10,10);
@@ -40,7 +42,7 @@ public class RankingScreen extends Screen {
             
             duvidei.gridx = 0;
             duvidei.gridy = 0;
-            add(textoLabel, duvidei);
+            mainPanel.add(textoLabel, duvidei);
 
             String filename = "src/com/game/view/ranking.txt"; 
 
@@ -88,7 +90,7 @@ public class RankingScreen extends Screen {
                     textooLabel.setBounds(570, 70, 300, 80); // (x, y, largura, altura)
                     duvidei.gridy = 1;
                     duvidei.gridx = 0;
-                    add(textooLabel, duvidei);
+                    mainPanel.add(textooLabel, duvidei);
                     System.out.println("Conteúdo completo do arquivo:\n" + content);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -98,8 +100,9 @@ public class RankingScreen extends Screen {
         
             duvidei.gridy = 2;
             duvidei.gridx = 0;
-            add(menuButton, duvidei);
-                
+            mainPanel.add(menuButton, duvidei);
+              
+            add(mainPanel);
             menuButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

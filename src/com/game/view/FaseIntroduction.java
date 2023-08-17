@@ -8,29 +8,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.controler.Game;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
 public class FaseIntroduction extends Screen {
     Fonts configStyle = new Fonts();
-    private String[] text = new String[3]; 
+    private String[] text = new String[3];
+    private String imagePath = "";  
 
     public FaseIntroduction(String id) {
         if(id == "1"){
             this.text[0] = "O INF é um lugar distante.";
             this.text[1] = "É preciso enfrentar uma grande jornada para descer até a matemática.";
             this.text[2] = "Desvie dos obstaculos para cumprir seu objetivo."; 
+            imagePath = "resources/sprites/background1.png";
         }    
         else if(id == "2"){
             this.text[0] =  "Os prédios da matemática são todos iguais.";
             this.text[1] = "Se você for capaz de encontrar a sala do professor...";
             this.text[2] = "Poderá rever sua nota e voltar a sua forma normal!";
+            imagePath = "resources/sprites/background2.png";
+
         }
 
-        setLayout(new GridBagLayout());
-        setBackground(Color.PINK);     
+        //setLayout(new GridBagLayout());
+        //setBackground(Color.PINK);     
     
-        JPanel mainPanel = new JPanel();
+        BackgroundPanel mainPanel = new BackgroundPanel(imagePath);   
+        mainPanel.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
+   
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBackground(new Color(0,0,0,0));
 

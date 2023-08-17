@@ -58,4 +58,7 @@ public class Fonts implements Serializable{
     public Font boldTitle(){
         return FONT.deriveFont(Font.PLAIN, 55);
     }    
+    public Font superTitle(){
+        return FONT.deriveFont(Font.PLAIN, 100);
+    }   
 }

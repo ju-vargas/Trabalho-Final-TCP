@@ -15,7 +15,9 @@ import src.com.game.controler.Game;
 import src.com.game.controler.SaveLevel;
 import src.com.game.model.Level;
 import src.com.game.model.Screen;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.controler.GameProgress;
+
 
 
 import src.com.game.utils.style.Fonts;
@@ -26,21 +28,40 @@ public class OptionsScreen extends Screen {
         setLocationRelativeTo(null);
         Fonts styles = new Fonts();
 
-		setLayout(new GridBagLayout());
+        
+        //setLayout(new GridBagLayout());
+		//GridBagConstraints mainConstraints = new GridBagConstraints();
+        
+        BackgroundPanel panel = new BackgroundPanel("resources/sprites/home2.png"); // Substitua pelo caminho da sua imagem
+        panel.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
+
+        panel.setLayout(new GridBagLayout());
 		GridBagConstraints mainConstraints = new GridBagConstraints();
 
+        
         JLabel labelTitle = new JLabel("DOGBYTE");
         labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        labelTitle.setFont(styles.boldTitle());
+        labelTitle.setFont(styles.superTitle());
+        //labelTitle.setForeground(new Color(223, 113, 37));
         labelTitle.setBounds(180, 100, 900, 200);
-		
+
 		mainConstraints.gridx = 0;
 		mainConstraints.gridy = 0;
-        add(labelTitle, mainConstraints);
+        panel.add(labelTitle, mainConstraints);
+
+        // JLabel labelSubtitle = new JLabel("uma aventura no vale");
+        // labelSubtitle.setHorizontalAlignment(SwingConstants.CENTER);
+        // labelSubtitle.setFont(styles.regularTitle());
+        // labelSubtitle.setBounds(180, 100, 900, 200);
+		
+		// mainConstraints.gridx = 0;
+		// mainConstraints.gridy = 1;
+        // panel.add(labelSubtitle, mainConstraints);
 
 
         // Botões na parte inferior
         JPanel buttonsPanel = new JPanel(new FlowLayout());
+        buttonsPanel.setOpaque(false);
         JButton newGameButton = new JButton("Novo Jogo");
 		newGameButton.setFont(styles.boldButton());
         JButton continueButton = new JButton("Continuar");
@@ -59,9 +80,12 @@ public class OptionsScreen extends Screen {
 		buttonsPanel.add(exitButton);
         
 		mainConstraints.gridx = 0;
-		mainConstraints.gridy = 1;
+		mainConstraints.gridy = 2;
 		
-        add(buttonsPanel,mainConstraints);
+        panel.add(buttonsPanel, mainConstraints); 
+        add(panel);
+
+        //add(buttonsPanel,mainConstraints);
 
       
         newGameButton.addActionListener(new ActionListener() {

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.controler.Game;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -27,10 +28,10 @@ public class RulesScreen extends Screen {
     public RulesScreen() {
         super();
         
-        setLayout(new GridBagLayout());
-        setBackground(Color.PINK);     
+        //setLayout(new GridBagLayout());
+        //setBackground(Color.PINK);     
     
-        JPanel mainPanel = new JPanel();
+        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");        
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBackground(new Color(0,0,0,0));
         GridBagConstraints constraintsMain = new GridBagConstraints();

@@ -1,4 +1,5 @@
 package src.com.game.view;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.model.Level;
 import src.com.game.model.Screen;
 
@@ -26,7 +27,8 @@ public class MapScreen extends Screen {
     
     public void update(){
         this.getContentPane().removeAll();
-        setLayout(new GridBagLayout());
+        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");        
+        mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(0, 75, 0, 75);	
 		
@@ -54,31 +56,33 @@ public class MapScreen extends Screen {
 	
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-        this.add(buttonMenu,constraints); 
+        mainPanel.add(buttonMenu,constraints); 
 
 		constraints.gridx = 1;
 		constraints.gridy = 1;
         int level1Time[] = TimerUtils.getTimeComponents(loadedProgress[0].getTime());
         JLabel label = new JLabel(Integer.toString(level1Time[0]) + "min" +Integer.toString(level1Time[1]) + "s");
         label.setBorder(new EmptyBorder(0, 0, 150, 0));
-        this.add(label,constraints);
-		this.add(button1, constraints);
+        mainPanel.add(label,constraints);
+		mainPanel.add(button1, constraints);
 
 		constraints.gridx = 2;
 		constraints.gridy = 0;
         int level2Time[] = TimerUtils.getTimeComponents(loadedProgress[1].getTime());
         JLabel label2 = new JLabel(Integer.toString(level2Time[0]) + "min" +Integer.toString(level2Time[1]) + "s");
         label2.setBorder(new EmptyBorder(150, 0, 0, 0));
-        this.add(label2,constraints);
-		this.add(button2, constraints);
+        mainPanel.add(label2,constraints);
+		mainPanel.add(button2, constraints);
 
         constraints.gridx = 3;
 		constraints.gridy = 1;
         int finalTime[] = TimerUtils.sum(level1Time, level2Time);
         JLabel label3 = new JLabel(Integer.toString(finalTime[0]) + "min" +Integer.toString(finalTime[1]) + "s");
         label3.setBorder(new EmptyBorder(0, 0, 150, 0));
-		this.add(label3,constraints);
-        this.add(button3, constraints);
+		mainPanel.add(label3,constraints);
+        mainPanel.add(button3, constraints);
+
+        add(mainPanel); 
 
         button1.addActionListener(new ActionListener() {
             @Override

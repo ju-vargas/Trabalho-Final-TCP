@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import src.com.game.controler.Game;
+import src.com.game.model.BackgroundPanel;
 import src.com.game.model.Screen;
 import src.com.game.utils.style.Fonts;
 
@@ -16,10 +17,9 @@ public class DeadScreen extends Screen {
 
     public DeadScreen() {
       
-        setLayout(new GridBagLayout());
-        setBackground(Color.PINK);     
-    
-        JPanel mainPanel = new JPanel();
+        //setLayout(new GridBagLayout());
+        //setBackground(Color.PINK);     
+        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");        
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBackground(new Color(0,0,0,0));
 
@@ -47,7 +47,7 @@ public class DeadScreen extends Screen {
         constraintsMain.gridy = 1;
         constraintsMain.gridx = 1; 
         mainPanel.add(mapButton,constraintsMain);
-        add(mainPanel);
+        //add(mainPanel);
 
         JButton menuButton = new JButton("Menu");
         menuButton.setFont(configStyle.regularButton());
