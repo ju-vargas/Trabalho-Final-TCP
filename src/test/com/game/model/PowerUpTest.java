@@ -12,14 +12,6 @@ import src.com.game.model.PowerUp;
 
 public class PowerUpTest { 
 
-    /*@Test
-    public void testApplyEffect() {
-        Player player = new Player('C');
-        PowerUp.applyEffect(player);
-        assertEquals(speedValue, player.getSpeed());
-        assertNotNull(player.getEndSpeedUpTime());
-    }*/
-
     Player player;
 
     @Before

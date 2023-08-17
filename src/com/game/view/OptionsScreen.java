@@ -23,8 +23,6 @@ public class OptionsScreen extends Screen {
 		setLayout(new GridBagLayout());
 		GridBagConstraints mainConstraints = new GridBagConstraints();
 
-
-
         JLabel labelTitle = new JLabel("DOGBYTE");
         labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
         labelTitle.setFont(styles.boldTitle());
@@ -108,5 +106,8 @@ public class OptionsScreen extends Screen {
             };
         });
     }
+
+  
+
 }
 

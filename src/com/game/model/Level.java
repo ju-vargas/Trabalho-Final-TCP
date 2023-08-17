@@ -14,18 +14,6 @@ public class Level implements Serializable {
     private Point point;
     private PowerUp powerUp;
 
-    /*
-     * possivelmente nesse construtor aqui
-     * que vai ser o gerencialmente de continue e tal 
-     */
-    public Level(String id, int numPoints, String path){
-        this.idFase = id;
-        this.numPoints = numPoints; 
-        this.map = new LevelMap(id, path);
-        this.player = new Player('D');
-        this.point = new Point(new int[2],1,"cafe");
-    }
-
     public Level(String id, int numPowerUps, int numPoints, String path){
        this.idFase = id;
        this.numPoints = numPoints; 
