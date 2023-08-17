@@ -1,7 +1,6 @@
 package src.com.game.controler;
 
 import javax.swing.*;
-import java.awt.*;
 
 import src.com.game.view.*;
 
