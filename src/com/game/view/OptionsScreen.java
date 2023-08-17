@@ -5,6 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+
 import src.com.game.controler.Game;
 import src.com.game.controler.SaveLevel;
 import src.com.game.model.Level;
@@ -22,8 +28,6 @@ public class OptionsScreen extends Screen {
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints mainConstraints = new GridBagConstraints();
-
-
 
         JLabel labelTitle = new JLabel("DOGBYTE");
         labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -108,5 +112,8 @@ public class OptionsScreen extends Screen {
             };
         });
     }
+
+  
+
 }
 

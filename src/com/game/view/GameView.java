@@ -156,11 +156,23 @@ public class GameView extends JPanel implements ActionListener {
             }
         } 
         else{
+            String pathBgLevel = "";
+            System.out.println(level.getIdFase());
+            switch (level.getIdFase()){
+                case "1":
+                    pathBgLevel = "resources/sprites/background1.png";
+                    break;
+                case "2": 
+                    pathBgLevel = "resources/sprites/background2.png"; 
+                    break;
+            }
+            
             try {
-                backgroundImage = ImageIO.read(new File("resources/sprites/background.png")); // Substitua "background.jpg" pelo caminho da sua imagem
+                backgroundImage = ImageIO.read(new File(pathBgLevel)); // Substitua "background.jpg" pelo caminho da sua imagem
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
             level.render(g, labelRander);
