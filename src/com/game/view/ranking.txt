@@ -1,5 +1,0 @@
-DENNIS: 3 segundos
-ARTHUR: 10 segundos
-JP: 10 segundos
-JULIANA: 10 segundos
-JULIA: 10 segundos
