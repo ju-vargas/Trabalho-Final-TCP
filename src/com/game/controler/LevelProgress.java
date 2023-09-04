@@ -3,9 +3,9 @@ package src.com.game.controler;
 import java.io.Serializable;
 
 public class LevelProgress implements Serializable {
-    private int id; 
+    private int id;
     private boolean isCompleted;
-    private boolean isGameRunning; 
+    private boolean isGameRunning;
     private int time;
 
     public LevelProgress(int id, boolean isCompleted, boolean isRunning, int time) {
@@ -21,7 +21,6 @@ public class LevelProgress implements Serializable {
 
     public int getTime() {
         return this.time;
-
     }
 
     public boolean isRunning() {
@@ -31,4 +30,3 @@ public class LevelProgress implements Serializable {
         return this.id;
     }
 }
- 

@@ -17,33 +17,33 @@ public class Player implements Serializable{
         return direction;
     }
 
-    private int size; 
+    private int size;
 
-    private LocalDateTime endSpeedUpTime; 
+    private LocalDateTime endSpeedUpTime;
 
-    private double speed; 
+    private double speed;
     private boolean isSpeededUp;
 
     private int points;
-    private boolean isDead; 
+    private boolean isDead;
 
     private int[] bodyX = new int[Game.UNITS];
     private int[] bodyY = new int[Game.UNITS];
-    
+
     private char[] bodySprite = new char[Game.UNITS];
-    
+
     public Player(char direction){
         this.name = "";
         this.direction = direction;
         Arrays.fill(this.bodySprite,direction);
-        this.size = -1; 
-        this.endSpeedUpTime = null; 
+        this.size = -1;
+        this.endSpeedUpTime = null;
         this.speed = 1;
         this.points = 0;
-        this.isDead = false; 
+        this.isDead = false;
         bodyX[0] = 0;
         bodyY[0] = Game.HEADER_SIZE;
-    } 
+    }
     /*GETTERS and SETTERS */
     public LocalDateTime getEndSpeedUpTime() {
         return endSpeedUpTime;
@@ -124,7 +124,7 @@ public class Player implements Serializable{
             case 'D':
                 this.bodyX[0] = (this.bodyX[0] + Game.BLOCK_SIZE);
                 break;
-            default: 
+            default:
                 break;
         }
         this.bodySprite[0] = this.direction;
@@ -158,12 +158,10 @@ public class Player implements Serializable{
             }
         }
         if (this.bodyX[0] < 0 || this.bodyX[0] + Game.BLOCK_SIZE > Game.WIDTH) {
-            isDead = true;
-            // System.out.println("morreu por colidir passar no width");
+            isDead = true; // morreu por colidir passar no width
         }
         if (this.bodyY[0] < Game.HEADER_SIZE || this.bodyY[0] + Game.HEADER_SIZE > Game.HEIGHT) {
-            isDead = true;
-            // System.out.println("morreu por colidir passar no height");
+            isDead = true; // morreu por colidir passar no height
         }
         return this.isDead;
     }
@@ -178,13 +176,13 @@ public class Player implements Serializable{
     public boolean hasCollide(int[] coord){
         int position[] = LevelMap.getPositionByCoordinates(coord);
         if (this.bodyX[0] == position[0] && this.bodyY[0] == position[1]) {
-            return true; 
+            return true;
         }
         return false;
     }
 
     public void render(Graphics g, String labelRender){
-        String label; 
+        String label;
         for (int i = 0; i < this.size; i++) {
             label = labelRender + bodySprite[i];
             ImageIcon icon = Images.headPlayer(label);
