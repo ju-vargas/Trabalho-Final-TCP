@@ -1,7 +1,7 @@
 package src.com.game.view;
 
 import javax.imageio.ImageIO;
-import javax.swing.*; 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,8 +23,8 @@ import src.com.game.controler.GameProgress;
 
 public class GameView extends JPanel implements ActionListener {
     private static int INTERVAL = Game.STANDART_INTERVAL; //o clock do jogo
-    private Level level; 
-    private Fonts style = new Fonts(); 
+    private Level level;
+    private Fonts style = new Fonts();
 
     private boolean isRunning = false;
     Timer timer = new Timer(INTERVAL, this);
@@ -38,7 +38,7 @@ public class GameView extends JPanel implements ActionListener {
     Random random;
     private boolean nomeDecente = false;
 
-    private int counterSprite = 0; 
+    private int counterSprite = 0;
     private String labelRander = "";
     private String[] prefixRender = {
         "1",
@@ -52,7 +52,7 @@ public class GameView extends JPanel implements ActionListener {
     /*
      * muda o label a cada 1 segunda
      * concatena o label com o prefixo da direcao
-     * manda pra renderizar 
+     * manda pra renderizar
      */
 
     public GameView() {
@@ -64,13 +64,13 @@ public class GameView extends JPanel implements ActionListener {
         renderTimer();
     }
 
-    public void startGameLevel(String id) {   
+    public void startGameLevel(String id) {
         level = SaveLevel.loadLevel(id);
         isRunning = true;
         resetTimer();
         timer.start();
-        renderTimer.restart();       
-        
+        renderTimer.restart();
+
         LevelProgress[] timeProgress = GameProgress.loadGameProgress();
         if (id == "1" && timeProgress[0].isRunning()){
             time = timeProgress[0].getTime();
@@ -100,9 +100,9 @@ public class GameView extends JPanel implements ActionListener {
                 if(counterSprite < 3){
                     counterSprite++;
                 }
-                else    
+                else
                     counterSprite = 0;
-                labelRander = prefixRender[counterSprite]; 
+                labelRander = prefixRender[counterSprite];
             }
         });
     }
@@ -119,42 +119,35 @@ public class GameView extends JPanel implements ActionListener {
                 time = seconds + minutes*60;
                 switch(level.getIdFase()){
                     case "1":
-                        thisLevelProgress = new LevelProgress(1, true, false, (int) time); 
+                        thisLevelProgress = new LevelProgress(1, true, false, (int) time);
                         GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                         SaveLevel.saveLevel(level, level.getIdFase());
                         Game.gameScreen.changeScreenLevel();
                         break;
                     case "2":
-                        thisLevelProgress = new LevelProgress(2, true, false, (int) time); 
+                        thisLevelProgress = new LevelProgress(2, true, false, (int) time);
                         GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
-                        SaveLevel.saveLevel(level, level.getIdFase());      
-                        Game.gameScreen.changeScreenWin();  
+                        SaveLevel.saveLevel(level, level.getIdFase());
+                        Game.gameScreen.changeScreenWin();
                         break;
                 }
                 nomeDecente = true;
             }
-            // SaveLevel.saveLevel(level, level.getIdFase());   
+            // SaveLevel.saveLevel(level, level.getIdFase());
             resetTimer();
             isRunning = false;
-        } 
+        }
         else if (level.isEnd()) {
             if(!nomeDecente){
-                switch(level.getIdFase()){
-                    case "1":
-                        GameProgress.clearGameProgress(1);
-                        Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
-                        SaveLevel.saveLevel(level1,"1");
-                        break; 
-                    case "2":
-                        GameProgress.clearGameProgress(2);
-                        Level level2 = new Level("2",2,3,Game.PATH_LEVEL2);
-                        SaveLevel.saveLevel(level2,"2");
-                        break;
-                }
+                // Reseta o progresso da fase se o jogador perdeu
+                System.out.println("\n\n\n HEYLOOOOU\n\n\n");
+                GameProgress.clearGameProgress(Integer.parseInt( level.getIdFase() ));
+                Level newLevel = Game.levelLoader.getLevel(level.getIdFase());
+                SaveLevel.saveLevel(newLevel, level.getIdFase());
                 Game.gameScreen.changeScreenDead();
                 nomeDecente = true;
             }
-        } 
+        }
         else{
             String pathBgLevel = "";
             System.out.println(level.getIdFase());
@@ -162,11 +155,11 @@ public class GameView extends JPanel implements ActionListener {
                 case "1":
                     pathBgLevel = "resources/sprites/background1.png";
                     break;
-                case "2": 
-                    pathBgLevel = "resources/sprites/background2.png"; 
+                case "2":
+                    pathBgLevel = "resources/sprites/background2.png";
                     break;
             }
-            
+
             try {
                 backgroundImage = ImageIO.read(new File(pathBgLevel)); // Substitua "background.jpg" pelo caminho da sua imagem
             } catch (IOException e) {
@@ -176,7 +169,7 @@ public class GameView extends JPanel implements ActionListener {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
             level.render(g, labelRander);
-            
+
             g.setColor(Color.BLACK);
             g.setFont(style.regularTitle());
             FontMetrics metrics = getFontMetrics(g.getFont());
@@ -192,7 +185,7 @@ public class GameView extends JPanel implements ActionListener {
         if (isRunning) {
             int newDelay = (int) Math.round(INTERVAL / level.getPlayer().getSpeed());
             timer.setDelay(newDelay);
-            level.getPlayer().walk(); 
+            level.getPlayer().walk();
             if (level.getPlayer().isSpeededUp()){
                 if (checkEndOfSpeedUp(level.getPlayer())){
                     level.getPlayer().speedDown();
@@ -201,7 +194,7 @@ public class GameView extends JPanel implements ActionListener {
             }
             if (!level.isComplete())
                 level.setComplete(level.checkScore());
-            if (level.isColliding()) 
+            if (level.isColliding())
                 timer.stop();
             updateTimer();
         }
@@ -227,20 +220,20 @@ public class GameView extends JPanel implements ActionListener {
             if (!isAnyKeyPressed){
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
-                        level.getPlayer().moveLeft();                     
+                        level.getPlayer().moveLeft();
                         isAnyKeyPressed = true;
                         break;
                     case KeyEvent.VK_RIGHT:
                         level.getPlayer().moveRight();
-                        isAnyKeyPressed = true;                   
+                        isAnyKeyPressed = true;
                         break;
                     case KeyEvent.VK_UP:
                         level.getPlayer().moveUp();
-                        isAnyKeyPressed = true;                   
+                        isAnyKeyPressed = true;
                         break;
                     case KeyEvent.VK_DOWN:
                         level.getPlayer().moveDown();
-                        isAnyKeyPressed = true;                   
+                        isAnyKeyPressed = true;
                         break;
                     default:
                         isAnyKeyPressed = false;
@@ -254,17 +247,17 @@ public class GameView extends JPanel implements ActionListener {
                     time = seconds + minutes*60;
                     switch(level.getIdFase()){
                         case "1":
-                            thisLevelProgress = new LevelProgress(1, false, true, (int) time); 
+                            thisLevelProgress = new LevelProgress(1, false, true, (int) time);
                             GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
                             SaveLevel.saveLevel(level, level.getIdFase());
-                            GameProgress.printGameProgress();      
+                            GameProgress.printGameProgress();
                             break;
                         case "2":
-                            thisLevelProgress = new LevelProgress(2, false, true, (int) time); 
+                            thisLevelProgress = new LevelProgress(2, false, true, (int) time);
                             GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
-                            SaveLevel.saveLevel(level, level.getIdFase());      
+                            SaveLevel.saveLevel(level, level.getIdFase());
                             break;
-                            
+
                     }
                     Game.gameScreen.changeScreenLevel();
                     nomeDecente = true;
@@ -280,7 +273,7 @@ public class GameView extends JPanel implements ActionListener {
         seconds = 0;
         minutes = 0;
     }
-    
+
     private void updateTimer(){
         miliseconds = miliseconds + ((double) 1 / level.getPlayer().getSpeed());
         time = time + ((double) 1 / level.getPlayer().getSpeed());
@@ -291,5 +284,5 @@ public class GameView extends JPanel implements ActionListener {
             miliseconds = 0;
         }
     }
-    
+
 }

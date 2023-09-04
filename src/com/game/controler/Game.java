@@ -3,6 +3,7 @@ package src.com.game.controler;
 import javax.swing.*;
 import java.awt.*;
 
+import src.com.game.model.LevelLoader;
 import src.com.game.view.*;
 
 
@@ -16,6 +17,8 @@ public class Game {
     public static final int X_BLOCKS = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
     public static final int Y_BLOCKS = (int) 650 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
 
+    public static final int STORY_LINES = 3;
+
     public static final int EMPTY_BLOCK_ID = 0;
     public static final int OBSTACLE_ID = 1;
     public static final int POINT_ID = 2;
@@ -24,12 +27,8 @@ public class Game {
     public static final int INICIAL_PLAYER_SIZE = 6;
     public static final int STANDART_INTERVAL = 160;
 
-    /*
-     * criar uma classe depois so pra ter os paths certinhos!!
-     * por enquanto eh gambiarra
-     */
-    public static String PATH_LEVEL1 = "resources/maps/source/1.txt";
-    public static String PATH_LEVEL2 = "resources/maps/source/2.txt";
+    public static String PATH_LEVEL_FOLDER = "resources/maps/source/";
+    public static String PATH_LEVEL_SUFFIX = ".txt";
 
     public static OptionsScreen optionsScreen = new OptionsScreen();
     public static GameScreen gameScreen = new GameScreen();
@@ -38,8 +37,9 @@ public class Game {
     public static MapScreen mapaScreen = new MapScreen();
     public static IntroductionScreen introductionScreen = new IntroductionScreen();
     public static WinScreen winScreen = new WinScreen();
-    public static FaseIntroduction faseIntroduction = new FaseIntroduction("1");
     public static DeadScreen deadScreen = new DeadScreen();
+    public static LevelLoader levelLoader = new LevelLoader();
+    public static FaseIntroduction faseIntroduction = new FaseIntroduction("1");
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

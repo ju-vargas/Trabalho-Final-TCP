@@ -22,23 +22,23 @@ import src.com.game.controler.GameProgress;
 
 import src.com.game.utils.style.Fonts;
 
-public class OptionsScreen extends Screen {    
-    public OptionsScreen() {    
+public class OptionsScreen extends Screen {
+    public OptionsScreen() {
         super();
         setLocationRelativeTo(null);
         Fonts styles = new Fonts();
 
-        
+
         //setLayout(new GridBagLayout());
 		//GridBagConstraints mainConstraints = new GridBagConstraints();
-        
+
         BackgroundPanel panel = new BackgroundPanel("resources/sprites/home2.png"); // Substitua pelo caminho da sua imagem
         panel.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
 
         panel.setLayout(new GridBagLayout());
 		GridBagConstraints mainConstraints = new GridBagConstraints();
 
-        
+
         JLabel labelTitle = new JLabel("DOGBYTE");
         labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
         labelTitle.setFont(styles.superTitle());
@@ -53,7 +53,7 @@ public class OptionsScreen extends Screen {
         // labelSubtitle.setHorizontalAlignment(SwingConstants.CENTER);
         // labelSubtitle.setFont(styles.regularTitle());
         // labelSubtitle.setBounds(180, 100, 900, 200);
-		
+
 		// mainConstraints.gridx = 0;
 		// mainConstraints.gridy = 1;
         // panel.add(labelSubtitle, mainConstraints);
@@ -78,30 +78,30 @@ public class OptionsScreen extends Screen {
         buttonsPanel.add(rankingButton);
         buttonsPanel.add(rulesButton);
 		buttonsPanel.add(exitButton);
-        
+
 		mainConstraints.gridx = 0;
 		mainConstraints.gridy = 2;
-		
-        panel.add(buttonsPanel, mainConstraints); 
+
+        panel.add(buttonsPanel, mainConstraints);
         add(panel);
 
         //add(buttonsPanel,mainConstraints);
 
-      
+
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 //NOVO JOGO limpa todo o progresso
 
                 GameProgress.clearGameProgress(1);
                 GameProgress.clearGameProgress(2);
-                
-                Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
+
+                Level level1 = Game.levelLoader.getLevel("1");
                 SaveLevel.saveLevel(level1,"1");
-                Level level2 = new Level("2",2,3,Game.PATH_LEVEL2);
+                Level level2 = Game.levelLoader.getLevel("2");
                 SaveLevel.saveLevel(level2,"2");
-                
+
                 GameProgress.printGameProgress();
 
 
@@ -125,7 +125,7 @@ public class OptionsScreen extends Screen {
         });
         rulesButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {    
+            public void actionPerformed(ActionEvent e) {
                 goTo(Game.rulesScreen);
             }
         });
@@ -137,7 +137,7 @@ public class OptionsScreen extends Screen {
         });
     }
 
-  
+
 
 }
 

@@ -24,14 +24,14 @@ public class MapScreen extends Screen {
         setLocationRelativeTo(null);
         update();
 	}
-    
+
     public void update(){
         this.getContentPane().removeAll();
-        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");        
+        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-		constraints.insets = new Insets(0, 75, 0, 75);	
-		
+		constraints.insets = new Insets(0, 75, 0, 75);
+
         LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
         String[] sprite = new String[3];
         for(int i = 0; i<2; i++){
@@ -39,24 +39,24 @@ public class MapScreen extends Screen {
                 sprite[i] = "completebutton";
             }
             else if(loadedProgress[i].isRunning() == true){
-                sprite[i] = "almostbutton"; 
+                sprite[i] = "almostbutton";
             }
             else
                 sprite[i] = "notbutton";
         }
         if(loadedProgress[0].isCompleted() & loadedProgress[1].isCompleted())
             sprite[2] = "completebutton";
-        else   
+        else
             sprite[2] = "notbutton";
-    
+
         JButton buttonMenu = createCircularButton("Menu", "menubutton");
 		JButton button1 = createCircularButton("Fase 1", sprite[0]);
 		JButton button2 = createCircularButton("Fase 2", sprite[1]);
 		JButton button3 = createCircularButton("Fim",sprite[2]);
-	
+
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-        mainPanel.add(buttonMenu,constraints); 
+        mainPanel.add(buttonMenu,constraints);
 
 		constraints.gridx = 1;
 		constraints.gridy = 1;
@@ -82,22 +82,22 @@ public class MapScreen extends Screen {
 		mainPanel.add(label3,constraints);
         mainPanel.add(button3, constraints);
 
-        add(mainPanel); 
+        add(mainPanel);
 
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println(loadedProgress[0].isCompleted());
-                
+
                 //SE esta completo e clica, refaz o nivel
                 if (loadedProgress[0].isCompleted()){
                     GameProgress.clearGameProgress(1);
-                    Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
+                    Level level1 = Game.levelLoader.getLevel("1");
                     SaveLevel.saveLevel(level1,"1");
                 }
 
                 //SE esta em progresso ou eh a primeira vez fazendo, só vai pro jogo
-                
+
                 Game.faseIntroduction = new FaseIntroduction("1");
                 goTo(Game.faseIntroduction);
             }
@@ -110,13 +110,13 @@ public class MapScreen extends Screen {
                 if(loadedProgress[0].isCompleted()){
                     if (loadedProgress[1].isCompleted()){
                         GameProgress.clearGameProgress(1);
-                        Level level2 = new Level("1",2,3,Game.PATH_LEVEL2);
+                        Level level2 = Game.levelLoader.getLevel("1");
                         SaveLevel.saveLevel(level2,"2");
                         //manda a classe limpa
                     }
                     Game.faseIntroduction = new FaseIntroduction("2");
                     goTo(Game.faseIntroduction);
-                } 
+                }
             }
         });
 
@@ -125,14 +125,14 @@ public class MapScreen extends Screen {
             public void actionPerformed(ActionEvent e) {
                 if(loadedProgress[1].isCompleted()){
                     goTo(Game.rankingScreen);
-                } 
+                }
             }
         });
 
         buttonMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Game.optionsScreen);    
+                goTo(Game.optionsScreen);
             }
         });
     }

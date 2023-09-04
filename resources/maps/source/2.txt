@@ -1,3 +1,8 @@
+Os prédios da matemática são todos iguais.
+Se você for capaz de encontrar a sala do professor...
+Poderá rever sua nota e voltar a sua forma normal!
+resources/sprites/background2.png
+2 3
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

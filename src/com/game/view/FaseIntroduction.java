@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import src.com.game.controler.Game;
 import src.com.game.model.BackgroundPanel;
@@ -14,56 +15,42 @@ import src.com.game.utils.style.Fonts;
 
 public class FaseIntroduction extends Screen {
     Fonts configStyle = new Fonts();
-    private String[] text = new String[3];
-    private String imagePath = "";  
+    private ArrayList<String> text;
+    private String imagePath = "";
 
     public FaseIntroduction(String id) {
-        if(id == "1"){
-            this.text[0] = "O INF é um lugar distante.";
-            this.text[1] = "É preciso enfrentar uma grande jornada para descer até a matemática.";
-            this.text[2] = "Desvie dos obstaculos para cumprir seu objetivo."; 
-            imagePath = "resources/sprites/background1.png";
-        }    
-        else if(id == "2"){
-            this.text[0] =  "Os prédios da matemática são todos iguais.";
-            this.text[1] = "Se você for capaz de encontrar a sala do professor...";
-            this.text[2] = "Poderá rever sua nota e voltar a sua forma normal!";
-            imagePath = "resources/sprites/background2.png";
+        this.text = Game.levelLoader.getLevel(id).getStory();
+        this.imagePath = Game.levelLoader.getLevel(id).getBackground();
 
-        }
-
-        //setLayout(new GridBagLayout());
-        //setBackground(Color.PINK);     
-    
-        BackgroundPanel mainPanel = new BackgroundPanel(imagePath);   
+        BackgroundPanel mainPanel = new BackgroundPanel(imagePath);
         mainPanel.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
-   
+
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBackground(new Color(0,0,0,0));
 
         GridBagConstraints constraintsMain = new GridBagConstraints();
-        constraintsMain.insets = new Insets(10,10,10,10); 
+        constraintsMain.insets = new Insets(10,10,10,10);
 
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraintsGrid = new GridBagConstraints();
         gridPanel.setBackground(new Color(150,150,150,127));
         gridPanel.setBorder(new EmptyBorder(150, 30, 150, 30));
-        
-        JLabel textIntroduction = new JLabel(text[0]);
+
+        JLabel textIntroduction = new JLabel(text.get(0));
         textIntroduction.setFont(configStyle.regularLabel());
         textIntroduction.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 1;
         constraintsGrid.gridx = 2;
         gridPanel.add(textIntroduction, constraintsGrid);
-    
-        JLabel textIntroduction1 = new JLabel(text[1]);
+
+        JLabel textIntroduction1 = new JLabel(text.get(1));
         textIntroduction1.setFont(configStyle.regularLabel());
         textIntroduction1.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 2;
         gridPanel.add(textIntroduction1, constraintsGrid);
-    
-        JLabel textIntroduction2 = new JLabel(text[2]);
+
+        JLabel textIntroduction2 = new JLabel(text.get(2));
         textIntroduction2.setFont(configStyle.regularLabel());
         textIntroduction2.setHorizontalAlignment(SwingConstants.CENTER);
         constraintsGrid.gridy = 3;
@@ -71,7 +58,7 @@ public class FaseIntroduction extends Screen {
 
         constraintsMain.gridy = 0;
         mainPanel.add(gridPanel,constraintsMain);
-        
+
         JButton continueToNext = new JButton("Continuar");
         continueToNext.setFont(configStyle.regularButton());
         constraintsMain.gridy = 1;
@@ -82,7 +69,7 @@ public class FaseIntroduction extends Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switch (id){
-                    case "1": 
+                    case "1":
                         goTo(Game.gameScreen);
                         Game.initNewGame("1");
                         break;
@@ -93,7 +80,7 @@ public class FaseIntroduction extends Screen {
                 }
             }
         });
-    }    
+    }
 }
 
 

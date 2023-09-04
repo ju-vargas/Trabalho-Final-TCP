@@ -1,3 +1,8 @@
+O INF é um lugar distante.
+É preciso enfrentar uma grande jornada para descer até a matemática
+Desvie dos obstaculos para cumprir seu objetivo
+resources/sprites/background1.png
+2 3
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

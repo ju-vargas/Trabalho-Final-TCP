@@ -15,27 +15,26 @@ public class LevelMapTest {
 
     @Before
     public void setUp() {
-    
+
         int[][] initialMapConstraints = {
                 {1, 2, 3},
                 {4, 5, 6},
                 {7, 8, 9}
         };
-        levelMap = new LevelMap("1", "resources/maps/source/1.txt");
-        levelMap.setMapConstraints(initialMapConstraints);
+        levelMap = new LevelMap(initialMapConstraints);
 
         pw = new PowerUp(new int[]{1, 1}, 1, 2, null);
     }
 
     @Test
     public void testRemoveObject() {
-        int[] coord = {1, 1}; 
+        int[] coord = {1, 1};
 
         levelMap.removeObject(coord, pw);
 
         int[][] expectedMapConstraints = {
                 {1, 2, 3},
-                {4, 0, 6}, 
+                {4, 0, 6},
                 {7, 8, 9}
         };
 

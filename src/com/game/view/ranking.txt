@@ -1,7 +1,14 @@
+asd: 0 segundos
 DENNIS: 3 segundos
 Juliana: 8 segundos
 ARTHUR: 10 segundos
 JP: 10 segundos
 JULIANA: 10 segundos
 JULIA: 10 segundos
+bah: 12 segundos
+idem: 13 segundos
+leo: 14 segundos
+bah: 15 segundos
 TESTEE: 20 segundos
+leo: 22 segundos
+leo: 35 segundos
