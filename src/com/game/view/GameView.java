@@ -72,14 +72,9 @@ public class GameView extends JPanel implements ActionListener {
         renderTimer.restart();
 
         LevelProgress[] timeProgress = GameProgress.loadGameProgress();
-        if (id == "1" && timeProgress[0].isRunning()){
-            time = timeProgress[0].getTime();
-            seconds = (double) time;
-            miliseconds = seconds*(1000/(INTERVAL));
-            minutes = (int) seconds/(60000/(INTERVAL));
-        }
-        else if (id == "2" && timeProgress[1].isRunning()){
-            time = timeProgress[1].getTime();
+        int levelIndex = Integer.parseInt(id) - 1;
+        if( timeProgress[ levelIndex ].isRunning()){
+            time = timeProgress[levelIndex].getTime();
             seconds = (double) time;
             miliseconds = seconds*(1000/(INTERVAL));
             minutes = (int) seconds/(60000/(INTERVAL));
@@ -140,7 +135,6 @@ public class GameView extends JPanel implements ActionListener {
         else if (level.isEnd()) {
             if(!nomeDecente){
                 // Reseta o progresso da fase se o jogador perdeu
-                System.out.println("\n\n\n HEYLOOOOU\n\n\n");
                 GameProgress.clearGameProgress(Integer.parseInt( level.getIdFase() ));
                 Level newLevel = Game.levelLoader.getLevel(level.getIdFase());
                 SaveLevel.saveLevel(newLevel, level.getIdFase());
