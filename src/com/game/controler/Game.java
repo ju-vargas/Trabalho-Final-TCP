@@ -17,6 +17,7 @@ public class Game {
     public static final int X_BLOCKS = (int) 1260 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
     public static final int Y_BLOCKS = (int) 650 / BLOCK_SIZE; //tamanho máximo de blocos no grid no eixo x
 
+    public static final int N_LEVELS = 3;
     public static final int STORY_LINES = 3;
 
     public static final int EMPTY_BLOCK_ID = 0;
@@ -40,6 +41,7 @@ public class Game {
     public static DeadScreen deadScreen = new DeadScreen();
     public static LevelLoader levelLoader = new LevelLoader();
     public static FaseIntroduction faseIntroduction = new FaseIntroduction("1");
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

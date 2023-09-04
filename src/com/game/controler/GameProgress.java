@@ -7,20 +7,8 @@ public class GameProgress {
 
     public static void clearGameProgress(int id){
         LevelProgress[] loadedProgress = loadGameProgress();
-        switch (id){
-            case 1:
-                LevelProgress level1 = new LevelProgress(1, false, false, 0);
-                saveGameProgress(level1, loadedProgress[1]);
-                break;
-
-            case 2:
-                LevelProgress level2 = new LevelProgress(2, false, false, 0);
-                saveGameProgress(loadedProgress[0],level2);
-                break;
-
-            default:
-                break;
-        }
+        loadedProgress[id-1] = new LevelProgress(1, false, false, 0);
+        saveGameProgress(loadedProgress);
     }
 
     public static void printGameProgress(){
@@ -32,7 +20,7 @@ public class GameProgress {
         }
     }
 
-    public static void saveGameProgress(LevelProgress... progress) {
+    public static void saveGameProgress(LevelProgress[] progress) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/com/game/controler/obj/game_progress.dat"))) {
             oos.writeObject(progress);
             System.out.println("Informações de progresso salvas com sucesso.");
@@ -41,11 +29,23 @@ public class GameProgress {
         }
     }
 
+    private static LevelProgress[] createBlankGameProgress(){
+        LevelProgress blanks[] = new LevelProgress[ Game.N_LEVELS ];
+        for(int i = 0; i < Game.N_LEVELS; ++i){
+            blanks[i] = new LevelProgress(1, false, false, 0);
+        }
+        return blanks;
+    }
+
     public static LevelProgress[] loadGameProgress() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/com/game/controler/obj/game_progress.dat"))) {
             return (LevelProgress[]) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e){
+            LevelProgress blanks[] = createBlankGameProgress();
+            saveGameProgress(blanks);
+            return blanks;
         }
         return null;
     }

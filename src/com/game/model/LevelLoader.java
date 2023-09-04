@@ -48,13 +48,13 @@ public class LevelLoader {
         ArrayList<String> levelStory = new ArrayList<>();
         int[][] matrix = new int[Game.X_BLOCKS][Game.Y_BLOCKS];
 
-
         for (int i = 0; i < Game.STORY_LINES; ++i) {
             String line = reader.readLine();
             levelStory.add(line);
         }
 
         String backgroundImageFile = reader.readLine();
+        String songFile = reader.readLine();
 
         String[] pointsAndPowersLine = reader.readLine().split(" ");
         int numPowerUps = Integer.parseInt(pointsAndPowersLine[0]);
@@ -72,6 +72,7 @@ public class LevelLoader {
         LevelMap levelMap = new LevelMap(matrix);
         Level level = new Level(id, numPowerUps, numPoints, levelMap, backgroundImageFile);
         level.setStory(levelStory);
+        if(! songFile.isEmpty() ) level.setSongFile(songFile);
 
         return level;
     }

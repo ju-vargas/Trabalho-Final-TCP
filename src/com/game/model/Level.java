@@ -14,6 +14,7 @@ public class Level implements Serializable {
     private Player player;
     private Point point;
     private PowerUp powerUp;
+    private String songFile;
 
     private ArrayList<String> story;
     private String backgroundImageFile;
@@ -22,12 +23,21 @@ public class Level implements Serializable {
         this.idFase = id;
         this.numPoints = numPoints;
         this.map = map;
+        this.songFile = null;
         this.player = new Player('D');
         this.backgroundImageFile = backgroundImageFile;
         setPointCoordinates(map.getRandomCoordinates());
         setPowerUpCoordinates(map.getRandomCoordinates());
         this.isEnd = false;
         this.isComplete = false;
+    }
+
+    public void setSongFile(String song){
+        this.songFile = song;
+    }
+
+    public String getSongFile(){
+        return songFile;
     }
 
     public void setStory(ArrayList<String> story){

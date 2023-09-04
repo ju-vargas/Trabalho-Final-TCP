@@ -1,17 +1,31 @@
 package src.com.game.view;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
+
+
+import java.applet.*;
+import java.awt.*;
+import java.net.*;
+import java.awt.event.*;
+
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 
 import src.com.game.controler.Game;
@@ -71,6 +85,21 @@ public class GameView extends JPanel implements ActionListener {
         timer.start();
         renderTimer.restart();
 
+        try {
+            if( level.getSongFile() != null ){
+                BufferedInputStream stream = new BufferedInputStream(new FileInputStream(level.getSongFile()) );
+                AudioInputStream songStream = AudioSystem.getAudioInputStream( stream );
+                Clip clip = AudioSystem.getClip();
+                clip.open(songStream);
+                clip.start();
+            }
+
+        } catch( Exception ex) {
+            System.out.println("Não dá pra tocar audio... <"+level.getSongFile() + ">\n");
+            System.out.println(ex);
+            ex.printStackTrace();
+        }
+
         LevelProgress[] timeProgress = GameProgress.loadGameProgress();
         int levelIndex = Integer.parseInt(id) - 1;
         if( timeProgress[ levelIndex ].isRunning()){
@@ -109,22 +138,17 @@ public class GameView extends JPanel implements ActionListener {
         isAnyKeyPressed =  false;
         if (level.isComplete()){
             if(!nomeDecente){
+                int thisIdInt = Integer.parseInt(level.getIdFase());
                 LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
-                LevelProgress thisLevelProgress;
                 time = seconds + minutes*60;
-                switch(level.getIdFase()){
-                    case "1":
-                        thisLevelProgress = new LevelProgress(1, true, false, (int) time);
-                        GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
-                        SaveLevel.saveLevel(level, level.getIdFase());
-                        Game.gameScreen.changeScreenLevel();
-                        break;
-                    case "2":
-                        thisLevelProgress = new LevelProgress(2, true, false, (int) time);
-                        GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
-                        SaveLevel.saveLevel(level, level.getIdFase());
-                        Game.gameScreen.changeScreenWin();
-                        break;
+                loadedProgress[ thisIdInt - 1 ] = new LevelProgress(thisIdInt, true, false, (int) time);
+                GameProgress.saveGameProgress(loadedProgress);
+
+                // If finished the game
+                if( thisIdInt == Game.N_LEVELS ){
+                    Game.gameScreen.changeScreenWin();
+                } else {
+                    Game.gameScreen.changeScreenLevel();
                 }
                 nomeDecente = true;
             }
@@ -143,20 +167,12 @@ public class GameView extends JPanel implements ActionListener {
             }
         }
         else{
-            String pathBgLevel = "";
-            System.out.println(level.getIdFase());
-            switch (level.getIdFase()){
-                case "1":
-                    pathBgLevel = "resources/sprites/background1.png";
-                    break;
-                case "2":
-                    pathBgLevel = "resources/sprites/background2.png";
-                    break;
-            }
+            String pathBackground = level.getBackground();
 
             try {
-                backgroundImage = ImageIO.read(new File(pathBgLevel)); // Substitua "background.jpg" pelo caminho da sua imagem
+                backgroundImage = ImageIO.read(new File(pathBackground)); // Substitua "background.jpg" pelo caminho da sua imagem
             } catch (IOException e) {
+                System.out.println("Tentou ler a imagem no caminho <" + pathBackground +">");
                 e.printStackTrace();
             }
 
@@ -236,23 +252,14 @@ public class GameView extends JPanel implements ActionListener {
             }
             if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
                 if(!nomeDecente){
-                    LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
-                    LevelProgress thisLevelProgress;
-                    time = seconds + minutes*60;
-                    switch(level.getIdFase()){
-                        case "1":
-                            thisLevelProgress = new LevelProgress(1, false, true, (int) time);
-                            GameProgress.saveGameProgress(thisLevelProgress, loadedProgress[1]);
-                            SaveLevel.saveLevel(level, level.getIdFase());
-                            GameProgress.printGameProgress();
-                            break;
-                        case "2":
-                            thisLevelProgress = new LevelProgress(2, false, true, (int) time);
-                            GameProgress.saveGameProgress(loadedProgress[0], thisLevelProgress);
-                            SaveLevel.saveLevel(level, level.getIdFase());
-                            break;
 
-                    }
+                    int thisIdInt = Integer.parseInt(level.getIdFase());
+                    LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
+                    time = seconds + minutes*60;
+                    loadedProgress[ thisIdInt - 1 ] = new LevelProgress(thisIdInt, false, true, (int) time);
+                    GameProgress.saveGameProgress(loadedProgress);
+                    SaveLevel.saveLevel(level, level.getIdFase());
+                    GameProgress.printGameProgress();
                     Game.gameScreen.changeScreenLevel();
                     nomeDecente = true;
                     resetTimer();

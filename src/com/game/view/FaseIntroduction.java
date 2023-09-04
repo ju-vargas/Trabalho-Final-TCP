@@ -68,16 +68,8 @@ public class FaseIntroduction extends Screen {
         continueToNext.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (id){
-                    case "1":
-                        goTo(Game.gameScreen);
-                        Game.initNewGame("1");
-                        break;
-                    case "2":
-                        goTo(Game.gameScreen);
-                        Game.initNewGame("2");
-                        break;
-                }
+                goTo(Game.gameScreen);
+                Game.initNewGame(id);
             }
         });
     }

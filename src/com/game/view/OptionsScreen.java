@@ -97,10 +97,10 @@ public class OptionsScreen extends Screen {
                 GameProgress.clearGameProgress(1);
                 GameProgress.clearGameProgress(2);
 
-                Level level1 = Game.levelLoader.getLevel("1");
-                SaveLevel.saveLevel(level1,"1");
-                Level level2 = Game.levelLoader.getLevel("2");
-                SaveLevel.saveLevel(level2,"2");
+                for(int i = 0; i < Game.N_LEVELS; ++i){
+                    Level levelI = Game.levelLoader.getLevel( (i+1) + "" );
+                    SaveLevel.saveLevel(levelI, (i+1) + "");
+                }
 
                 GameProgress.printGameProgress();
 
