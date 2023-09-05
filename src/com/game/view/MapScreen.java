@@ -24,39 +24,40 @@ public class MapScreen extends Screen {
         setLocationRelativeTo(null);
         update();
 	}
-    
+
     public void update(){
         this.getContentPane().removeAll();
-        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");        
+        BackgroundPanel mainPanel = new BackgroundPanel("resources/sprites/map.png");
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-		constraints.insets = new Insets(0, 75, 0, 75);	
-		
+		constraints.insets = new Insets(0, 75, 0, 75);
+
         LevelProgress[] loadedProgress = GameProgress.loadGameProgress();
         String[] sprite = new String[3];
-        for(int i = 0; i<2; i++){
+        for(int i = 0; i < Game.N_LEVELS ; i++){
             if (loadedProgress[i].isCompleted() == true){
                 sprite[i] = "completebutton";
             }
             else if(loadedProgress[i].isRunning() == true){
-                sprite[i] = "almostbutton"; 
+                sprite[i] = "almostbutton";
             }
             else
                 sprite[i] = "notbutton";
         }
         if(loadedProgress[0].isCompleted() & loadedProgress[1].isCompleted())
             sprite[2] = "completebutton";
-        else   
+        else
             sprite[2] = "notbutton";
-    
+
         JButton buttonMenu = createCircularButton("Menu", "menubutton");
-		JButton button1 = createCircularButton("Fase 1", sprite[0]);
+        JButton button1 = createCircularButton("Fase 1", sprite[0]);
 		JButton button2 = createCircularButton("Fase 2", sprite[1]);
-		JButton button3 = createCircularButton("Fim",sprite[2]);
-	
+		JButton button3 = createCircularButton("Fase 3", sprite[2]);
+		JButton buttonFim = createCircularButton("Fim",sprite[2]);
+
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-        mainPanel.add(buttonMenu,constraints); 
+        mainPanel.add(buttonMenu,constraints);
 
 		constraints.gridx = 1;
 		constraints.gridy = 1;
@@ -74,49 +75,50 @@ public class MapScreen extends Screen {
         mainPanel.add(label2,constraints);
 		mainPanel.add(button2, constraints);
 
+
         constraints.gridx = 3;
 		constraints.gridy = 1;
-        int finalTime[] = TimerUtils.sum(level1Time, level2Time);
-        JLabel label3 = new JLabel(Integer.toString(finalTime[0]) + "min" +Integer.toString(finalTime[1]) + "s");
+        int level3Time[] = TimerUtils.getTimeComponents(loadedProgress[2].getTime());
+        // int finalTime[] = TimerUtils.sum(level1Time, level2Time);
+        JLabel label3 = new JLabel(Integer.toString(level3Time[0]) + "min" +Integer.toString(level3Time[1]) + "s");
         label3.setBorder(new EmptyBorder(0, 0, 150, 0));
 		mainPanel.add(label3,constraints);
         mainPanel.add(button3, constraints);
 
-        add(mainPanel); 
+        add(mainPanel);
 
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println(loadedProgress[0].isCompleted());
-                
+
                 //SE esta completo e clica, refaz o nivel
                 if (loadedProgress[0].isCompleted()){
                     GameProgress.clearGameProgress(1);
-                    Level level1 = new Level("1",2,3,Game.PATH_LEVEL1);
+                    Level level1 = Game.levelLoader.getLevel("1");
                     SaveLevel.saveLevel(level1,"1");
                 }
 
                 //SE esta em progresso ou eh a primeira vez fazendo, só vai pro jogo
-                
+
                 Game.faseIntroduction = new FaseIntroduction("1");
                 goTo(Game.faseIntroduction);
             }
         });
 
-        // Adicionar um ActionListener para tratar o clique no botão
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(loadedProgress[0].isCompleted()){
                     if (loadedProgress[1].isCompleted()){
                         GameProgress.clearGameProgress(1);
-                        Level level2 = new Level("1",2,3,Game.PATH_LEVEL2);
+                        Level level2 = Game.levelLoader.getLevel("2");
                         SaveLevel.saveLevel(level2,"2");
                         //manda a classe limpa
                     }
                     Game.faseIntroduction = new FaseIntroduction("2");
                     goTo(Game.faseIntroduction);
-                } 
+                }
             }
         });
 
@@ -124,15 +126,32 @@ public class MapScreen extends Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(loadedProgress[1].isCompleted()){
+                    if (loadedProgress[2].isCompleted()){
+                        GameProgress.clearGameProgress(1);
+                        Level level2 = Game.levelLoader.getLevel("3");
+                        SaveLevel.saveLevel(level2,"3");
+                        //manda a classe limpa
+                    }
+                    Game.faseIntroduction = new FaseIntroduction("3");
+                    goTo(Game.faseIntroduction);
+                }
+            }
+        });
+
+
+        buttonFim.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(loadedProgress[1].isCompleted()){
                     goTo(Game.rankingScreen);
-                } 
+                }
             }
         });
 
         buttonMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goTo(Game.optionsScreen);    
+                goTo(Game.optionsScreen);
             }
         });
     }

@@ -1,42 +1,65 @@
 package src.com.game.model;
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Level implements Serializable {
     private String idFase;
     private int numPoints;
-    
+
     private boolean isComplete;
-    private boolean isEnd; 
-    
-    private LevelMap map; 
+    private boolean isEnd;
+
+    private LevelMap map;
     private Player player;
     private Point point;
     private PowerUp powerUp;
+    private String songFile;
 
-    /*
-     * possivelmente nesse construtor aqui
-     * que vai ser o gerencialmente de continue e tal 
-     */
-    public Level(String id, int numPoints, String path){
+    private ArrayList<String> story;
+    private String backgroundImageFile;
+
+    public Level(String id, int numPowerUps, int numPoints, LevelMap map, String backgroundImageFile){
         this.idFase = id;
-        this.numPoints = numPoints; 
-        this.map = new LevelMap(id, path);
+        this.numPoints = numPoints;
+        this.map = map;
+        this.songFile = null;
         this.player = new Player('D');
-        this.point = new Point(new int[2],1,"cafe");
+        this.backgroundImageFile = backgroundImageFile;
+        setPointCoordinates(map.getRandomCoordinates());
+        setPowerUpCoordinates(map.getRandomCoordinates());
+        this.isEnd = false;
+        this.isComplete = false;
     }
 
-    public Level(String id, int numPowerUps, int numPoints, String path){
-       this.idFase = id;
-       this.numPoints = numPoints; 
-       this.map = new LevelMap(id, path);
-       this.player = new Player('D');
-       this.point = new Point(map.getRandomCoordinates(),1,"cafe");
-       map.setPointCoordinates(point.getCoordinates());
-       this.powerUp = new PowerUp(map.getRandomCoordinates(), 2, 3, "energy");
-       map.setPowerUpCoordinates(powerUp.getCoordinates());
-       this.isEnd = false;
-       this.isComplete = false; 
+    public void setSongFile(String song){
+        this.songFile = song;
+    }
+
+    public String getSongFile(){
+        return songFile;
+    }
+
+    public void setStory(ArrayList<String> story){
+        this.story = story;
+    }
+
+    public ArrayList<String> getStory(){
+        return story;
+    }
+
+    public String getBackground(){
+        return backgroundImageFile;
+    }
+
+    public void setPowerUpCoordinates(int[] coords){
+       this.powerUp = new PowerUp(coords, 2, 3, "energy");
+       map.setPowerUpCoordinates(coords);
+    }
+
+    public void setPointCoordinates(int[] coords){
+       this.point = new Point(coords,1,"cafe");
+       map.setPointCoordinates(coords);
     }
 
     public boolean isEnd(){
@@ -46,7 +69,7 @@ public class Level implements Serializable {
         return this.isComplete;
     }
     public void setComplete(boolean complete){
-        this.isComplete = complete; 
+        this.isComplete = complete;
     }
     public Player getPlayer(){
         return this.player;
@@ -59,7 +82,7 @@ public class Level implements Serializable {
     }
     public String getIdFase(){
         return this.idFase;
-    }    
+    }
     public boolean isColliding(){
         this.isEnd =  this.player.checkCollision(this.map.getMapConstraints(), this);
         return this.isEnd;

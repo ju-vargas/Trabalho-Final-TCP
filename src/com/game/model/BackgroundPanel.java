@@ -14,6 +14,7 @@ public class BackgroundPanel extends JPanel {
         try {
             backgroundImage = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
+            System.out.println("Não pôde ler " + backgroundImage + "!\n");
             e.printStackTrace();
         }
     }
